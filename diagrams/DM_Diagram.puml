@@ -1,7 +1,21 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object Acount
+object Spiller
+object Terning
+object Sprog
+object MonopolyJuniorspil
+object konto
+object Spillerplade
+object Felt
+object Chancekort
+Sprog -- MonopolyJuniorspil
+Felt -- Spillerplade
+Spillerplade -- MonopolyJuniorspil
+Spiller -- konto
+Spiller -- MonopolyJuniorspil
+Terning -- MonopolyJuniorspil
+Chancekort -- MonopolyJuniorspil
 
 
 @enduml
