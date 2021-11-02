@@ -1,6 +1,8 @@
 @startuml
 'https://plantuml.com/object-diagram
 
+object billetboder{
+}
 object Spiller
 object Terning
 object Sprog
@@ -9,13 +11,15 @@ object konto
 object Spillerplade
 object Felt
 object Chancekort
-Sprog -- MonopolyJuniorspil
-Felt -- Spillerplade
-Spillerplade -- MonopolyJuniorspil
-Spiller -- konto
-Spiller -- MonopolyJuniorspil
-Terning -- MonopolyJuniorspil
-Chancekort -- MonopolyJuniorspil
+
+billetboder "48       " -- "1          " MonopolyJuniorspil
+Sprog "1..*              " --"1 " MonopolyJuniorspil
+Felt "24" -- "1" Spillerplade
+Spillerplade "1" -- "1" MonopolyJuniorspil
+Spiller "1" -- "1" konto
+Spiller "4" -- "1             " MonopolyJuniorspil
+Terning "1" -- "1" MonopolyJuniorspil
+Chancekort "25      " -- "1" MonopolyJuniorspil
 
 
 @enduml
