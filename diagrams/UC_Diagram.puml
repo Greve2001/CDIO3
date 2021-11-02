@@ -7,5 +7,5 @@ rectangle "Monopoly Junior" {
     usecase (Spil Monopoly Junior) as play
 }
 
-Spiller "2..4" --> play
+Spiller "2..4" -- play
 @enduml
