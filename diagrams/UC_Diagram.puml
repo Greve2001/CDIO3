@@ -1,11 +1,11 @@
 @startuml
 'https://plantuml.com/use-case-diagram
 
-' Initial draft of the UC Diagram
+left to right direction
 
 rectangle "Monopoly Junior" {
     usecase (Spil Monopoly Junior) as play
 }
 
-Spiller -> play
+Spiller "2..4" --> play
 @enduml
