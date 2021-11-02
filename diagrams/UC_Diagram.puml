@@ -3,8 +3,8 @@
 
 ' Initial draft of the UC Diagram
 
-rectangle "Junior Monopoly" {
-    usecase (Spil Junior Monopoly) as play
+rectangle "Monopoly Junior" {
+    usecase (Spil Monopoly Junior) as play
 }
 
 Spiller -> play
