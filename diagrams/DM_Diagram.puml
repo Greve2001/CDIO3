@@ -15,7 +15,7 @@ Sprog "1..*" --"1  " MonopolyJuniorspil
 Felt "24" -- "1" Spillerplade
 Spillerplade "1   " -down- "1" MonopolyJuniorspil
 Spiller "1" -- "1" konto
-Spiller "1     " -left- "2..4      " MonopolyJuniorspil
+Spiller "1     " -left- "2..4            " MonopolyJuniorspil
 Terning "1    " -right- "    1" MonopolyJuniorspil
 
 
