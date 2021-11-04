@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/object-diagram
 
+object Spillerbrik
 object Spiller
 object Terning
 object Sprog
@@ -9,6 +10,7 @@ object Konto
 object "Spillebræt" as board
 object Felt
 object "Chancen Kort" as chance
+object Billetboder
 
 chance          "1"         -up-        "1"                 game
 Sprog           "1..*"      --          "1  "               game
@@ -16,6 +18,8 @@ Felt            "24"        --          "1"                 board
 board           "1   "      -down-      "1"                 game
 Spiller         "1"         --          "1"                 Konto
 Spiller         "2..4"      -left-      "1"                 game    : \t
+Spiller         "1"         -right-     "1"                 Spillerbrik :\t
+Spiller         "1"           -up-      "12"                Billetboder :\t
 Terning         "1    "     -right-     "    1"             game    : \t
 
 @enduml
