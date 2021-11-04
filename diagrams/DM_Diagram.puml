@@ -4,19 +4,18 @@
 object Spiller
 object Terning
 object Sprog
-object MonopolyJuniorspil
-object konto
-object Spillerplade
+object "Monopoly Junior" as game
+object Konto
+object "Spillebræt" as board
 object Felt
-object Bunken
+object "Chancen Kort" as chance
 
-Bunken "1" -up- "1" MonopolyJuniorspil
-Sprog "1..*" --"1  " MonopolyJuniorspil
-Felt "24" -- "1" Spillerplade
-Spillerplade "1   " -down- "1" MonopolyJuniorspil
-Spiller "1" -- "1" konto
-Spiller "1     " -left- "2..4            " MonopolyJuniorspil
-Terning "1    " -right- "    1" MonopolyJuniorspil
-
+chance          "1"         -up-        "1"                 game
+Sprog           "1..*"      --          "1  "               game
+Felt            "24"        --          "1"                 board
+board           "1   "      -down-      "1"                 game
+Spiller         "1"         --          "1"                 Konto
+Spiller         "2..4"      -left-      "1"                 game    : \t
+Terning         "1    "     -right-     "    1"             game    : \t
 
 @enduml
