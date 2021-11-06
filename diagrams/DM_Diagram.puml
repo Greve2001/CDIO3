@@ -19,7 +19,7 @@ board           "1   "      -down-      "1"                 game
 Spiller         "1"         --          "1"                 Konto
 Spiller         "2..4"      -left-      "1"                 game    : \t
 Spiller         "1"         -right-     "1"                 Spillerbrik :\t
-Spiller         "1"           -up-      "12"                Billetboder :\t
+Spiller         "1"         -up-        "10..12"            Billetboder :\t
 Terning         "1    "     -right-     "    1"             game    : \t
 
 @enduml
