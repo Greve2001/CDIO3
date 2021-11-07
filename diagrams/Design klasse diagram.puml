@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class "Monopoly_Junior" as Game
+class Terning
+class Spillebræt
+class Felt
+class Bunken
+class Kort
+class Spiller
+class Konto
+class Billetboder
+class SpilleBrik
+
+Game --|> Terning
+Game --|> Bunken
+Game --|> Spiller
+Game --|> Spillebræt
+Spillebræt --|> Felt
+Spiller --|> Billetboder
+Spiller --|> Konto
+Spiller --|> SpilleBrik
+Bunken --|> Kort
+
+class Game {
+    -numberOfPlayers
+    -currentPlayer
+}
+
+class Terning {
+    -faceValue: int
+    -nrOfSides: int
+    +rollDie(): void
+    +getFaceValue(): int
+}
+
+class Spillebræt {
+    -spillerPosition
+    -antalFelter
+    +flytSpiller()
+    +setSpillerPosition()
+    +getField()
+}
+
+class Felt {
+    -fieldName: String
+    -effectText: String
+    -pris: int
+    -ejer: int
+    -position: int
+
+    +assignToken(): void
+
+}
+
+class Kort {
+
+}
+
+class Konto {
+    -balanse: int
+    +opdaterBalanse(): boolean
+    +getBalanse(): int
+}
+
+class Bunken {
+    -antalKort: int
+
+}
+
+
+
+
+
+@enduml
