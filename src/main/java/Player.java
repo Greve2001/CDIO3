@@ -1,6 +1,7 @@
 // A class for the player which contains the score and name of the player
 
 public class Player {
+    private int playerNumber;
     private final String name;
     private final Account playerAccount;
     private boolean hasExtraTurn = false;
