@@ -5,6 +5,8 @@ public class Square {
     public Square(String name, int position) {
         this.name = name;
         this.position = position;
+    }    public void pullCard() {
+        // Implements
     }
 
     public String getName() {
