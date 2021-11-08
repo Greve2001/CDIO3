@@ -2,44 +2,44 @@
 'https://plantuml.com/class-diagram
 
 class "Monopoly_Junior" as Game
-class Terning
-class Spillebræt
-class Felt
-class Bunken
-class Kort
-class Spiller
-class Konto
-class Billetboder
-class SpilleBrik
+class Die
+class Board
+class Field
+class Pile
+class Card
+class Player
+class Account
+class Stand
+class Token
 
-Game --|> Terning
-Game --|> Bunken
-Game --|> Spiller
-Game --|> Spillebræt
-Spillebræt --|> Felt
-Spiller --|> Billetboder
-Spiller --|> Konto
-Spiller --|> SpilleBrik
-Bunken --|> Kort
+Game --|> Die
+Game --|> Pile
+Game --|> Player
+Game --|> Board
+Board --|> Field
+Player --|> Stand
+Player --|> Account
+Player --|> Token
+Pile --|> Card
 
 class Game {
     -numberOfPlayers
     -currentPlayer
 }
 
-class Terning {
+class Die {
     -faceValue: int
     -nrOfSides: int
     +rollDie(): void
     +getFaceValue(): int
 }
 
-class Spillebræt {
-    -antalFelter
+class Board {
+    -antalFielder
     +getField()
 }
 
-class Felt {
+class Field {
     -fieldName: String
     -effectText: String
     -pris: int
@@ -51,35 +51,35 @@ class Felt {
 
 }
 
-class Kort {
+class Card {
 
 }
 
-'opdaterBalanse() er lavet som boolean, for at kunne returnere hvis en spiller går bankerot'
-class Konto {
+'opdaterBalanse() er lavet som boolean, for at kunne returnere hvis en Player går bankerot'
+class Account {
     -balanse: int
     +opdaterBalanse(): boolean
     +getBalanse(): int
 }
 
-class Bunken {
-    -antalKort: int
+class Pile {
+    -antalCard: int
     -shuffle(): void
 
 }
 
-class Spiller {
+class Player {
     -nr: int
 }
 
-class SpilleBrik {
+class Token {
     -position
-    +flytSpiller(): void
+    +flytPlayer(): void
     +setPosition(): void
 }
 
 'assignToken er lavet som boolean return i tilfælde af at der ikke er flere tokens'
-class Billetboder {
+class Stand {
     -bodNr: static int
     -positionOnBoard: int
     +assignToken(): boolean
