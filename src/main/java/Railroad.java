@@ -7,4 +7,8 @@ public class Railroad extends Square {
         super("Railroad", position);
         this.color = color;
     }
+
+    public Color getColor() {
+        return color;
+    }
 }
