@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public class Railroad extends Square {
-    private Color color;
+    private final Color color;
 
     public Railroad(int position, Color color) {
         super("Railroad", position);
