@@ -1,27 +1,27 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object Bunken
-object Spillerbrik
-object Spiller
-object Terning
-object Sprog
+object Pile
+object Stand
+object Player
+object Die
+object Language
 object "Monopoly Junior" as game
-object Konto
-object "Spillebræt" as board
-object Felt
-object "Chancen Kort" as chance
-object Billetboder
+object Account
+object "Board" as board
+object Field
+object "Chance card" as chance
+object Token
 
-Bunken          "1"         -up-        "1"                 game
-Sprog           "1..*"      --          "1  "               game
-Felt            "24"        --          "1"                 board
+Pile          "1"         -up-        "1"                 game
+Language           "1..*"      --          "1  "               game
+Field            "24"        --          "1"                 board
 board           "1   "      -down-      "1"                 game
-Spiller         "1"         --          "1"                 Konto
-Spiller         "2..4"      -left-      "1"                 game    : \t
-Spiller         "1"         -right-     "1"                 Spillerbrik :\t
-Spiller         "1"         -up-        "10..12"            Billetboder :\t
-Terning         "1    "     -right-     "  1"               game    : \t
-chance          "20"        -up-        " 1"                Bunken
+Player         "1"         --          "1"                 Account
+Player         "2..4"      -left-      "1"                 game    : \t
+Player         "1"         -right-     "1"                 Stand :\t
+Player         "1"         -up-        "10..12"            Token :\t
+Die         "1    "     -right-     "  1"               game    : \t
+chance          "20"        -up-        " 1"                Pile
 
 @enduml
