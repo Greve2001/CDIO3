@@ -50,6 +50,7 @@ class Felt {
     -position: int
 
     +assignToken(): void
+    +toString(): String
 
 }
 
@@ -57,6 +58,7 @@ class Kort {
 
 }
 
+'opdaterBalanse() er lavet som boolean, for at kunne returnere hvis en spiller går bankerot'
 class Konto {
     -balanse: int
     +opdaterBalanse(): boolean
@@ -65,7 +67,24 @@ class Konto {
 
 class Bunken {
     -antalKort: int
+    -shuffle(): void
 
+}
+
+class Spiller {
+    -nr: int
+}
+
+class SpilleBrik {
+    -position
+    +setPosition()
+}
+
+'assignToken er lavet som boolean return i tilfælde af at der ikke er flere tokens'
+class Billetboder {
+    -bodNr: static int
+    -positionOnBoard: int
+    +assignToken(): boolean
 }
 
 
