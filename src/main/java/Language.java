@@ -44,7 +44,7 @@ public class Language {
                 try {
                     setLanguage("en");
 
-                    getText(str);
+                    returnStr = getText(str);
 
                     setLanguage(langInUse);
                 } catch (Exception ex) {
