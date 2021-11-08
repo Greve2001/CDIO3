@@ -65,6 +65,7 @@ class Account {
 class Pile {
     -antalCard: int
     -shuffle(): void
+    +drawCard():
 
 }
 
