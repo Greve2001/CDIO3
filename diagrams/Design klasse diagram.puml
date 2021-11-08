@@ -24,7 +24,7 @@ Pile --|> Card
 
 class Game {
     -numberOfPlayers
-    -currentPlayer
+    -currentPlayer: Player
 }
 
 class Die {
@@ -43,10 +43,9 @@ class Field {
     -fieldName: String
     -effectText: String
     -pris: int
-    -ejer: int
+    -ejer: player
     -position: int
 
-    +assignToken(): void
     +toString(): String
 
 }
@@ -58,14 +57,14 @@ class Card {
 'opdaterBalanse() er lavet som boolean, for at kunne returnere hvis en Player går bankerot'
 class Account {
     -balanse: int
-    +opdaterBalanse(): boolean
+    +opdaterBalanse(int): void
     +getBalanse(): int
 }
 
 class Pile {
     -antalCard: int
     -shuffle(): void
-    +drawCard():
+    +drawCard(): Card
 
 }
 
