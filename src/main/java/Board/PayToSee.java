@@ -1,3 +1,5 @@
+package Board;
+
 public class PayToSee extends Square{
     private final int amount;
 

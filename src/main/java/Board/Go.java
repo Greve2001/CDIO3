@@ -1,3 +1,5 @@
+package Board;
+
 public class Go extends Square{
     private final int amount;
 

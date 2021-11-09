@@ -1,3 +1,5 @@
+package Board;
+
 import java.awt.*;
 
 public class Amusement extends Square{

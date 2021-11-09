@@ -1,3 +1,5 @@
+package Board;
+
 public class GoToRestrooms extends Square{
     private final int dest;
 
