@@ -7,7 +7,7 @@ public class Main {
         do {
             //todo logik
             monopoly.playGame();
-        }while(!win_condition);
+        }while(!MonopolyJunior.win_condition);
         //MonopolyJunior.decideAndAnnounceWinner();//to find and Announce the winner
     }
 }
