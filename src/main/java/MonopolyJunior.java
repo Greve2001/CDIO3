@@ -25,10 +25,23 @@ public class MonopolyJunior {
         currentPlayer = players[0];
     }
 
+    public static void giveStartMoney() {
+        for (int i = 0 ; i < players.length ; i++){
+            
+        }
+    }
+
     public void playGame() {
         do {
-            takeTurn(currentPlayer);
+            movePiece(currentPlayer);
+            //something to do with the field we land on
+            //
         }while(!hasWinner);
+    }
+
+    private void movePiece(Player currentPlayer) {
+        die.roll();
+
     }
 
     private void takeTurn(Player currentPlayer) {
