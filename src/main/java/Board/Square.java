@@ -1,3 +1,5 @@
+package Board;
+
 public class Square {
     private final String name;
     private final int position;
