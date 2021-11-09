@@ -26,6 +26,12 @@ public class MonopolyJunior {
     }
 
     public void playGame() {
+        do {
+            takeTurn(currentPlayer);
+        }while(!hasWinner);
+    }
+
+    private void takeTurn(Player currentPlayer) {
 
     }
 }
