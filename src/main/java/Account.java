@@ -5,9 +5,8 @@ public class Account {
         balance = 1000; // Default start amount
     }
 
-    public Boolean updateBalance() {
-        boolean update = false;
-        return update = true;
+    public void updateBalance(int balance) {
+       this.balance = balance;
     }
 
     public int getBalance(){
