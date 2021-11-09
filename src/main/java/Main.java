@@ -6,7 +6,7 @@ public class Main {
         //MonopolyJunior.whoGoesFirst();//let all roll, and highest goes first
         do {
             //todo logik
-            monopoly.playGame();
+            monopoly.playRound();
         }while(!MonopolyJunior.win_condition);
         //MonopolyJunior.decideAndAnnounceWinner();//to find and Announce the winner
     }

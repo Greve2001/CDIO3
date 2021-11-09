@@ -1,14 +1,18 @@
 // A class for the player which contains the score and name of the player
 
 public class Player {
+    private final Account playerAccount = new Account();
+
     private int playerNumber;
-    private final String name;
-    private final Account playerAccount;
+    private String name;
     private boolean hasExtraTurn = false;
 
-    public Player(String name) {
+    public Player() {
+        this.name = this.playerNumber + "";
+    }
+
+    public void setName(String name){
         this.name = name;
-        playerAccount = new Account();
     }
 
     public String toString() {
@@ -17,6 +21,10 @@ public class Player {
 
     public Account getAccount() {
         return playerAccount;
+    }
+
+    public void setPlayerAccount(int balance){
+        playerAccount.setBalance(balance);
     }
 
     public void giveExtraTurn(){
