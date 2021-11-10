@@ -66,10 +66,12 @@ public class MonopolyJunior {
     }
 
     public void updatePosition(){
-        if (die.getFaceValue() + currentPlayer.getPosition() > BOARD_SIZE)
-            currentPlayer.setPosition(die.getFaceValue() + currentPlayer.getPosition() - BOARD_SIZE);
+        if (die.getFaceValue() + currentPlayer.getToken().getPosition() > BOARD_SIZE) {
+            currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition() - BOARD_SIZE);
+            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + 2);
+        }
         else
-            currentPlayer.setPosition(die.getFaceValue() + currentPlayer.getPosition());
+            currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition());
     }
 }
 

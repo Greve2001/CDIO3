@@ -24,30 +24,11 @@ public class Player {
         return playerAccount;
     }
 
+    public Token getToken(){
+        return token;
+    }
+
     public void setPlayerAccount(int balance){
         playerAccount.setBalance(balance);
     }
-
-    public void giveExtraTurn(){
-        hasExtraTurn = true;
     }
-
-    public boolean checkExtraTurn(){
-        if (hasExtraTurn){
-            hasExtraTurn = false;
-            return true;
-        }
-        else{
-            return false;
-        }
-
-    }
-
-    public int getPosition(){
-        return token.getPosition();
-    }
-
-    public void setPosition(int update) {
-        token.setPosition(update);
-    }
-}
