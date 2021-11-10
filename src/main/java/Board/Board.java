@@ -2,28 +2,51 @@ package Board;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Board {
 
     HashMap<String, String> row = new HashMap<String, String>();
+    List<HashMap<String, String>> mapList = new ArrayList<>();
 
     public Board (int boardSize){
 
     }
 
-
+    
     public void readCSV(String file) {
-        ClassLoader classLoader = getClass().getClassLoader();
+        ClassLoader classLoader = Board.class.getClassLoader();
         InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(file)));
 
         Scanner scan = new Scanner(reader);
-        scan.useDelimiter(",");
+        Scanner lineReader;
 
-        while(scan.hasNext()) {
-            System.out.print(scan.next() + " ");
+        int index = 0;
+        int line = 0;
+
+        while(scan.hasNextLine()) {
+            lineReader = new Scanner(scan.nextLine());
+            lineReader.useDelimiter(",");
+
+            mapList.add(new HashMap<String, String>());
+
+            while(lineReader.hasNext()) {
+                switch (index) {
+                    case 0 : mapList.get(line).put("pos", lineReader.next());         break;
+                    case 1 : mapList.get(line).put("type", lineReader.next());        break;
+                    case 2 : mapList.get(line).put("name", lineReader.next());        break;
+                    case 3 : mapList.get(line).put("amountGiven", lineReader.next()); break;
+                    case 4 : mapList.get(line).put("price", lineReader.next());       break;
+                    case 5 : mapList.get(line).put("color", lineReader.next());       break;
+                    case 6 : mapList.get(line).put("amountToPay", lineReader.next()); break;
+                    case 7 : mapList.get(line).put("dest", lineReader.next());        break;
+                }
+
+                index++;
+            }
+
+            index = 0;
+            line++;
         }
 
         scan.close();
@@ -33,7 +56,5 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 }
