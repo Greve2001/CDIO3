@@ -5,11 +5,12 @@ import java.util.Scanner;
 public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
+    private final int BOARD_SIZE = 40;
 
     private Player[] players = new Player[MAX_NR_OF_PLAYERS];
     private boolean win_condition;
-    private final Die die = new Die();;
-    private final Board board = new Board(40);
+    private final Die die = new Die();
+    private final Board board = new Board(BOARD_SIZE);
     private final Pile pile = new Pile(16);
     private Player currentPlayer;
     private boolean hasWinner = false;
@@ -32,6 +33,8 @@ public class MonopolyJunior {
     public void takeTurn() {
         //todo logic
         //roll die and update position
+        die.roll();
+        updatePosition();
 
         //need to create method to handle all the different fields that the player can land on.
         //what to do if landing on an amusement
@@ -61,4 +64,12 @@ public class MonopolyJunior {
         else
             return false;
     }
+
+    public void updatePosition(){
+        if (die.getFaceValue() + currentPlayer.getPosition() > BOARD_SIZE)
+            currentPlayer.setPosition(die.getFaceValue() + currentPlayer.getPosition() - BOARD_SIZE);
+        else
+            currentPlayer.setPosition(die.getFaceValue() + currentPlayer.getPosition());
+    }
 }
+

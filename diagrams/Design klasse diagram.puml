@@ -74,8 +74,6 @@ class Player {
 
 class Token {
     -position
-    +flytPlayer(): void
-    +setPosition(): void
 }
 
 'assignToken er lavet som boolean return i tilfælde af at der ikke er flere tokens'

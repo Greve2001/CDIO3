@@ -2,6 +2,7 @@
 
 public class Player {
     private final Account playerAccount = new Account();
+    private final Token token = new Token();
 
     private int playerNumber;
     private String name;
@@ -40,5 +41,13 @@ public class Player {
             return false;
         }
 
+    }
+
+    public int getPosition(){
+        return token.getPosition();
+    }
+
+    public void setPosition(int update) {
+        token.setPosition(update);
     }
 }
