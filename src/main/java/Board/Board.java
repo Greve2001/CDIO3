@@ -8,7 +8,7 @@ public class Board {
 
     List<HashMap<String, String>> mapList = new ArrayList<>();
 
-    public Board (int boardSize){
+    public Board (){
         readCSV("board.csv");
 
         for (int i = 0; i < mapList.toArray().length; i++) {

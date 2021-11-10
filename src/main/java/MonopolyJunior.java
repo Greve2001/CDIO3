@@ -53,7 +53,7 @@ public class MonopolyJunior {
 
         //check if a player has no money
         if (currentPlayer.getAccount().getBalance() == 0)
-            isWin_condition();
+            hasWinner = true;
     }
 
     public void changePlayer(){
@@ -64,8 +64,8 @@ public class MonopolyJunior {
             currentPlayer = players[playerIndex + 1];
     }
 
-    public boolean isWin_condition(){
-        return true;
+    public boolean gethasWinner(){
+        return hasWinner;
     }
 
     public void updatePosition(){

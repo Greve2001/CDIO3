@@ -6,9 +6,9 @@ public class Main {
         //monopoly.whoGoesFirst();//let all roll, and highest goes first
         do {
             monopoly.takeTurn();
-            if (!monopoly.isWin_condition())
+            if (!monopoly.gethasWinner())
                 monopoly.changePlayer();
-        }while(!monopoly.isWin_condition());
+        }while(!monopoly.gethasWinner());
         monopoly.decideAndAnnounceWinner();//to find and Announce the winner
     }
 }
