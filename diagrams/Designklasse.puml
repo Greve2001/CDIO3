@@ -1,0 +1,97 @@
+@startuml
+
+class "Monopoly Junior" as Game
+class Die
+
+package "Game Board" {
+    class Board
+    class TicketBooth
+
+    class "<<abstract>>\nSquare" as Square
+        class Amusement
+        class Restrooms
+        class Start
+        class Railroad
+        class Chance
+        class PennyBag
+        class PayFor
+}
+
+class Deck
+class ChanceCard
+class Player
+class "<<singleton>>\nLanguage" as Language
+
+Game -up- Die
+Game -right- Deck
+    Deck *-right- ChanceCard
+Game -left- Player
+Game -down- Board
+    Board *-down- Square
+    Amusement -up- TicketBooth
+    Square <|-- Restrooms
+    Square <|-- Amusement
+    Square <|-- Railroad
+    Square <|-- PayFor
+    Square <|-- PennyBag
+    Square <|-- Start
+    Square <|-- Chance
+
+class Game {
+    -players: Player[]
+    -currentPlayer: Player
+    -board: Board[]
+    -deck: Deck
+
+    +setupGame(): void
+    +playGame(): void
+}
+
+class Board {
+    -squares: Square[]
+
+    +getSquare(): Square
+    +addBooth(Player, position:int) : void
+    +removeBooth(position): void
+}
+
+class Square {
+    -text: String
+    -Effect?!
+}
+
+class Die {
+    -faceValue: int
+    -nrOfSides: int
+
+    +rollDie(): void
+}
+
+class Player {
+    -color: Color:
+    -name: String
+    -position: int
+    -balance: int
+    -boothsOnHand: int
+
+    +payMoney(balance): void
+    +addMoney(balance): void
+    +useOneBooth(): void
+}
+
+class TicketBooth {
+    -ownedBy: Player
+}
+
+class Deck {
+    -chanceCards: ChanceCard[]
+
+    +pullCard(): ChanceCard
+}
+class ChanceCard {
+    -text: String
+    -Effect?!
+}
+
+
+@enduml
