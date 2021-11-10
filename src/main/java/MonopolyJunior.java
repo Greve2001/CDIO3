@@ -5,13 +5,14 @@ import java.util.Scanner;
 public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
-    private final int BOARD_SIZE = 40;
-    private final int DECK_SIZE = 16;
+    private final int BOARD_SIZE = 32;
+    private final int DECK_SIZE = 24;
+    private final int MOVING_PAST_START = 2;
 
-    private Player[] players = new Player[MAX_NR_OF_PLAYERS];
+    private Player[] players;
     private boolean win_condition;
     private final Die die = new Die();
-    private final Board board = new Board(BOARD_SIZE);
+    private final Board board = new Board();
     private final Pile pile = new Pile(DECK_SIZE);
     private Player currentPlayer;
     private boolean hasWinner = false;
@@ -19,7 +20,8 @@ public class MonopolyJunior {
 
 
     public MonopolyJunior(int numOfPlayers){
-        for (int i = 0 ; i < numOfPlayers ; i++){
+        players = new Player[numOfPlayers];
+        for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){
             players[i] = new Player();
         }
         currentPlayer = players[0];
@@ -49,6 +51,9 @@ public class MonopolyJunior {
         //need to finish with an update to the win condition
         //something like 'current money' < 'money they have to pay'
 
+        //check if a player has no money
+        if (currentPlayer.getAccount().getBalance() == 0)
+            isWin_condition();
     }
 
     public void changePlayer(){
@@ -66,26 +71,14 @@ public class MonopolyJunior {
     public void updatePosition(){
         if (die.getFaceValue() + currentPlayer.getToken().getPosition() > BOARD_SIZE) {
             currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition() - BOARD_SIZE);
-            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + 2);
+            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + MOVING_PAST_START);
         }
         else
             currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition());
     }
 
-    public void updateBalance(int update){
-        if (update > 0) {
-            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + update);
-        }
-        else{
-            if (currentPlayer.getAccount().getBalance() < Math.abs(update)){
-                currentPlayer.getAccount().setBalance(0);
-                isWin_condition();
-            }
-            else{
-                currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() - update);
-            }
+    public void decideAndAnnounceWinner(){
 
-        }
     }
 
 }

@@ -9,6 +9,6 @@ public class Main {
             if (!monopoly.isWin_condition())
                 monopoly.changePlayer();
         }while(!monopoly.isWin_condition());
-        //MonopolyJunior.decideAndAnnounceWinner();//to find and Announce the winner
+        monopoly.decideAndAnnounceWinner();//to find and Announce the winner
     }
 }
