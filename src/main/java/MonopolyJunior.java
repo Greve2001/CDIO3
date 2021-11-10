@@ -74,5 +74,22 @@ public class MonopolyJunior {
         else
             currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition());
     }
+
+    public void updateBalance(int update){
+        if (update > 0) {
+            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + update);
+        }
+        else{
+            if (currentPlayer.getAccount().getBalance() < Math.abs(update)){
+                currentPlayer.getAccount().setBalance(0);
+                hasWinner = true;
+            }
+            else{
+                currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() - update);
+            }
+
+        }
+    }
+
 }
 
