@@ -60,10 +60,7 @@ public class MonopolyJunior {
     }
 
     public boolean isWin_condition(){
-        if (this.hasWinner)
-            return true;
-        else
-            return false;
+        return true;
     }
 
     public void updatePosition(){
@@ -82,7 +79,7 @@ public class MonopolyJunior {
         else{
             if (currentPlayer.getAccount().getBalance() < Math.abs(update)){
                 currentPlayer.getAccount().setBalance(0);
-                hasWinner = true;
+                isWin_condition();
             }
             else{
                 currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() - update);
