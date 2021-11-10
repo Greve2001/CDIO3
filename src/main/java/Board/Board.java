@@ -6,14 +6,19 @@ import java.util.*;
 
 public class Board {
 
-    HashMap<String, String> row = new HashMap<String, String>();
     List<HashMap<String, String>> mapList = new ArrayList<>();
 
     public Board (int boardSize){
+        readCSV("board.csv");
+
+        for (int i = 0; i < mapList.toArray().length; i++) {
+            switch (mapList.get(i).get("type")) {
+
+            }
+        }
 
     }
 
-    
     public void readCSV(String file) {
         ClassLoader classLoader = Board.class.getClassLoader();
         InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(file)));
