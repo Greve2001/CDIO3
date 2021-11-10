@@ -6,12 +6,13 @@ public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = 40;
+    private final int DECK_SIZE = 16;
 
     private Player[] players = new Player[MAX_NR_OF_PLAYERS];
     private boolean win_condition;
     private final Die die = new Die();
     private final Board board = new Board(BOARD_SIZE);
-    private final Pile pile = new Pile(16);
+    private final Pile pile = new Pile(DECK_SIZE);
     private Player currentPlayer;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
