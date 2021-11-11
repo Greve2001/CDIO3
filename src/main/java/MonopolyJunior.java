@@ -13,7 +13,7 @@ public class MonopolyJunior {
     private boolean win_condition;
     private final Die die = new Die();
     private final Board board = new Board();
-    private final Pile pile = new Pile(DECK_SIZE);
+    private final Deck pile = new Deck(DECK_SIZE);
     private Player currentPlayer;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);

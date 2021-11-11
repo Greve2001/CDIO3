@@ -1,6 +1,6 @@
-public class Pile {
+public class Deck {
 
-    public Pile(int deckSize){
+    public Deck(int deckSize){
 
     }
 }
