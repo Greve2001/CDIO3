@@ -1,5 +1,11 @@
 import Board.Board;
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Player;
+import gui_main.GUI;
 
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MonopolyJunior {
@@ -17,12 +23,15 @@ public class MonopolyJunior {
     private Player currentPlayer;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
+    private MJGui gui;
 
-
-    public MonopolyJunior(int numOfPlayers){
+    public MonopolyJunior(int numOfPlayers, MJGui gui){
+        this.gui = gui;
         players = new Player[numOfPlayers];
+
         for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){
             players[i] = new Player();
+            gui.setPlayerNameAndColor(i+1, START_MONEY);
         }
         currentPlayer = players[0];
     }
@@ -37,6 +46,7 @@ public class MonopolyJunior {
         //todo logic
         //roll die and update position
         die.roll();
+        gui.showRoll(die);
         updatePosition();
 
         //need to create method to handle all the different fields that the player can land on.
@@ -62,6 +72,8 @@ public class MonopolyJunior {
             currentPlayer = players[0];
         else
             currentPlayer = players[playerIndex + 1];
+
+        gui.changePlayer(playerIndex);
     }
 
     public boolean gethasWinner(){

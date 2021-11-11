@@ -1,12 +1,11 @@
 import java.awt.*;
 
-public final class GUI {
+public final class GUI_unused {
     private Board board;
 
     public GUI() {
         this.board = new Board();
     }
-
 
     public void showMessage(String msg) {
         this.board.showMessage(msg);
@@ -20,7 +19,6 @@ public final class GUI {
         for (int i = 0; i < buttons.length; ++i) {
             buttons[i] = buttons[i].replace("\n", "<BR>");
         }
-
         return this.board.getUserButtonPressed(msg, buttons);
     }
 
