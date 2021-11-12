@@ -9,12 +9,18 @@ public class Player {
     private Color color;
 
 
-    public void UseOneBooth () {
+    public void useOneBooth () {
         this.boothsOnHand = this.boothsOnHand -1;
     }
 
     public Player() {
         this.name = this.playerNumber + "";
+    }
+    public boolean hasBooth(){
+        if (boothsOnHand > 0)
+            return true;
+        else
+            return false;
     }
 
     public void setName(String name){
