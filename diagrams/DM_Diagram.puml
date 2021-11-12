@@ -1,27 +1,27 @@
 @startuml
 'https://plantuml.com/object-diagram
 
-object Pile
-object Stand
+object Deck
+object Ticketbooth
 object Player
 object Die
 object Language
 object "Monopoly Junior" as game
 object Account
 object "Board" as board
-object Field
+object Square
 object "Chance card" as chance
 object Token
 
-Pile          "1"         -up-        "1"                 game
+Deck          "1"         -up-        "1"                 game
 Language           "1..*"      --          "1  "               game
-Field            "24"        --          "1"                 board
+Square            "32"        --          "1"                 board
 board           "1   "      -down-      "1"                 game
 Player         "1"         --          "1"                 Account
 Player         "2..4"      -left-      "1"                 game    : \t
-Player         "1"         -right-     "1"                 Stand :\t
+Player         "1"         -right-     "1"                 Ticketbooth :\t
 Player         "1"         -up-        "10..12"            Token :\t
 Die         "1    "     -right-     "  1"               game    : \t
-chance          "20"        -up-        " 1"                Pile
+chance          "24"        -up-        " 1"                Deck
 
 @enduml
