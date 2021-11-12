@@ -41,6 +41,7 @@ public class MonopolyJunior {
         } while (!hasWinner);
     }
 
+    
     public void initalizePlayers(int numOfPlayers){
         players = new Player[numOfPlayers];
         for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){ // Maybe remove && state and make it try catch to inform players
