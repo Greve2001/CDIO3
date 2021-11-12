@@ -139,9 +139,11 @@ public class MonopolyJunior {
     public void pay(Player from, Player to, int amount){
         if (paymentPossible(from , amount))
             to.updateBalance(amount);
-        else
+        else {
             to.updateBalance(from.getBalance());
-        from.updateBalance(amount);
+            from.updateBalance(amount);
+        }
+
     }
 
     public boolean paymentPossible(Player player, int amount){
