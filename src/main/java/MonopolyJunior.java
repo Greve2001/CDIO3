@@ -65,8 +65,10 @@ public class MonopolyJunior {
         switch (typeofField){
             case "Amusement" ->  {
                 /* field.getBooth
-                if field.getBooth = null{
-                    buyBooth(position)
+                if (field.getBooth == null){
+                    int boothPrice = field.getPrice;
+                    pay(currentPlayer, boothPrice);
+                    Board.addBooth(currentPlayer, currentPlayer.getPosition());
                 }
                 if field.getBooth != null{
                     pay(field.getBooth.ownedBy, field.getCost)
@@ -143,8 +145,10 @@ public class MonopolyJunior {
     public boolean paymentPossible(Player player, int amount){
         if (player.getBalance() > amount)
             return true;
-        else
+        else {
+            this.hasWinner = true;
             return false;
+        }
     }
 
     public void decideAndAnnounceWinner(){
