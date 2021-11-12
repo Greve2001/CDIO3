@@ -51,7 +51,7 @@ public class MonopolyJunior {
 
     public void giveStartMoney() { //starts with 31 dollars
         for (Player player : this.players) {
-            player.setPlayerAccount(START_MONEY);
+            player.setupStartBalance(START_MONEY);
         }
     }
 
@@ -59,6 +59,7 @@ public class MonopolyJunior {
         // Might ask for player action
         die.roll();
         updatePosition();
+
         // getField(), do action
         String typeofField = ""; // Place holder
         switch (typeofField){
@@ -73,6 +74,10 @@ public class MonopolyJunior {
                 }
                 */
             }
+            default -> {
+
+            }
+
         }
 
 
@@ -89,7 +94,7 @@ public class MonopolyJunior {
         //something like 'current money' < 'money they have to pay'
 
         //check if a player has no money
-        if (currentPlayer.getAccount().getBalance() == 0)
+        if (currentPlayer.getBalance() == 0)
             hasWinner = true;
     }
 
