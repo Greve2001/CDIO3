@@ -25,14 +25,18 @@ public class MonopolyJunior {
     private MJGui gui;
 
     public MonopolyJunior(int numOfPlayers){
-        setupGame();
+        setupGame(numOfPlayers);
         playGame();
     }
 
-    public void setupGame(){
+    public void setupGame(int numOfPlayers){
         // Evt lav getAllPlayers method to ask for players
-        initalizePlayers(4);
-        giveStartMoney();
+        initalizePlayers(numOfPlayers);
+        // Give players items
+        for (Player player : this.players) {
+            player.setupStartBalance(START_MONEY); // $31
+            player.setBooths( (numOfPlayers > 2) ? 10 : 12 );
+        }
     }
 
     public void playGame(){
@@ -50,11 +54,6 @@ public class MonopolyJunior {
         currentPlayer = players[0]; // Set starting player. // Upgrade feature
     }
 
-    public void giveStartMoney() { //starts with 31 dollars
-        for (Player player : this.players) {
-            player.setupStartBalance(START_MONEY);
-        }
-    }
 
     public void takeTurn() {
         // Might ask for player action
@@ -67,8 +66,8 @@ public class MonopolyJunior {
             case "Amusement" ->  {
                 /*field.getBooth
                 if (field.getBooth == null){
-                pay(currentPlayer, boothPrice);
                     int boothPrice = field.getPrice;
+                    pay(currentPlayer, boothPrice);
                     if (currentPlayer.hasBooth())
                         currentPlayer.useOneBooth();
                         board.addBooth(currentPlayer, currentPlayer.getPosition());
