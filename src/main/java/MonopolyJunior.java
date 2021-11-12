@@ -60,13 +60,15 @@ public class MonopolyJunior {
         die.roll();
         updatePosition(die.getFaceValue());
 
-        // getField(), do action
+        // field = getField(), do action
         String typeofField = ""; // Place holder
         switch (typeofField){
             case "Amusement" ->  {
                 /* field.getBooth
-                if field.getBooth = null{
-                    buyBooth(position)
+                if (field.getBooth == null){
+                    int boothPrice = field.getPrice;
+                    pay(currentPlayer, boothPrice);
+                    Board.addBooth(currentPlayer, currentPlayer.getPosition());
                 }
                 if field.getBooth != null{
                     pay(field.getBooth.ownedBy, field.getCost)
@@ -126,12 +128,6 @@ public class MonopolyJunior {
             // Give passing start money
             currentPlayer.updateBalance(MOVING_PAST_START);
         }
-    }
-
-    public void buyBooth(){
-        
-        pay();
-
     }
 
     public void pay(){
