@@ -22,9 +22,6 @@ public class Player {
         else
             return false;
     }
-    public void setBooths (int booths) {
-        this.boothsOnHand = booths;
-    }
 
     public void setName(String name){
         this.name = name;
@@ -36,6 +33,9 @@ public class Player {
 
     public void setPosition (int position){
         this.position = position;
+    }
+    public void setBooths (int booths) {
+        this.boothsOnHand = booths;
     }
 
     public int getPosition () {
