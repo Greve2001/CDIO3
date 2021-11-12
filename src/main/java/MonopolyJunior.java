@@ -58,7 +58,7 @@ public class MonopolyJunior {
     public void takeTurn() {
         // Might ask for player action
         die.roll();
-        updatePosition(die.getFaceValue(););
+        updatePosition(die.getFaceValue());
 
         // getField(), do action
         String typeofField = ""; // Place holder
@@ -77,7 +77,6 @@ public class MonopolyJunior {
             default -> {
 
             }
-
         }
 
 
@@ -104,8 +103,6 @@ public class MonopolyJunior {
             currentPlayer = players[0];
         else
             currentPlayer = players[playerIndex + 1];
-
-        gui.changePlayer(playerIndex);
     }
 
     public boolean gethasWinner(){
@@ -113,17 +110,22 @@ public class MonopolyJunior {
     }
 
     public void updatePosition(int moveSpaces){
-        int currentPlayerPosition = currentPlayer.getPosition();
-        int destination = currentPlayerPosition + moveSpaces;
-        if (destination > BOARD_SIZE)
-            currentPlayer.setPosition(destination - BOARD_SIZE);
+        int prevPos = currentPlayer.getPosition();
+        int endPos = prevPos + moveSpaces;
+        if (endPos >= BOARD_SIZE)
+            currentPlayer.setPosition(endPos - BOARD_SIZE);
         else
-            currentPlayer.setPosition(destination);
-        hasPassStart(currentPlayerPosition, destination, false);
+            currentPlayer.setPosition(endPos);
+        hasPassStart(prevPos, endPos, false);
     }
 
-    public void hasPassStart(int currentPosition, int destination, boolean goingToJail){
+    public void hasPassStart(int prevPos, int endPos, boolean goingToRestrooms){ //
+        if (goingToRestrooms) return;
 
+        if (endPos > BOARD_SIZE || prevPos == 0 || endPos < prevPos) { // Maybe get the zero form fieldtype GO position.
+            // Give passing start money
+            currentPlayer.updateBalance(MOVING_PAST_START);
+        }
     }
 
     public void decideAndAnnounceWinner(){
