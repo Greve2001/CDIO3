@@ -3,7 +3,7 @@
 public class Player {
     private final Token token = new Token();
     private int balance;
-
+    private int boothsOnHand;
     private int playerNumber;
     private String name;
     private boolean hasExtraTurn = false;
