@@ -1,5 +1,8 @@
 @startuml
 
+hide empty members
+skinparam groupInheritance 2
+
 class "Monopoly Junior" as Game
 class Die
 
