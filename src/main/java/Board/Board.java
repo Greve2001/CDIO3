@@ -46,6 +46,12 @@ public class Board {
                                     Integer.parseInt(currentSquare.get("pos")),
                                     Integer.parseInt(currentSquare.get("pos")));
                     break;
+                case "GoTo" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                            new GoToRestrooms(Integer.parseInt(currentSquare.get("pos")),
+                                    Integer.parseInt(currentSquare.get("dest")));
+                    break;
+
              }
         }
 
