@@ -8,7 +8,6 @@ class Die
 
 package "Game Board" {
     class Board
-    class TicketBooth
 
     class "<<abstract>>\nSquare" as Square
         class Amusement
@@ -31,7 +30,6 @@ Game -right- Deck
 Game -left- Player
 Game -down- Board
     Board *-down- Square
-    Amusement -up- TicketBooth
     Square <|-- Restrooms
     Square <|-- Amusement
     Square <|-- Railroad
@@ -83,10 +81,6 @@ class Player {
     +useOneBooth(): void
 }
 
-class TicketBooth {
-    -ownedBy: Player
-}
-
 class Deck {
     -chanceCards: ChanceCard[]
 
@@ -96,6 +90,10 @@ class ChanceCard {
     -text: String
     -Effect?!
 }
+class Amusement {
+    -boothOwner: Player
+    -fieldColor: Color
 
+}
 
 @enduml
