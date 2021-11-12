@@ -6,7 +6,7 @@ public class DeckTest {
     @Test
     public void pullCardShouldReturnChanceCard(){
 
-        Deck testDeck = new Deck(new ChanceCard[]{new ChanceCard()});
+        Deck testDeck = new Deck(new ChanceCard[]{new ChanceCard("", 0)});
 
         ChanceCard result = testDeck.pullCard();
 
@@ -16,7 +16,7 @@ public class DeckTest {
     @Test
     public void pullCardShouldReturnAChanceCardFromTheDeck(){
 
-        ChanceCard testCard = new ChanceCard();
+        ChanceCard testCard = new ChanceCard("" , 0);
 
         Deck testDeck = new Deck(new ChanceCard[]{testCard});
 
@@ -29,9 +29,9 @@ public class DeckTest {
     @Test
     public void pullCardShouldReturnIndex0WhenArrayOutOfBoundsExceptionIsThrown(){
 
-        ChanceCard testCard1 = new ChanceCard();
-        ChanceCard testCard2 = new ChanceCard();
-        ChanceCard testCard3 = new ChanceCard();
+        ChanceCard testCard1 = new ChanceCard("", 0);
+        ChanceCard testCard2 = new ChanceCard("", 0);
+        ChanceCard testCard3 = new ChanceCard("", 0);
 
         Deck testDeck = new Deck(new ChanceCard[]{testCard1, testCard2, testCard3});
 
@@ -46,9 +46,9 @@ public class DeckTest {
 
     @Test
     public void pullCardShouldReturnChanceCardWithIndexCorrespondingToDrawCardCount(){
-        ChanceCard testCard1 = new ChanceCard();
-        ChanceCard testCard2 = new ChanceCard();
-        ChanceCard testCard3 = new ChanceCard();
+        ChanceCard testCard1 = new ChanceCard("", 0);
+        ChanceCard testCard2 = new ChanceCard("", 0);
+        ChanceCard testCard3 = new ChanceCard("", 0);
 
         Deck testDeck = new Deck(new ChanceCard[]{testCard1, testCard2, testCard3});
 
