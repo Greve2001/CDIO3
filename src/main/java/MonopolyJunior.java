@@ -72,6 +72,7 @@ public class MonopolyJunior {
                         board.addBooth(currentPlayer, currentPlayer.getPosition());
                 }
                 if field.getBooth != null{
+                    // Make sure you are not paying yourself.
                     pay(field.getBooth.ownedBy, field.getCost)
                     // In pay method, check paymentPossible()
                 }
