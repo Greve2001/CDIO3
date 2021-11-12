@@ -58,7 +58,7 @@ public class MonopolyJunior {
     public void takeTurn() {
         // Might ask for player action
         die.roll();
-        updatePosition();
+        updatePosition(die.getFaceValue(););
 
         // getField(), do action
         String typeofField = ""; // Place holder
@@ -112,13 +112,18 @@ public class MonopolyJunior {
         return hasWinner;
     }
 
-    public void updatePosition(){
-        if (die.getFaceValue() + currentPlayer.getToken().getPosition() > BOARD_SIZE) {
-            currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition() - BOARD_SIZE);
-            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + MOVING_PAST_START);
-        }
+    public void updatePosition(int moveSpaces){
+        int currentPlayerPosition = currentPlayer.getPosition();
+        int destination = currentPlayerPosition + moveSpaces;
+        if (destination > BOARD_SIZE)
+            currentPlayer.setPosition(destination - BOARD_SIZE);
         else
-            currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition());
+            currentPlayer.setPosition(destination);
+        hasPassStart(currentPlayerPosition, destination, false);
+    }
+
+    public void hasPassStart(int currentPosition, int destination, boolean goingToJail){
+
     }
 
     public void decideAndAnnounceWinner(){

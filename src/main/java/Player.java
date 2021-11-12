@@ -1,8 +1,8 @@
 // A class for the player which contains the score and name of the player
 
 public class Player {
-    private final Token token = new Token();
     private int balance;
+    private int position;
     private int boothsOnHand;
     private int playerNumber;
     private String name;
@@ -20,8 +20,12 @@ public class Player {
         return name;
     }
 
-    public Token getToken(){
-        return token;
+    public void setPosition(int position){
+        this.position = position;
+    }
+
+    public int getPosition(){
+        return this.position;
     }
 
     public void setupStartBalance(int startMoney){
