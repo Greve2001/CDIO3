@@ -1,8 +1,8 @@
 // A class for the player which contains the score and name of the player
 
 public class Player {
-    private final Account playerAccount = new Account();
     private final Token token = new Token();
+    private int balance;
 
     private int playerNumber;
     private String name;
@@ -20,15 +20,24 @@ public class Player {
         return name;
     }
 
-    public Account getAccount() {
-        return playerAccount;
-    }
-
     public Token getToken(){
         return token;
     }
 
-    public void setPlayerAccount(int balance){
-        playerAccount.setBalance(balance);
+    public void setupStartBalance(int startMoney){
+        this.balance = startMoney;
     }
+
+    public void updateBalance(int update){
+        if (update > 0 || balance > Math.abs(update))
+            this.balance += update;
+        else
+            this.balance = 0;
     }
+
+    public int getBalance(){
+        return balance;
+    }
+}
+
+
