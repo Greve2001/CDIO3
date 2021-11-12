@@ -128,6 +128,16 @@ public class MonopolyJunior {
         }
     }
 
+    public void buyBooth(){
+        
+        pay();
+
+    }
+
+    public void pay(){
+
+    }
+
     public void decideAndAnnounceWinner(){
 
     }
