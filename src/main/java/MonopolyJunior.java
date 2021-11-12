@@ -68,8 +68,10 @@ public class MonopolyJunior {
                 /* field.getBooth
                 if (field.getBooth == null){
                     int boothPrice = field.getPrice;
-                    pay(currentPlayer, boothPrice);
-                    Board.addBooth(currentPlayer, currentPlayer.getPosition());
+                    if (currentPlayer.hasBooth())
+                        pay(currentPlayer, boothPrice);
+                        currentPlayer.useOneBooth();
+                        Board.addBooth(currentPlayer, currentPlayer.getPosition());
                 }
                 if field.getBooth != null{
                     pay(field.getBooth.ownedBy, field.getCost)
