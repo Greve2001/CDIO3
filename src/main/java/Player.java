@@ -1,34 +1,32 @@
 // A class for the player which contains the score and name of the player
 
-public class Player {
-    private final Account playerAccount = new Account();
-    private final Token token = new Token();
+import java.awt.*;
 
-    private int playerNumber;
+public class Player {
+    private int playerNum;
     private String name;
-    private boolean hasExtraTurn = false;
+    private int position, balance, boothsOnHand;
+    private Color color;
+
+    public void payMoney (int balance){
+        this.balance -= balance;
+    }
+    public void addMoney (int balance){
+        this.balance += balance;
+    }
+    public void UseOneBooth () {
+        this.boothsOnHand = this.boothsOnHand -1;
+    }
 
     public Player() {
-        this.name = this.playerNumber + "";
+
     }
 
     public void setName(String name){
         this.name = name;
     }
-
-    public String toString() {
+    public String getName() {
         return name;
     }
+}
 
-    public Account getAccount() {
-        return playerAccount;
-    }
-
-    public Token getToken(){
-        return token;
-    }
-
-    public void setPlayerAccount(int balance){
-        playerAccount.setBalance(balance);
-    }
-    }
