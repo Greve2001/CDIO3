@@ -55,10 +55,13 @@ class Board {
     +addBooth(Player, position:int) : void
     +removeBooth(position): void
     +hasMonopoly(): boolean
+
+    -readCSV(): void
 }
 
 class Square {
-    -text: String
+    -name: String
+    -position: int
     -Effect?!
 }
 
@@ -92,7 +95,8 @@ class ChanceCard {
 }
 class Amusement {
     -boothOwner: Player
-    -fieldColor: Color
+    -color: String
+    -price: int
 
 }
 
