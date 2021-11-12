@@ -1,5 +1,11 @@
 import Board.Board;
+import gui_fields.GUI_Car;
+import gui_fields.GUI_Player;
+import gui_main.GUI;
 
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MonopolyJunior {
@@ -10,34 +16,73 @@ public class MonopolyJunior {
     private final int MOVING_PAST_START = 2;
 
     private Player[] players;
-    private boolean win_condition;
     private final Die die = new Die();
     private final Board board = new Board();
     private final Deck pile = new Deck(DECK_SIZE);
     private Player currentPlayer;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
-
+    private MJGui gui;
 
     public MonopolyJunior(int numOfPlayers){
+        setupGame(numOfPlayers);
+        playGame();
+    }
+
+    public void setupGame(int numOfPlayers){
+        // Evt lav getAllPlayers method to ask for players
+        initalizePlayers(numOfPlayers);
+        // Give players items
+        for (Player player : this.players) {
+            player.setupStartBalance(START_MONEY); // $31
+            player.setBooths( (numOfPlayers > 2) ? 10 : 12 );
+        }
+    }
+
+    public void playGame(){
+        do {
+            takeTurn();
+        } while (!hasWinner);
+    }
+
+    
+    public void initalizePlayers(int numOfPlayers){
         players = new Player[numOfPlayers];
-        for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){
+        for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){ // Maybe remove && state and make it try catch to inform players
             players[i] = new Player();
         }
-        currentPlayer = players[0];
+        currentPlayer = players[0]; // Set starting player. // Upgrade feature
     }
 
-    public void giveStartMoney() { //starts with 31 dollars
-        for (Player player : this.players) {
-            player.setPlayerAccount(START_MONEY);
-        }
-    }
 
     public void takeTurn() {
-        //todo logic
-        //roll die and update position
+        // Might ask for player action
         die.roll();
-        updatePosition();
+        updatePosition(die.getFaceValue());
+
+        // getField(), do action
+        String typeofField = ""; // Place holder
+        switch (typeofField){
+            case "Amusement" ->  {
+                /*field.getBooth
+                if (field.getBooth == null){
+                    int boothPrice = field.getPrice;
+                    pay(currentPlayer, boothPrice);
+                    if (currentPlayer.hasBooth())
+                        currentPlayer.useOneBooth();
+                        board.addBooth(currentPlayer, currentPlayer.getPosition());
+                }
+                if field.getBooth != null{
+                    pay(field.getBooth.ownedBy, field.getCost)
+                    // In pay method, check paymentPossible()
+                }
+                */
+            }
+            default -> {
+
+            }
+        }
+
 
         //need to create method to handle all the different fields that the player can land on.
         //what to do if landing on an amusement
@@ -52,7 +97,7 @@ public class MonopolyJunior {
         //something like 'current money' < 'money they have to pay'
 
         //check if a player has no money
-        if (currentPlayer.getAccount().getBalance() == 0)
+        if (currentPlayer.getBalance() == 0)
             hasWinner = true;
     }
 
@@ -68,13 +113,44 @@ public class MonopolyJunior {
         return hasWinner;
     }
 
-    public void updatePosition(){
-        if (die.getFaceValue() + currentPlayer.getToken().getPosition() > BOARD_SIZE) {
-            currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition() - BOARD_SIZE);
-            currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + MOVING_PAST_START);
-        }
+    public void updatePosition(int moveSpaces){
+        int prevPos = currentPlayer.getPosition();
+        int endPos = prevPos + moveSpaces;
+        if (endPos >= BOARD_SIZE)
+            currentPlayer.setPosition(endPos - BOARD_SIZE);
         else
-            currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition());
+            currentPlayer.setPosition(endPos);
+        hasPassStart(prevPos, endPos, false);
+    }
+
+    public void hasPassStart(int prevPos, int endPos, boolean goingToRestrooms){ //
+        if (goingToRestrooms) return;
+
+        if (endPos > BOARD_SIZE || prevPos == 0 || endPos < prevPos) { // Maybe get the zero form fieldtype GO position.
+            // Give passing start money
+            currentPlayer.updateBalance(MOVING_PAST_START);
+        }
+    }
+
+    public void pay(Player from, int amount){
+        from.updateBalance(amount);
+    }
+
+    public void pay(Player from, Player to, int amount){
+        if (paymentPossible(from , amount))
+            to.updateBalance(amount);
+        else
+            to.updateBalance(from.getBalance());
+        from.updateBalance(amount);
+    }
+
+    public boolean paymentPossible(Player player, int amount){
+        if (player.getBalance() > amount)
+            return true;
+        else {
+            this.hasWinner = true;
+            return false;
+        }
     }
 
     public void decideAndAnnounceWinner(){

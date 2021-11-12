@@ -10,11 +10,14 @@ public class Token{
     }
 
     public void updatePosition(){
+        /*
         if (die.getFaceValue() + currentPlayer.getToken().getPosition() > BOARD_SIZE) {
             currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition() - BOARD_SIZE);
             currentPlayer.getAccount().setBalance(currentPlayer.getAccount().getBalance() + MOVING_PAST_START);
         }
         else
             currentPlayer.getToken().setPosition(die.getFaceValue() + currentPlayer.getToken().getPosition());
+
+         */
     }
 }

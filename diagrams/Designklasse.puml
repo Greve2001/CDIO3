@@ -1,11 +1,13 @@
 @startuml
 
+hide empty members
+skinparam groupInheritance 2
+
 class "Monopoly Junior" as Game
 class Die
 
 package "Game Board" {
     class Board
-    class TicketBooth
 
     class "<<abstract>>\nSquare" as Square
         class Amusement
@@ -28,7 +30,6 @@ Game -right- Deck
 Game -left- Player
 Game -down- Board
     Board *-down- Square
-    Amusement -up- TicketBooth
     Square <|-- Restrooms
     Square <|-- Amusement
     Square <|-- Railroad
@@ -54,10 +55,13 @@ class Board {
     +addBooth(Player, position:int) : void
     +removeBooth(position): void
     +hasMonopoly(): boolean
+
+    -readCSV(): void
 }
 
 class Square {
-    -text: String
+    -name: String
+    -position: int
     -Effect?!
 }
 
@@ -80,10 +84,6 @@ class Player {
     +useOneBooth(): void
 }
 
-class TicketBooth {
-    -ownedBy: Player
-}
-
 class Deck {
     -chanceCards: ChanceCard[]
 
@@ -93,6 +93,11 @@ class ChanceCard {
     -text: String
     -Effect?!
 }
+class Amusement {
+    -boothOwner: Player
+    -color: String
+    -price: int
 
+}
 
 @enduml

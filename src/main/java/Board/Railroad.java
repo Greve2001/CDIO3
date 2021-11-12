@@ -3,14 +3,14 @@ package Board;
 import java.awt.*;
 
 public class Railroad extends Square {
-    private final Color color;
+    private final String color;
 
-    public Railroad(int position, Color color) {
+    public Railroad(int position, String color) {
         super("Railroad", position);
         this.color = color;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 }

@@ -1,12 +1,10 @@
 package Board;
 
-import java.awt.*;
-
 public class Amusement extends Square{
-    private final Color color;
+    private final String color;
     private final int price;
 
-    public Amusement(String name, int position, Color color, int price) {
+    public Amusement(String name, int position, String color, int price) {
         super(name, position);
         this.color = color;
         this.price = price;
@@ -17,7 +15,7 @@ public class Amusement extends Square{
     }
 
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 }
