@@ -4,23 +4,15 @@ import gui_main.GUI;
 
 public class Main {
     public static void main(String[] args) {
-        /*
-        MonopolyJunior monopoly = new MonopolyJunior(4);//need to be changeable with some user input later.
-        monopoly.giveStartMoney();
-        //monopoly.inputNames();//For name input later (might never go live)
-        //monopoly.whoGoesFirst();//let all roll, and highest goes first
-        do {
-            monopoly.takeTurn();
-            if (!monopoly.gethasWinner())
-                monopoly.changePlayer();
-        }while(!monopoly.gethasWinner());
-        monopoly.decideAndAnnounceWinner();//to find and Announce the winner
-        */
 
+        MonopolyJunior monopoly = new MonopolyJunior(4);//need to be changeable with some user input later.
+
+        // !!! GUI !!!
+        /*
         MJGui gui = new MJGui();
         //gui_sandbox();
         MonopolyJunior game = new MonopolyJunior(4, gui);
-
+        */
     }
 
     /**
@@ -36,7 +28,7 @@ public class Main {
 
         GUI_Player player1 = new GUI_Player("Goli", 2000);
         field.setCar(player1, true);
-        */
+
 
         GUI gui = new GUI();
         gui.showMessage("Jubiiiiiii");
@@ -50,5 +42,6 @@ public class Main {
 
         String username = gui.getUserString("Hvad hedder spiller 1?");
         System.out.println("Spiller 1 hedder "+username);
+        */
     }
 }

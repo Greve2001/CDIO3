@@ -16,7 +16,6 @@ public class MonopolyJunior {
     private final int MOVING_PAST_START = 2;
 
     private Player[] players;
-    private boolean win_condition;
     private final Die die = new Die();
     private final Board board = new Board();
     private final Deck pile = new Deck(DECK_SIZE);
@@ -25,15 +24,23 @@ public class MonopolyJunior {
     private final Scanner input = new Scanner(System.in);
     private MJGui gui;
 
-    public MonopolyJunior(int numOfPlayers, MJGui gui){
-        this.gui = gui;
-        players = new Player[numOfPlayers];
+    public MonopolyJunior(int numOfPlayers){
+        setupGame();
+    }
 
-        for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){
+    public void setupGame(){
+        // Evt lav getAllPlayers method to ask for players
+        initalizePlayers(4);
+        giveStartMoney();
+
+    }
+
+    public void initalizePlayers(int numOfPlayers){
+        players = new Player[numOfPlayers];
+        for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){ // Maybe remove && state and make it try catch to inform players
             players[i] = new Player();
-            gui.setPlayerNameAndColor(i+1, START_MONEY);
         }
-        currentPlayer = players[0];
+        currentPlayer = players[0]; // Set starting player. // Upgrade feature
     }
 
     public void giveStartMoney() { //starts with 31 dollars
@@ -46,7 +53,6 @@ public class MonopolyJunior {
         //todo logic
         //roll die and update position
         die.roll();
-        gui.showRoll(die);
         updatePosition();
 
         //need to create method to handle all the different fields that the player can land on.
