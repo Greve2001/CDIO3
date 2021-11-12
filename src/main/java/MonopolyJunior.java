@@ -128,23 +128,14 @@ public class MonopolyJunior {
         }
     }
 
-    public void pay(Player from, int amount){
-        from.updateBalance(amount);
+    public void buyBooth(){
+        
+        pay();
+
     }
 
-    public void pay(Player from, Player to, int amount){
-        if (paymentPossible(from , amount))
-            to.updateBalance(amount);
-        else
-            to.updateBalance(from.getBalance());
-        from.updateBalance(amount);
-    }
+    public void pay(){
 
-    public boolean paymentPossible(Player player, int amount){
-        if (player.getBalance() > amount)
-            return true;
-        else
-            return false;
     }
 
     public void decideAndAnnounceWinner(){
