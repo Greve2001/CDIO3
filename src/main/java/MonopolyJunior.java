@@ -26,13 +26,19 @@ public class MonopolyJunior {
 
     public MonopolyJunior(int numOfPlayers){
         setupGame();
+        playGame();
     }
 
     public void setupGame(){
         // Evt lav getAllPlayers method to ask for players
         initalizePlayers(4);
         giveStartMoney();
+    }
 
+    public void playGame(){
+        do {
+            takeTurn();
+        } while (!hasWinner);
     }
 
     public void initalizePlayers(int numOfPlayers){
@@ -50,10 +56,25 @@ public class MonopolyJunior {
     }
 
     public void takeTurn() {
-        //todo logic
-        //roll die and update position
+        // Might ask for player action
         die.roll();
         updatePosition();
+        // getField(), do action
+        String typeofField = ""; // Place holder
+        switch (typeofField){
+            case "Amusement" ->  {
+                /* field.getBooth
+                if field.getBooth = null{
+                    buyBooth(position)
+                }
+                if field.getBooth != null{
+                    pay(field.getBooth.ownedBy, field.getCost)
+                    // In pay method, check paymentPossible()
+                }
+                */
+            }
+        }
+
 
         //need to create method to handle all the different fields that the player can land on.
         //what to do if landing on an amusement
