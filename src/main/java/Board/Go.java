@@ -3,8 +3,8 @@ package Board;
 public class Go extends Square{
     private final int amount;
 
-    public Go(int amount) {
-        super("GO!", 1);
+    public Go(int amount, int pos) {
+        super("GO!", pos);
         this.amount = amount;
     }
 

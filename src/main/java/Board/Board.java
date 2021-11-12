@@ -7,15 +7,46 @@ import java.util.*;
 public class Board {
 
     List<HashMap<String, String>> mapList = new ArrayList<>();
+    Square[] allSquares;
 
     public Board (){
         readCSV("board.csv");
 
+        allSquares = new Square[mapList.size()];
+
         // initialises the objects based on the hashmap
         for (int i = 0; i < mapList.toArray().length; i++) {
-            switch (mapList.get(i).get("type")) {
+            HashMap<String, String> currentSquare = mapList.get(i);
 
-            }
+            switch (currentSquare.get("type")) {
+                case "GO!" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                            new Go(Integer.parseInt(currentSquare.get("amountGiven")),
+                                    Integer.parseInt(currentSquare.get("pos")));
+                    break;
+                case "Amusement" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                        new Amusement(currentSquare.get("name"),
+                                Integer.parseInt(currentSquare.get("pos")),
+                                currentSquare.get("color"),
+                                Integer.parseInt(currentSquare.get("price")));
+                    break;
+                case "Chance" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                        new Chance(Integer.parseInt(currentSquare.get("pos")));
+                    break;
+                case "Railroad" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                        new Railroad(Integer.parseInt(currentSquare.get("pos")),
+                                currentSquare.get("color"));
+                    break;
+                case "PayToSee" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                            new PayToSee(currentSquare.get("name"),
+                                    Integer.parseInt(currentSquare.get("pos")),
+                                    Integer.parseInt(currentSquare.get("pos")));
+                    break;
+             }
         }
 
     }
@@ -67,5 +98,9 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Square getSquare(int pos) {
+        return allSquares[pos - 1];
     }
 }
