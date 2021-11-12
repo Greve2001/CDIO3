@@ -65,11 +65,11 @@ public class MonopolyJunior {
         String typeofField = ""; // Place holder
         switch (typeofField){
             case "Amusement" ->  {
-                /* field.getBooth
+                /*field.getBooth
                 if (field.getBooth == null){
+                pay(currentPlayer, boothPrice);
                     int boothPrice = field.getPrice;
                     if (currentPlayer.hasBooth())
-                        pay(currentPlayer, boothPrice);
                         currentPlayer.useOneBooth();
                         Board.addBooth(currentPlayer, currentPlayer.getPosition());
                 }
