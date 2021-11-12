@@ -8,8 +8,7 @@ public class Player {
     private int position, balance, boothsOnHand;
     private Color color;
 
-   
-    }
+
     public void UseOneBooth () {
         this.boothsOnHand = this.boothsOnHand -1;
     }
