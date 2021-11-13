@@ -24,13 +24,12 @@ public class MonopolyJunior {
     private MJGui gui;
 
     public MonopolyJunior(int numOfPlayers){
-        setupGame(numOfPlayers);
-        playGame();
+
     }
 
     public void setupGame(int numOfPlayers){
         // Evt lav getAllPlayers method to ask for players
-        initalizePlayers(numOfPlayers);
+        initializePlayers(numOfPlayers);
         // Give players items
         for (Player player : this.players) {
             player.setupStartBalance(START_MONEY); // $31
@@ -45,7 +44,7 @@ public class MonopolyJunior {
     }
 
     
-    public void initalizePlayers(int numOfPlayers){
+    public void initializePlayers(int numOfPlayers){
         players = new Player[numOfPlayers];
         for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){ // Maybe remove && state and make it try catch to inform players
             players[i] = new Player();
@@ -133,16 +132,27 @@ public class MonopolyJunior {
     }
 
     public void pay(Player from, int amount){
-        from.updateBalance(amount);
+        if (from.getBalance() <= 0) { System.out.println("Negative balance, payment not possible"); return; }
+        if (paymentPossible(from, amount))
+            from.updateBalance(-amount);
+        else {
+            from.updateBalance(-from.getBalance());
+        }
     }
 
     public void pay(Player from, Player to, int amount){
-        if (paymentPossible(from , amount))
+        if (from.getBalance() <= 0) { System.out.println("Negative balance, payment not possible"); return; }
+        if (paymentPossible(from, amount)){
             to.updateBalance(amount);
-        else {
+            from.updateBalance(-amount);
+        }else{
+            // Pay as much as you can
             to.updateBalance(from.getBalance());
-            from.updateBalance(amount);
+            from.updateBalance(-from.getBalance());
+            // Maybe use boolean or a statement to end game?
         }
+
+
 
     }
 
