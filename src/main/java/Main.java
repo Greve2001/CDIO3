@@ -5,7 +5,7 @@ import gui_main.GUI;
 public class Main {
     public static void main(String[] args) {
 
-        MonopolyJunior monopoly = new MonopolyJunior(4);//need to be changeable with some user input later.
+        MonopolyJunior monopoly = new MonopolyJunior();//need to be changeable with some user input later.
         monopoly.setupGame(4);
         monopoly.playGame();
         // !!! GUI !!!

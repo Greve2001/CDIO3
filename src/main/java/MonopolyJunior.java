@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
+    private final int MIN_NR_OF_PLAYERS = 2;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = 32;
     private final int MOVING_PAST_START = 2;
@@ -23,11 +24,15 @@ public class MonopolyJunior {
     private final Scanner input = new Scanner(System.in);
     private MJGui gui;
 
-    public MonopolyJunior(int numOfPlayers){
+    public MonopolyJunior(){
 
     }
 
     public void setupGame(int numOfPlayers){
+        if (numOfPlayers < MIN_NR_OF_PLAYERS || numOfPlayers > MAX_NR_OF_PLAYERS) {
+            System.out.println("The number of players is not allowed. game will not be setup.");
+            return;
+        }
         // Evt lav getAllPlayers method to ask for players
         initializePlayers(numOfPlayers);
         // Give players items

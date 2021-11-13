@@ -2,29 +2,119 @@ import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MonopolyJuniorTest {
     MonopolyJunior game;
     Player player1;
     Player player2;
+    Player[] curPlayers = {};
+    Field players;
 
-    @BeforeEach void setup(){
-        game = new MonopolyJunior(4);
+    @BeforeEach void setup() throws NoSuchFieldException {
+        game = new MonopolyJunior();
         player1 = new Player();
         player2 = new Player();
+
+
     }
 
     @Test
-    void setupGame() {
+    void AmountOfTicketBoothsGivenOnSetup() throws NoSuchFieldException, IllegalAccessException {
+        // **** Test of num of booths with 2 players ****
+        game.setupGame(2);
+        getPlayers();
+
+        for (Player p : curPlayers){
+            // Get boothsOnHand variable, which is normally private
+            Field numOfBooths = p.getClass().getDeclaredField("boothsOnHand");
+            numOfBooths.setAccessible(true);
+            int curBoothsOnHand = (int) numOfBooths.get(p);
+
+            int actual = curBoothsOnHand;
+            int expected = 12;
+            assertEquals(expected, actual);
+        }
+
+        // **** Test of num of booths with more than 2 players, that is allowed by rules ****
+        game.setupGame(4);
+        getPlayers();
+
+        for (Player p : curPlayers){
+            // Get boothsOnHand variable, which is normally private
+            Field numOfBooths = p.getClass().getDeclaredField("boothsOnHand");
+            numOfBooths.setAccessible(true);
+            int curBoothsOnHand = (int) numOfBooths.get(p);
+
+            int actual = curBoothsOnHand;
+            int expected = 10;
+            assertEquals(expected, actual);
+        }
     }
 
     @Test
-    void playGame() {
+    void OnlyAllowNumberOfPlayersAccordingToRules() throws NoSuchFieldException, IllegalAccessException {
+        // **** Minimum of players ****
+        game = new MonopolyJunior();
+        game.setupGame(2);
+        getPlayers();
+
+        int actual = curPlayers.length;
+        int expected = 2;
+        assertEquals(expected, actual);
+
+
+
+        // **** Max players ****
+        game = new MonopolyJunior();
+        game.setupGame(4);
+        getPlayers();
+
+        actual = curPlayers.length;
+        expected = 4;
+        assertEquals(expected, actual);
+
+
+
+        // **** Under minimum ****
+        game = new MonopolyJunior();
+        game.setupGame(-2);
+        getPlayers();
+
+        assertNull(curPlayers);
+
+
+        // **** Over max ****
+        game = new MonopolyJunior();
+        game.setupGame(10);
+        getPlayers();
+
+        assertNull(curPlayers);
+
+        // **** Zero exception? ****
+        game = new MonopolyJunior();
+        game.setupGame(0);
+        getPlayers();
+
+        assertNull(curPlayers);
+
+    }
+
+    void getPlayers() throws NoSuchFieldException, IllegalAccessException {
+        // Get players, which normally are private.
+        players = game.getClass().getDeclaredField("players");
+        players.setAccessible(true);
+        curPlayers = (Player[]) players.get(game);
     }
 
     @Test
     void initializePlayers() {
+    }
+
+    @Test
+    void playGame() {
     }
 
     @Test
