@@ -126,27 +126,29 @@ class MonopolyJuniorTest {
         game.setupGame(4);
         getPlayers();
 
-        cP = curPlayers[0]; // First player
-
         game.changePlayer();
 
         getCurrentPlayer();
         Player actual = cP;
         Player expected = curPlayers[1];
+
         assertEquals(expected.getName(), actual.getName());
 
         // **** Limit case ****
+        // Beacuse we have no method to set the variable we get from getCurrentPlayers
+        // We will just do it manually:
         game.setupGame(4);
         getPlayers();
 
-        cP = curPlayers[curPlayers.length-1]; // Last player
-        System.out.println(cP.getName());
-
+        game.changePlayer();
+        game.changePlayer();
+        game.changePlayer();
         game.changePlayer();
 
         getCurrentPlayer();
         actual = cP;
         expected = curPlayers[0];
+
         assertEquals(expected.getName(), actual.getName());
     }
 
