@@ -51,7 +51,10 @@ public class Board {
                             new GoToRestrooms(Integer.parseInt(currentSquare.get("pos")),
                                     Integer.parseInt(currentSquare.get("dest")));
                     break;
-
+                case "GetMoney" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                            new PennyBag(currentSquare.get("name"),
+                                    Integer.parseInt(currentSquare.get("pos")));
              }
         }
 
