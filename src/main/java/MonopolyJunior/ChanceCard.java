@@ -1,3 +1,5 @@
+package MonopolyJunior;
+
 import java.awt.*;
 
 public class ChanceCard {

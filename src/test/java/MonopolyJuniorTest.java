@@ -1,4 +1,4 @@
-import org.junit.Before;
+import MonopolyJunior.MonopolyJunior;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

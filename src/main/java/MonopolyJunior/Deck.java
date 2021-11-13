@@ -1,3 +1,5 @@
+package MonopolyJunior;
+
 import static java.awt.Color.*;
 
 public class Deck {

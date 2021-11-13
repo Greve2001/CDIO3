@@ -1,4 +1,4 @@
-// A class for the player which contains the score and name of the player
+package MonopolyJunior;// A class for the player which contains the score and name of the player
 
 import java.awt.*;
 

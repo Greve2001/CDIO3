@@ -1,11 +1,7 @@
-import Board.Board;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Player;
-import gui_main.GUI;
+package MonopolyJunior;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import Board.Board;
+
 import java.util.Scanner;
 
 public class MonopolyJunior {

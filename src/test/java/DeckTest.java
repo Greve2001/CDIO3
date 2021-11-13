@@ -1,3 +1,5 @@
+import MonopolyJunior.ChanceCard;
+import MonopolyJunior.Deck;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
