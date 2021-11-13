@@ -1,5 +1,7 @@
 package Board;
 
+import MonopolyJunior.Player;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
@@ -128,6 +130,36 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void addBooth(Player player, int position) {
+        Amusement amusement = (Amusement) allSquares[position - 1];
+        amusement.setBoothOwner(player);
+    }
+
+    public void removeBooth(int position) {
+        Amusement amusement = (Amusement) allSquares[position - 1];
+        amusement.setBoothOwner(null);
+    }
+
+    public boolean hasMonopoly(int position) {
+        Amusement amusement = (Amusement) allSquares[position - 1];
+        boolean result = true;
+
+        for (int i = 0; i < allSquares.length; i++) {
+            if(allSquares[i].getClass().getSimpleName().equals("Amusement")) {
+                if(i + 1 != position &&
+                        amusement.getBoothOwner() == null &&
+                        ((Amusement) allSquares[i]).getBoothOwner() == null &&
+                        ((Amusement) allSquares[i]).getColor().equals(amusement.getColor()) &&
+                        !(((Amusement) allSquares[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
+
+                    result = false;
+                }
+            }
+        }
+
+        return result;
     }
 
     public Square[] getAllSquares() {
