@@ -148,13 +148,15 @@ public class Board {
 
         for (int i = 0; i < allSquares.length; i++) {
             if(allSquares[i].getClass().getSimpleName().equals("Amusement")) {
-                if(i + 1 != position &&
-                        amusement.getBoothOwner() == null &&
-                        ((Amusement) allSquares[i]).getBoothOwner() == null &&
-                        ((Amusement) allSquares[i]).getColor().equals(amusement.getColor()) &&
-                        !(((Amusement) allSquares[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
+                if(i + 1 != position && ((Amusement) allSquares[i]).getColor().equals(amusement.getColor()) ) {
+                    if (amusement.getBoothOwner() == null ||
+                                    ((Amusement) allSquares[i]).getBoothOwner() == null) {
+                        result = false;
+                    }
+                    else if(!(((Amusement) allSquares[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
 
-                    result = false;
+                        result = false;
+                    }
                 }
             }
         }

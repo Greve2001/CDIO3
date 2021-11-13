@@ -1,5 +1,6 @@
 package Board;
 
+import MonopolyJunior.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,6 +38,27 @@ class BoardTest {
 
             assertNotNull(square);
         }
+    }
+
+    @Test
+    void hasNotMonopoly() {
+        Player player = new Player("Spiller1");
+        Amusement amusement = (Amusement) board.getSquare(3);
+        amusement.setBoothOwner(player);
+
+        assertFalse(board.hasMonopoly(3));
+    }
+
+    @Test
+    void hasMonopoly() {
+        Player player = new Player("Spiller1");
+        Amusement amusement = (Amusement) board.getSquare(3);
+        amusement.setBoothOwner(player);
+
+        amusement = (Amusement) board.getSquare(4);
+        amusement.setBoothOwner(player);
+
+        assertTrue(board.hasMonopoly(3));
     }
 
     @Test
