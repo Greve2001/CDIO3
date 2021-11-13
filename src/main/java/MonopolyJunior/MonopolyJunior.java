@@ -48,7 +48,7 @@ public class MonopolyJunior {
     public void initializePlayers(int numOfPlayers){
         players = new Player[numOfPlayers];
         for (int i = 0 ; i < numOfPlayers && i < MAX_NR_OF_PLAYERS ; i++){ // Maybe remove && state and make it try catch to inform players
-            players[i] = new Player();
+            players[i] = new Player("Player " + (i+1));
         }
         currentPlayer = players[0]; // Set starting player. // Upgrade feature
     }
@@ -103,7 +103,7 @@ public class MonopolyJunior {
 
     public void changePlayer(){
         int playerIndex = java.util.Arrays.asList(players).indexOf(currentPlayer);
-        if (playerIndex == players.length-1)
+        if (playerIndex >= players.length-1)
             currentPlayer = players[0];
         else
             currentPlayer = players[playerIndex + 1];

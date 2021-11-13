@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
+import MonopolyJunior.*;
+import Board.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MonopolyJuniorTest {
@@ -12,11 +15,13 @@ class MonopolyJuniorTest {
     Player player2;
     Player[] curPlayers = {};
     Field players;
+    Player cP;
+    Field currentPlayer;
 
     @BeforeEach void setup() throws NoSuchFieldException {
         game = new MonopolyJunior();
-        player1 = new Player();
-        player2 = new Player();
+        player1 = new Player("Player1");
+        player2 = new Player("Player2");
 
 
     }
@@ -102,12 +107,6 @@ class MonopolyJuniorTest {
 
     }
 
-    void getPlayers() throws NoSuchFieldException, IllegalAccessException {
-        // Get players, which normally are private.
-        players = game.getClass().getDeclaredField("players");
-        players.setAccessible(true);
-        curPlayers = (Player[]) players.get(game);
-    }
 
     @Test
     void initializePlayers() {
@@ -122,7 +121,33 @@ class MonopolyJuniorTest {
     }
 
     @Test
-    void changePlayer() {
+    void testChangePlayer() throws NoSuchFieldException, IllegalAccessException {
+        // **** Base case ****
+        game.setupGame(4);
+        getPlayers();
+
+        cP = curPlayers[0]; // First player
+
+        game.changePlayer();
+
+        getCurrentPlayer();
+        Player actual = cP;
+        Player expected = curPlayers[1];
+        assertEquals(expected.getName(), actual.getName());
+
+        // **** Limit case ****
+        game.setupGame(4);
+        getPlayers();
+
+        cP = curPlayers[curPlayers.length-1]; // Last player
+        System.out.println(cP.getName());
+
+        game.changePlayer();
+
+        getCurrentPlayer();
+        actual = cP;
+        expected = curPlayers[0];
+        assertEquals(expected.getName(), actual.getName());
     }
 
     @Test
@@ -208,4 +233,20 @@ class MonopolyJuniorTest {
     @Test
     void decideAndAnnounceWinner() {
     }
+
+    // utility methods
+    void getPlayers() throws NoSuchFieldException, IllegalAccessException {
+        // Get players, which normally are private.
+        players = game.getClass().getDeclaredField("players");
+        players.setAccessible(true);
+        curPlayers = (Player[]) players.get(game);
+    }
+
+    void getCurrentPlayer() throws NoSuchFieldException, IllegalAccessException {
+        // Get currentPlayer, which is private
+        currentPlayer = game.getClass().getDeclaredField("currentPlayer");
+        currentPlayer.setAccessible(true);
+        cP = (Player) currentPlayer.get(game);
+    }
+
 }

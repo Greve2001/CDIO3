@@ -3,7 +3,6 @@ package MonopolyJunior;// A class for the player which contains the score and na
 import java.awt.*;
 
 public class Player {
-    private int playerNumber;
     private String name;
     private int position, balance, boothsOnHand;
     private Color color;
@@ -13,8 +12,8 @@ public class Player {
         this.boothsOnHand = this.boothsOnHand -1;
     }
 
-    public Player() {
-        this.name = this.playerNumber + "";
+    public Player(String name) {
+        this.name = name;
     }
     public boolean hasBooth(){
         if (boothsOnHand > 0)
