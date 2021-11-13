@@ -24,14 +24,12 @@ class BoardTest {
     }
 
     @Test
-    void allArrayFieldInit() throws NoSuchFieldException {
+    void allArrayFieldInit() throws NoSuchFieldException, IllegalAccessException {
         Field allSquares = board.getClass().getDeclaredField("allSquares");
         allSquares.setAccessible(true);
-
-        Square[] arr = board.allSquares;
+        Square[] arr =(Square[]) (allSquares.get(board));
 
         int index = 1;
-
         for (Square square : arr) {
             if(square == null)
                 System.out.println("Index: " + index + " " + square);

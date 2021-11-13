@@ -6,15 +6,15 @@ import java.util.*;
 
 public class Board {
 
-    List<HashMap<String, String>> mapList = new ArrayList<>();
-    Square[] allSquares;
+    private List<HashMap<String, String>> mapList = new ArrayList<>();
+    private Square[] allSquares;
 
     public Board (){
         readCSV("board.csv");
 
         allSquares = new Square[mapList.size() - 1];
 
-        // initialises the objects based on the hashmap
+        // initialises the objects in an array based on the hashmap
         for (int i = 0; i < mapList.toArray().length; i++) {
             HashMap<String, String> currentSquare = mapList.get(i);
 
@@ -65,7 +65,7 @@ public class Board {
 
     }
 
-    // Reads a CSV file an stores the result as a list of hashmaps
+    // Reads a CSV file and stores the result as a list of hashmaps
     public void readCSV(String file) {
         // Gets the class loader and reads the file from the ressources folder
         ClassLoader classLoader = Board.class.getClassLoader();
@@ -88,14 +88,30 @@ public class Board {
             // puts the values to the hashmap
             while(lineReader.hasNext()) {
                 switch (index) {
-                    case 0 : mapList.get(line).put("pos", lineReader.next());         break;
-                    case 1 : mapList.get(line).put("type", lineReader.next());        break;
-                    case 2 : mapList.get(line).put("name", lineReader.next());        break;
-                    case 3 : mapList.get(line).put("amountGiven", lineReader.next()); break;
-                    case 4 : mapList.get(line).put("price", lineReader.next());       break;
-                    case 5 : mapList.get(line).put("color", lineReader.next());       break;
-                    case 6 : mapList.get(line).put("amountToPay", lineReader.next()); break;
-                    case 7 : mapList.get(line).put("dest", lineReader.next());        break;
+                    case 0 :
+                        mapList.get(line).put("pos", lineReader.next());
+                    break;
+                    case 1 :
+                        mapList.get(line).put("type", lineReader.next());
+                        break;
+                    case 2 :
+                        mapList.get(line).put("name", lineReader.next());
+                    break;
+                    case 3 :
+                        mapList.get(line).put("amountGiven", lineReader.next());
+                    break;
+                    case 4 :
+                        mapList.get(line).put("price", lineReader.next());
+                    break;
+                    case 5 :
+                        mapList.get(line).put("color", lineReader.next());
+                    break;
+                    case 6 :
+                        mapList.get(line).put("amountToPay", lineReader.next());
+                    break;
+                    case 7 :
+                        mapList.get(line).put("dest", lineReader.next());
+                    break;
                 }
 
                 index++;
@@ -112,6 +128,10 @@ public class Board {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Square[] getAllSquares() {
+        return allSquares;
     }
 
     public Square getSquare(int pos) {
