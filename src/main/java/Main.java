@@ -6,7 +6,8 @@ public class Main {
     public static void main(String[] args) {
 
         MonopolyJunior monopoly = new MonopolyJunior(4);//need to be changeable with some user input later.
-
+        monopoly.setupGame(4);
+        monopoly.playGame();
         // !!! GUI !!!
         /*
         MJGui gui = new MJGui();
