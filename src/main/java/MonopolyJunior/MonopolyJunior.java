@@ -1,15 +1,10 @@
 package MonopolyJunior;
 
-import Board.Board;
+import Board.*;
 
 import java.util.Scanner;
 
 public class MonopolyJunior {
-    private final int MAX_NR_OF_PLAYERS = 4;
-    private final int MIN_NR_OF_PLAYERS = 2;
-    private final int START_MONEY = 31;
-    private final int BOARD_SIZE = 32;
-    private final int MOVING_PAST_START = 2;
 
     private Player[] players;
     private final Die die = new Die();
@@ -19,6 +14,13 @@ public class MonopolyJunior {
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
     private MJGui gui;
+
+    private final int MIN_NR_OF_PLAYERS = 2;
+    private final int MAX_NR_OF_PLAYERS = 4;
+    private final int START_MONEY = 31;
+    private final int BOARD_SIZE = board.getAllSquares().length;
+    private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
+
 
     public MonopolyJunior(){
 
@@ -36,6 +38,7 @@ public class MonopolyJunior {
             player.setupStartBalance(START_MONEY); // $31
             player.setBooths( (numOfPlayers > 2) ? 10 : 12 );
         }
+
     }
 
     public void playGame(){
