@@ -5,7 +5,7 @@ import MonopolyJunior.Player;
 public class Amusement extends Square{
     private final String color;
     private final int price;
-    private Player boothOwner;
+    private Player boothOwner = null;
 
     public Amusement(String name, int position, String color, int price) {
         super(name, position);
