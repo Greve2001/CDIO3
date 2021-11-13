@@ -12,7 +12,7 @@ public class Board {
     public Board (){
         readCSV("board.csv");
 
-        allSquares = new Square[mapList.size()];
+        allSquares = new Square[mapList.size() - 1];
 
         // initialises the objects based on the hashmap
         for (int i = 0; i < mapList.toArray().length; i++) {
@@ -51,7 +51,15 @@ public class Board {
                             new GoToRestrooms(Integer.parseInt(currentSquare.get("pos")),
                                     Integer.parseInt(currentSquare.get("dest")));
                     break;
-
+                case "GetMoney" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                            new PennyBag(currentSquare.get("name"),
+                                    Integer.parseInt(currentSquare.get("pos")));
+                    break;
+                case "Restrooms" :
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                            new Restrooms(Integer.parseInt(currentSquare.get("pos")));
+                    break;
              }
         }
 
