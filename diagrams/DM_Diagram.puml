@@ -2,26 +2,28 @@
 'https://plantuml.com/object-diagram
 
 object Deck
-object Ticketbooth
 object Player
 object Die
 object Language
 object "Monopoly Junior" as game
-object Account
 object "Board" as board
 object Square
 object "Chance card" as chance
-object Token
 
-Deck          "1"         -up-        "1"                 game
-Language           "1..*"      --          "1  "               game
-Square            "32"        --          "1"                 board
-board           "1   "      -down-      "1"                 game
-Player         "1"         --          "1"                 Account
-Player         "2..4"      -left-      "1"                 game    : \t
-Player         "1"         -right-     "1"                 Ticketbooth :\t
-Player         "1"         -up-        "10..12"            Token :\t
-Die         "1    "     -right-     "  1"               game    : \t
-chance          "24"        -up-        " 1"                Deck
+Die : FaceValue
+Player : Name
+Player : Position
+Player : Balance
+Player : Color
+
+Square : Type
+Square : Owner
+
+Deck          "1"         -l-   "1"                 game    : \t
+Square         "32"       -u-   "1"                 board
+board          "1   "     -u-   "1"                 game
+Player         "2..4"     -r-   "1"                 game    : \t
+Die            "1"        -d-   "         1"        game    : \t
+chance         "24"       -l-   " 1"                Deck    :\t
 
 @enduml
