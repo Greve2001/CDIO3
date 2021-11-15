@@ -23,7 +23,7 @@ public class MonopolyJunior {
 
 
     public MonopolyJunior(){
-
+        //commit
     }
 
     public void setupGame(int numOfPlayers){
