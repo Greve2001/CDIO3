@@ -11,6 +11,7 @@ public class Player {
 
     public void useOneBooth () {
         this.boothsOnHand = this.boothsOnHand -1;
+
     }
 
     public Player(String name) {
@@ -22,7 +23,9 @@ public class Player {
         else
             return false;
     }
-
+    public int getBoothsOnHand() {
+        return boothsOnHand;
+    }
     public void setGoingToRestRoom(boolean goingToRestRoom) {
         this.goingToRestRoom = goingToRestRoom;
     }
@@ -56,8 +59,10 @@ public class Player {
         else
             this.balance = 0;
     }
-
     public int getBalance() {
         return balance;
+    }
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }
