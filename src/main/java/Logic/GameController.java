@@ -10,6 +10,7 @@ public class GameController {
 
     PlayerHandler playerHandler;
     SquareActionHandler squareActionHandler;
+    PositionHandler positionHandler;
     Board board = new Board();
     Deck deck = new Deck();
     Die die = new Die();
@@ -23,6 +24,7 @@ public class GameController {
     public void setupGame(){
         playerHandler = new PlayerHandler(4); // Change default when using GUI
         squareActionHandler = new SquareActionHandler(board);
+        positionHandler = new PositionHandler(playerHandler.getPlayers());
 
     }
 
@@ -42,14 +44,15 @@ public class GameController {
 
         // Roll die, get value.
         die.roll();
-        int faceValue = die.getFaceValue();
+        int spacesToMove = die.getFaceValue();
 
         // Move player position
-        
-        int currentPosition;
+        positionHandler.movePlayer(currentPlayer, spacesToMove);
+        // Get new position
+        int currentPosition = playerHandler.getCurrentPlayer().getPosition();
 
         // Do action on that field
-        squareActionHandler.doFieldAction();
+        squareActionHandler.doFieldAction(currentPlayer, currentPosition);
 
         // Win check
 

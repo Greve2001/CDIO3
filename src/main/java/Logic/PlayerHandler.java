@@ -46,5 +46,9 @@ public class PlayerHandler {
         return currentPlayer;
     }
 
+    public Player[] getPlayers(){
+        return players;
+    }
+
 }
 
