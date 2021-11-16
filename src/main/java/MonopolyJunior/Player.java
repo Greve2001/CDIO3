@@ -6,6 +6,7 @@ public class Player {
     private String name;
     private int position, balance, boothsOnHand;
     private Color color;
+    boolean goingToRestRoom;
 
 
     public void useOneBooth () {
@@ -22,6 +23,12 @@ public class Player {
             return false;
     }
 
+    public void setGoingToRestRoom(boolean goingToRestRoom) {
+        this.goingToRestRoom = goingToRestRoom;
+    }
+    public boolean getGoingToRestRoom () {
+        return this.goingToRestRoom;
+    }
     public void setName(String name){
         this.name = name;
     }
