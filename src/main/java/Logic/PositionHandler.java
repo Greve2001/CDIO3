@@ -6,11 +6,12 @@ public class PositionHandler {
 
     Player[] players;
 
-    int boardSize = 32;
+    int boardSize;
     int startBonus = 2; // Evt få fra controlleren
 
-    public PositionHandler(Player[] players) {
+    public PositionHandler(Player[] players, int boardLength) {
         this.players = players;
+        boardSize = boardLength;
     }
 
     public void movePlayer(Player player, int spacesToMove){

@@ -16,6 +16,7 @@ public class GameController {
     Die die = new Die();
 
     Player currentPlayer;
+    boolean gameover = false;
     int BOARD_SIZE = board.getAllSquares().length;
 
     // Ekstra, remove later
@@ -24,14 +25,14 @@ public class GameController {
     public void setupGame(){
         playerHandler = new PlayerHandler(4); // Change default when using GUI
         squareActionHandler = new SquareActionHandler(board);
-        positionHandler = new PositionHandler(playerHandler.getPlayers());
+        positionHandler = new PositionHandler(playerHandler.getPlayers(), board.getAllSquares().length);
 
     }
 
     public void startGame(){
         do {
             takeTurn();
-        }while (true);
+        }while (!gameover);
     }
 
     public void takeTurn(){
@@ -54,10 +55,38 @@ public class GameController {
         // Do action on that field
         squareActionHandler.doFieldAction(currentPlayer, currentPosition);
 
-        // Win check
+        // Lose check - Only for currentPlayer, since it's not possible for others to be a zero now.
+        loseCheck();
 
         // Change turn
         playerHandler.changeTurn();
 
+    }
+
+    private void loseCheck(){ // On currentplayer
+        if (currentPlayer.getBalance() >= 0){
+            // Found a loser
+            findWinner();
+            gameover = true;
+        }
+    }
+    // Maybe move into playerHandler???
+    private void findWinner(){
+        Player[] players = playerHandler.getPlayers();
+
+        Player winner = players[0]; // Just to have a starting point
+
+        for (Player player : players){
+            if (winner.getBalance() > player.getBalance() && player != winner){
+                winner = player;
+            }
+            else if (winner.getBalance() == player.getBalance() && player != winner){
+                System.out.println("Its a tie");
+            }
+        }
+
+        // Announce winner
+        System.out.println("We have a winner!!!!");
+        System.out.println(winner.getName() + " with a balance of " + winner.getBalance());
     }
 }
