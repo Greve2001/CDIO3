@@ -5,7 +5,6 @@ import java.util.*;
 
 public class CSVReader {
     private String[] columnNames;
-    private String FILE;
     private Scanner fileScanner;
     private final String DELIMITER;
     private final List<HashMap<String, String>> FILE_AS_LIST_OF_HASHMAPS = new ArrayList<>();
@@ -21,10 +20,6 @@ public class CSVReader {
 
         // reads the entire file to a list of hashmaps
         readFileToMap();
-    }
-
-    public boolean hasNextLine() {
-        return fileScanner.hasNextLine();
     }
 
     public String[] getColumnNames() {
