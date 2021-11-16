@@ -8,13 +8,15 @@ import java.util.*;
 
 public class Board {
 
+    private final int OFFSET = 1;
+
     private List<HashMap<String, String>> mapList = new ArrayList<>();
     private Square[] allSquares;
 
     public Board (){
         readCSV("board.csv");
 
-        allSquares = new Square[mapList.size() - 1];
+        allSquares = new Square[mapList.size() - OFFSET];
 
         // initialises the objects in an array based on the hashmap
         for (int i = 0; i < mapList.toArray().length; i++) {
@@ -22,44 +24,44 @@ public class Board {
 
             switch (currentSquare.get("type")) {
                 case "GO!" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new Go(Integer.parseInt(currentSquare.get("amountGiven")),
                                     Integer.parseInt(currentSquare.get("pos")));
                     break;
                 case "Amusement" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                         new Amusement(currentSquare.get("name"),
                                 Integer.parseInt(currentSquare.get("pos")),
                                 currentSquare.get("color"),
                                 Integer.parseInt(currentSquare.get("price")));
                     break;
                 case "Chance" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                         new Chance(Integer.parseInt(currentSquare.get("pos")));
                     break;
                 case "Railroad" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                         new Railroad(Integer.parseInt(currentSquare.get("pos")),
                                 currentSquare.get("color"));
                     break;
                 case "PayToSee" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new PayToSee(currentSquare.get("name"),
                                     Integer.parseInt(currentSquare.get("pos")),
                                     Integer.parseInt(currentSquare.get("pos")));
                     break;
                 case "GoTo" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new GoToRestrooms(Integer.parseInt(currentSquare.get("pos")),
                                     Integer.parseInt(currentSquare.get("dest")));
                     break;
                 case "GetMoney" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new PennyBag(currentSquare.get("name"),
                                     Integer.parseInt(currentSquare.get("pos")));
                     break;
                 case "Restrooms" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - 1] =
+                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new Restrooms(Integer.parseInt(currentSquare.get("pos")));
                     break;
              }
@@ -133,22 +135,22 @@ public class Board {
     }
 
     public void addBooth(Player player, int position) {
-        Amusement amusement = (Amusement) allSquares[position - 1];
+        Amusement amusement = (Amusement) getSquare(position);
         amusement.setBoothOwner(player);
     }
 
     public void removeBooth(int position) {
-        Amusement amusement = (Amusement) allSquares[position - 1];
+        Amusement amusement = (Amusement) getSquare(position);
         amusement.setBoothOwner(null);
     }
 
     public boolean hasMonopoly(int position) {
-        Amusement amusement = (Amusement) allSquares[position - 1];
+        Amusement amusement = (Amusement) getSquare(position);
         boolean result = true;
 
         for (int i = 0; i < allSquares.length; i++) {
             if(allSquares[i].getClass().getSimpleName().equals("Amusement")) {
-                if(i + 1 != position && ((Amusement) allSquares[i]).getColor().equals(amusement.getColor()) ) {
+                if(i + OFFSET != position && ((Amusement) allSquares[i]).getColor().equals(amusement.getColor()) ) {
                     if (amusement.getBoothOwner() == null ||
                                     ((Amusement) allSquares[i]).getBoothOwner() == null) {
                         result = false;
@@ -189,7 +191,7 @@ public class Board {
         return allSquares;
     }
 
-    public Square getSquare(int pos) {
-        return allSquares[pos - 1];
+    public Square getSquare(int position) {
+        return allSquares[position - OFFSET];
     }
 }
