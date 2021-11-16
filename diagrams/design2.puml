@@ -1,0 +1,54 @@
+@startuml
+
+hide empty members
+skinparam groupInheritance 2
+
+class Die
+
+package "Game Board" {
+    class Board
+    class "<<abstract>>\nSquare" as Square
+        class Amusement
+        class Restrooms
+        class Start
+        class Railroad
+        class Chance
+        class PennyBag
+        class PayFor
+}
+
+package Logic {
+    class Bank
+    class GameController
+    class PlayerHandler
+    class PositionHandler
+    class SquareActionHandler
+}
+
+class Deck
+class ChanceCard
+class Player
+class "<<singleton>>\nLanguage" as Language
+
+Deck *-right- ChanceCard
+Board *-down- Square
+Square <|-- Restrooms
+Square <|-- Amusement
+Square <|-- Railroad
+Square <|-- PayFor
+Square <|-- PennyBag
+Square <|-- Start
+Square <|-- Chance
+
+GameController -up- PositionHandler
+GameController -up- PlayerHandler
+GameController -up- Die
+GameController -right- SquareActionHandler
+GameController -left- ChanceCard
+GameController -down- Board
+
+PlayerHandler -right- Player
+SquareActionHandler -right- Bank
+
+
+@enduml
