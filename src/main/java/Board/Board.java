@@ -164,6 +164,15 @@ public class Board {
         return result;
     }
 
+    public int getPennyBagPos() {
+        int result = -1;
+        for (int i = 0; i < allSquares.length; i++) {
+            if (allSquares[i].getClass().getSimpleName().equals("PennyBag"))
+                result = allSquares[i].getPosition();
+        }
+        return result;
+    }
+
     public Square[] getAllSquares() {
         return allSquares;
     }
