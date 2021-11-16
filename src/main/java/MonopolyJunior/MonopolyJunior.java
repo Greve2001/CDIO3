@@ -82,9 +82,8 @@ public class MonopolyJunior {
                     }
                 }
                 else{
-                    if(board.hasMonopoly(position)) {
+                    if(board.hasMonopoly(position))
                         pay(amusement.getBoothOwner(), amusement.getPrice() * 2);
-                    }
                     else
                         pay(amusement.getBoothOwner(), amusement.getPrice());
                 }
@@ -198,6 +197,6 @@ public class MonopolyJunior {
     }
 
     public void decideAndAnnounceWinner(){
-        
+
     }
 }
