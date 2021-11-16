@@ -69,4 +69,8 @@ public class Deck {
 
     }
 
+    public ChanceCard getCard() {
+        //need the option to get the info on the chance card without drawing a new card
+        return chanceCardDeck[drawCardCount];
+    }
 }

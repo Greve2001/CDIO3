@@ -22,11 +22,6 @@ public class MonopolyJunior {
     private final int PENNYBAG_POSITION = board.getPennyBagPos();
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
-
-    public MonopolyJunior(){
-
-    }
-
     public void setupGame(int numOfPlayers){
         if (numOfPlayers < MIN_NR_OF_PLAYERS || numOfPlayers > MAX_NR_OF_PLAYERS) {
             System.out.println("The number of players is not allowed. game will not be setup.");
@@ -78,7 +73,10 @@ public class MonopolyJunior {
             case "Amusement":
                 if (((Amusement)board.getSquare(position)).getBoothOwner() == null) {
                     pay((((Amusement) (board.getSquare(position))).getPrice()));
-                    board.addBooth(currentPlayer,position);
+                    if (currentPlayer.hasBooth()) {
+                        board.addBooth(currentPlayer, position);
+                        currentPlayer.useOneBooth();
+                    }
                 }
                 else
                     if(board.hasMonopoly(position))
@@ -90,7 +88,7 @@ public class MonopolyJunior {
                 takeTurn();//equels to restart your turn
                 break;
             case "Chance":
-                //todo logik
+                handleChance();
                 break;
             case "GoToRestrooms":
                 currentPlayer.setPosition(((GoToRestrooms)board.getSquare(position)).getDest());
@@ -110,6 +108,14 @@ public class MonopolyJunior {
             case "Go":
                 //do nothing
                 break;
+        }
+    }
+
+    private void handleChance() {
+        pile.pullCard();
+        if (pile.getCard().getDestination() > 0){
+            currentPlayer.setPosition(pile.getCard().getDestination());
+            handleField(currentPlayer.getPosition());
         }
     }
 
