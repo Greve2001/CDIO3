@@ -121,10 +121,10 @@ public class MonopolyJunior {
         }
         else{
             //todo logik
-            //handle placing booth on different colors
-            if (!board.hasMonopoly(12) && currentPlayer.hasBooth()){
+            String color = new String(pile.getCard().getColor());
+            if (!board.hasMonopoly(board.getSquarePosByColor(color)[0]) && currentPlayer.hasBooth()){
                 System.out.print("pick either 1 or 2");//going to gui later
-                board.addBooth(currentPlayer,input.nextInt()-1);
+                board.addBooth(currentPlayer,board.getSquarePosByColor(color)[input.nextInt()-1]);  //need refractor, also because we can't use scanner with GUI
                 currentPlayer.useOneBooth();
             }
 
