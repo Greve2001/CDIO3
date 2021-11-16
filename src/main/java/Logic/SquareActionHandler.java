@@ -18,7 +18,7 @@ public class SquareActionHandler {
     }
 
     private void setVariables(){
-        PENNYBAG_POSITION = board.getFistPosOfSquareByType("GetMoney");
+        PENNYBAG_POSITION = board.getFistPosOfSquareByType("PennyBag");
         RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms");
         MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
     }

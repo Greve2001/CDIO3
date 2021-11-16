@@ -66,7 +66,7 @@ public class GameController {
     }
 
     private void loseCheck(){ // On currentplayer
-        if (currentPlayer.getBalance() >= 0){
+        if (currentPlayer.getBalance() <= 0){
             // Found a loser
             findWinner();
             gameOver = true;
