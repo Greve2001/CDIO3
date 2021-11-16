@@ -19,6 +19,7 @@ public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
+    private final int PENNYBAG_POSITION =
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
 
@@ -61,31 +62,7 @@ public class MonopolyJunior {
         // Might ask for player action
         die.roll();
         updatePosition(die.getFaceValue());
-
-        // getField(), do action
-        String typeofField = ""; // Place holder
-        switch (typeofField){
-            case "Amusement" ->  {
-                /*field.getBooth
-                if (field.getBooth == null){
-                    int boothPrice = field.getPrice;
-                    pay(currentPlayer, boothPrice);
-                    if (currentPlayer.hasBooth())
-                        currentPlayer.useOneBooth();
-                        board.addBooth(currentPlayer, currentPlayer.getPosition());
-                }
-                if field.getBooth != null{
-                    // Make sure you are not paying yourself.
-                    pay(field.getBooth.ownedBy, field.getCost)
-                    // In pay method, check paymentPossible()
-                }
-                */
-            }
-            default -> {
-
-            }
-        }
-
+        handleField(currentPlayer.getPosition()+1);//handle all interaction with the field the player lands on
 
         //need to create method to handle all the different fields that the player can land on.
         //what to do if landing on an amusement
@@ -102,6 +79,46 @@ public class MonopolyJunior {
         //check if a player has no money
         if (currentPlayer.getBalance() == 0)
             hasWinner = true;
+    }
+
+    private void handleField(int position) {
+        String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
+        switch (fieldType){
+            case "Amusement":
+                if (((Amusement)board.getSquare(position)).getBoothOwner() == null) {
+                    pay((((Amusement) (board.getSquare(position))).getPrice()));
+                    board.addBooth(currentPlayer,position);
+                }
+                else
+                    if(board.hasMonopoly(position))
+                        pay(((Amusement)board.getSquare(position)).getBoothOwner(),((Amusement)board.getSquare(position)).getPrice()*2);
+                    else
+                        pay(((Amusement)board.getSquare(position)).getBoothOwner(),((Amusement)board.getSquare(position)).getPrice());
+                break;
+            case "Railroad":
+                takeTurn();//equels to restart your turn
+                break;
+            case "Chance":
+                //todo logik
+                break;
+            case "GoToRestrooms":
+                currentPlayer.setPosition(((GoToRestrooms)board.getSquare(position)).getDest());
+                pay(3);
+                ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(3);
+                break;
+            case "PennyBag":
+                //todo logik
+                break;
+            case "Restrooms":
+                //todo logik
+                break;
+            case "PayToSee":
+                //todo logik
+                break;
+            case "Go":
+                //do nothing
+                break;
+        }
     }
 
     public void changePlayer(){
@@ -135,24 +152,24 @@ public class MonopolyJunior {
         }
     }
 
-    public void pay(Player from, int amount){
-        if (from.getBalance() <= 0) { System.out.println("Negative balance, payment not possible"); return; }
-        if (paymentPossible(from, amount))
-            from.updateBalance(-amount);
+    public void pay(int amount){
+        if (currentPlayer.getBalance() <= 0) { System.out.println("Negative balance, payment not possible"); return; }
+        if (paymentPossible(currentPlayer, amount))
+            currentPlayer.updateBalance(-amount);
         else {
-            from.updateBalance(-from.getBalance());
+            currentPlayer.updateBalance(-currentPlayer.getBalance());
         }
     }
 
-    public void pay(Player from, Player to, int amount){
-        if (from.getBalance() <= 0) { System.out.println("Negative balance, payment not possible"); return; }
-        if (paymentPossible(from, amount)){
+    public void pay(Player to, int amount){
+        if (currentPlayer.getBalance() <= 0) { System.out.println("Negative balance, payment not possible"); return; }
+        if (paymentPossible(currentPlayer, amount)){
             to.updateBalance(amount);
-            from.updateBalance(-amount);
+            currentPlayer.updateBalance(-amount);
         }else{
             // Pay as much as you can
-            to.updateBalance(from.getBalance());
-            from.updateBalance(-from.getBalance());
+            to.updateBalance(currentPlayer.getBalance());
+            currentPlayer.updateBalance(-currentPlayer.getBalance());
             // Maybe use boolean or a statement to end game?
         }
 
