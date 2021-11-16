@@ -5,17 +5,14 @@ import MonopolyJunior.Player;
 import java.util.*;
 
 public class Board {
-
     private final int OFFSET = 1;
-
-    private List<HashMap<String, String>> listOfAllSquareAndProps;
-    private String[] columnNames;
-    private Square[] allSquares;
+    private final Square[] allSquares;
 
     public Board (){
+        // Loads the information from the board.csv in ressources.
         CSVReader reader = new CSVReader("board.csv", ",");
-        columnNames = reader.getColumnNames();
-        listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_HASHMAPS();
+        String[] columnNames = reader.getColumnNames();
+        List<HashMap<String, String>> listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_HASHMAPS();
 
         allSquares = new Square[listOfAllSquareAndProps.size()];
 
@@ -23,6 +20,8 @@ public class Board {
         for (int i = 0; i < listOfAllSquareAndProps.toArray().length; i++) {
             HashMap<String, String> currentSquare = listOfAllSquareAndProps.get(i);
 
+            // Column names is expected to be in the following order in the columnNames:
+            // 0 Position; 1 Type; 2 Name; 3 AmountGiven; 4 Price; 5 Color; 6 AmountToPay; 7 Dest
             switch (currentSquare.get(columnNames[1])) {
                 case "GO!" :
                     allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
@@ -85,6 +84,7 @@ public class Board {
         amusement.setBoothOwner(null);
     }
 
+    // Check squares of same color on the entire board for if they have the same owner
     public boolean hasMonopoly(int position) {
         Amusement amusement = (Amusement) getSquare(position);
         boolean result = true;

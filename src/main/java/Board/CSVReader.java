@@ -30,6 +30,7 @@ public class CSVReader {
         return FILE_AS_LIST_OF_HASHMAPS;
     }
 
+    // Opens the file as a scanner object for further use in the class
     private void fileAsScanner(String file) {
         // Gets the class loader and reads the file from the ressources folder
         ClassLoader classLoader = Board.class.getClassLoader();
@@ -39,10 +40,12 @@ public class CSVReader {
         // System.out.println(fileScanner.nextLine());
     }
 
+    // Takes the first line and makes it the column names
     private void setColumnNames(){
         this.columnNames = fileScanner.nextLine().split(",");
     }
 
+    // Reads the entire file to a list of HashMaps and closes the scanner object
     private void readFileToMap(){
         while (fileScanner.hasNextLine()) {
             FILE_AS_LIST_OF_HASHMAPS.add(readLineToHashMap());
@@ -52,6 +55,8 @@ public class CSVReader {
         fileScanner.close();
     }
 
+
+    // Reads one line at a time and makes it a HashMap
     private HashMap<String, String> readLineToHashMap() {
         HashMap<String, String> lineAsMap = new HashMap<>();
         Scanner currentLine = new Scanner(fileScanner.nextLine());
