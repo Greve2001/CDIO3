@@ -19,7 +19,7 @@ public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
-    private final int PENNYBAG_POSITION =
+    private final int PENNYBAG_POSITION = 
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
 
@@ -107,10 +107,10 @@ public class MonopolyJunior {
                 ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(3);
                 break;
             case "PennyBag":
-                //todo logik
+                currentPlayer.updateBalance(((PennyBag)board.getSquare(position)).withDraw());
                 break;
             case "Restrooms":
-                //todo logik
+                //do nothing
                 break;
             case "PayToSee":
                 //todo logik
