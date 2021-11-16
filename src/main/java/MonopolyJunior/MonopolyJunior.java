@@ -187,9 +187,6 @@ public class MonopolyJunior {
             to.updateBalance(currentPlayer.getBalance());
             currentPlayer.updateBalance(-currentPlayer.getBalance()); // Removes last remaning balance
         }
-
-
-
     }
 
     public boolean paymentPossible(Player player, int amount){
@@ -202,6 +199,6 @@ public class MonopolyJunior {
     }
 
     public void decideAndAnnounceWinner(){
-
+        
     }
 }
