@@ -15,7 +15,7 @@ public class CSVReader {
         // Sets the file as a scanner object
         fileAsScanner(file);
 
-        // Set the columnNames based on the first line.
+        // Takes only the first line of the CSV file and sets it as column names
         setColumnNames();
 
         // reads the entire file to a list of hashmaps
@@ -33,19 +33,18 @@ public class CSVReader {
     // Opens the file as a scanner object for further use in the class
     private void fileAsScanner(String file) {
         // Gets the class loader and reads the file from the ressources folder
-        ClassLoader classLoader = Board.class.getClassLoader();
+        ClassLoader classLoader = CSVReader.class.getClassLoader();
         InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(file)));
 
         fileScanner = new Scanner(reader);
-        // System.out.println(fileScanner.nextLine());
     }
 
     // Takes the first line and makes it the column names
     private void setColumnNames(){
-        this.columnNames = fileScanner.nextLine().split(",");
+        this.columnNames = fileScanner.nextLine().split(DELIMITER);
     }
 
-    // Reads the entire file to a list of HashMaps and closes the scanner object
+    // Reads the entire file except the first line to a list of HashMaps and closes the scanner object
     private void readFileToMap(){
         while (fileScanner.hasNextLine()) {
             FILE_AS_LIST_OF_HASHMAPS.add(readLineToHashMap());
