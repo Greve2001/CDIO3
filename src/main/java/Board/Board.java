@@ -25,7 +25,8 @@ public class Board {
             switch (currentSquare.get("type")) {
                 case "GO!" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new Go(Integer.parseInt(currentSquare.get("amountGiven")),
+                            new Go(currentSquare.get("name"),
+                                    Integer.parseInt(currentSquare.get("amountGiven")),
                                     Integer.parseInt(currentSquare.get("pos")));
                     break;
                 case "Amusement" :
@@ -37,7 +38,8 @@ public class Board {
                     break;
                 case "Chance" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                        new Chance(Integer.parseInt(currentSquare.get("pos")));
+                        new Chance(currentSquare.get("name"),
+                                Integer.parseInt(currentSquare.get("pos")));
                     break;
                 case "Railroad" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
@@ -52,7 +54,8 @@ public class Board {
                     break;
                 case "GoTo" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new GoToRestrooms(Integer.parseInt(currentSquare.get("pos")),
+                            new GoToRestrooms(currentSquare.get("name"),
+                                    Integer.parseInt(currentSquare.get("pos")),
                                     Integer.parseInt(currentSquare.get("dest")));
                     break;
                 case "GetMoney" :
@@ -62,7 +65,8 @@ public class Board {
                     break;
                 case "Restrooms" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new Restrooms(Integer.parseInt(currentSquare.get("pos")));
+                            new Restrooms(currentSquare.get("name"),
+                                    Integer.parseInt(currentSquare.get("pos")));
                     break;
              }
         }

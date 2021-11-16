@@ -98,7 +98,7 @@ public class MonopolyJunior {
                 break;
             case "GoToRestrooms":
                 currentPlayer.setGoingToRestRoom(true);
-                currentPlayer.setPosition(((GoToRestrooms)board.getSquare(position)).getDest());
+                currentPlayer.setPosition(((GoToRestrooms)board.getSquare(position)).getDestination());
                 pay(3);
                 ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(3);
                 break;

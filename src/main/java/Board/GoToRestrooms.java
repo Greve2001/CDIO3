@@ -1,14 +1,14 @@
 package Board;
 
 public class GoToRestrooms extends Square{
-    private final int dest;
+    private final int destination;
 
-    public GoToRestrooms(int position, int dest) {
-        super("Go to the Restrooms", position);
-        this.dest = dest;
+    public GoToRestrooms(String name, int position, int destination) {
+        super(name, position);
+        this.destination = destination;
     }
 
-    public int getDest() {
-        return dest;
+    public int getDestination() {
+        return destination;
     }
 }

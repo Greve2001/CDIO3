@@ -1,7 +1,5 @@
 package Board;
 
-import java.awt.*;
-
 public class Railroad extends Square {
     private final String color;
 

@@ -2,7 +2,7 @@ package Board;
 
 public class Restrooms extends Square{
 
-    public Restrooms(int position) {
-        super("Restrooms", position);
+    public Restrooms(String name, int position) {
+        super(name, position);
     }
 }
