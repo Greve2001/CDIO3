@@ -19,7 +19,7 @@ public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
-    private final int PENNYBAG_POSITION = 
+    private final int PENNYBAG_POSITION = board.getPennyBagPos();
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
 
@@ -64,15 +64,6 @@ public class MonopolyJunior {
         updatePosition(die.getFaceValue());
         handleField(currentPlayer.getPosition()+1);//handle all interaction with the field the player lands on
 
-        //need to create method to handle all the different fields that the player can land on.
-        //what to do if landing on an amusement
-        //what to do if landing on a rail road
-        //what to do if landing on 'chance field'
-        //what to do if landing on or passing start
-        //what to do if landing on 'go to cafe'
-
-
-
         //need to finish with an update to the win condition
         //something like 'current money' < 'money they have to pay'
 
@@ -113,7 +104,8 @@ public class MonopolyJunior {
                 //do nothing
                 break;
             case "PayToSee":
-                //todo logik
+                pay(((PayToSee)board.getSquare(position)).getAmount());
+                ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(((PayToSee)board.getSquare(position)).getAmount());
                 break;
             case "Go":
                 //do nothing
