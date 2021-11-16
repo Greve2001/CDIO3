@@ -60,17 +60,13 @@ public class MonopolyJunior {
         die.roll();
         updatePosition(die.getFaceValue());
         handleField(currentPlayer.getPosition());//handle all interaction with the field the player lands on
-
-        //check if winCondition is meet
-        if (currentPlayer.getBalance() == 0)
+        if (currentPlayer.getBalance() == 0)//check if winCondition is meet
             hasWinner = true;
     }
 
     private void handleField(int position) {
         String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
-        // Get squares which is needed across cases:
-        PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
-
+        PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);//used multiple placess
         switch (fieldType){
             case "Amusement":
                 Amusement amusement = (Amusement) (board.getSquare(position));
@@ -80,8 +76,7 @@ public class MonopolyJunior {
                         board.addBooth(currentPlayer, position);
                         currentPlayer.useOneBooth();
                     }
-                }
-                else{
+                }else{
                     if(board.hasMonopoly(position))
                         pay(amusement.getBoothOwner(), amusement.getPrice() * 2);
                     else
@@ -129,14 +124,12 @@ public class MonopolyJunior {
             handleField(currentPlayer.getPosition());
         }
         else{
-            //todo logik
             String color = new String(pile.getCard().getColor().toString());
             if (!board.hasMonopoly(board.getSquarePosByColor(color)[0]) && currentPlayer.hasBooth()){
                 System.out.print("pick either 1 or 2");//going to gui later
                 board.addBooth(currentPlayer,board.getSquarePosByColor(color)[input.nextInt()-1]);  //need refractor, also because we can't use scanner with GUI
                 currentPlayer.useOneBooth();
             }
-
         }
     }
 
@@ -160,7 +153,6 @@ public class MonopolyJunior {
 
     public void hasPassStart(int prevPos, int endPos, boolean goingToRestrooms){ //
         if (goingToRestrooms) return;
-
         if (endPos > BOARD_SIZE || prevPos == 1 || endPos < prevPos) { // Maybe get the zero form fieldtype GO position.
             // Give passing start money
             currentPlayer.updateBalance(MOVING_PAST_START);
