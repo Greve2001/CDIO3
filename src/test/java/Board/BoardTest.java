@@ -4,8 +4,6 @@ import MonopolyJunior.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Field;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
@@ -25,10 +23,8 @@ class BoardTest {
     }
 
     @Test
-    void allArrayFieldInit() throws NoSuchFieldException, IllegalAccessException {
-        Field allSquares = board.getClass().getDeclaredField("allSquares");
-        allSquares.setAccessible(true);
-        Square[] arr =(Square[]) (allSquares.get(board));
+    void allArrayFieldInit() {
+        Square[] arr = board.getAllSquares();
 
         int index = 1;
         for (Square square : arr) {
@@ -59,9 +55,5 @@ class BoardTest {
         amusement.setBoothOwner(player);
 
         assertTrue(board.hasMonopoly(3));
-    }
-
-    @Test
-    void readCSV() {
     }
 }
