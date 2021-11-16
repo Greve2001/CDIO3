@@ -164,6 +164,18 @@ public class Board {
         return result;
     }
 
+    public Integer[] getSquarePosByColor(String color) {
+        List<Integer> listOfPositions = new ArrayList<>();
+
+        for (int i = 0; i < allSquares.length; i++) {
+            if (((Amusement) allSquares[i]).getColor().equals(color)) {
+                listOfPositions.add((allSquares[i].getPosition()));
+            }
+        }
+
+        return (Integer[]) listOfPositions.toArray();
+    }
+
     public int getFistPosOfSquareByType(String type) {
         int result = -1;
         for (int i = 0; i < allSquares.length; i++) {
