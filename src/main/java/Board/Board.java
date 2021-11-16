@@ -2,141 +2,77 @@ package Board;
 
 import MonopolyJunior.Player;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
 
 public class Board {
 
     private final int OFFSET = 1;
 
-    private List<HashMap<String, String>> mapList = new ArrayList<>();
+    private List<HashMap<String, String>> listOfAllSquareAndProps;
+    private String[] columnNames;
     private Square[] allSquares;
 
     public Board (){
-        readCSV("board.csv");
+        CSVReader reader = new CSVReader("board.csv", ",");
+        columnNames = reader.getColumnNames();
+        listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_HASHMAPS();
 
-        allSquares = new Square[mapList.size() - OFFSET];
+        allSquares = new Square[listOfAllSquareAndProps.size()];
 
         // initialises the objects in an array based on the hashmap
-        for (int i = 0; i < mapList.toArray().length; i++) {
-            HashMap<String, String> currentSquare = mapList.get(i);
+        for (int i = 0; i < listOfAllSquareAndProps.toArray().length; i++) {
+            HashMap<String, String> currentSquare = listOfAllSquareAndProps.get(i);
 
-            switch (currentSquare.get("type")) {
+            switch (currentSquare.get(columnNames[1])) {
                 case "GO!" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new Go(currentSquare.get("name"),
-                                    Integer.parseInt(currentSquare.get("pos")),
-                                    Integer.parseInt(currentSquare.get("amountGiven")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                            new Go(currentSquare.get(columnNames[2]),
+                                    Integer.parseInt(currentSquare.get(columnNames[0])),
+                                    Integer.parseInt(currentSquare.get(columnNames[3])));
                     break;
                 case "Amusement" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                        new Amusement(currentSquare.get("name"),
-                                Integer.parseInt(currentSquare.get("pos")),
-                                currentSquare.get("color"),
-                                Integer.parseInt(currentSquare.get("price")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                        new Amusement(currentSquare.get(columnNames[2]),
+                                Integer.parseInt(currentSquare.get(columnNames[0])),
+                                currentSquare.get(columnNames[5]),
+                                Integer.parseInt(currentSquare.get(columnNames[4])));
                     break;
                 case "Chance" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                        new Chance(currentSquare.get("name"),
-                                Integer.parseInt(currentSquare.get("pos")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                        new Chance(currentSquare.get(columnNames[2]),
+                                Integer.parseInt(currentSquare.get(columnNames[0])));
                     break;
                 case "Railroad" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                        new Railroad(currentSquare.get("name"),
-                                Integer.parseInt(currentSquare.get("pos")),
-                                currentSquare.get("color"));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                        new Railroad(currentSquare.get(columnNames[3]),
+                                Integer.parseInt(currentSquare.get(columnNames[0])),
+                                currentSquare.get(columnNames[5]));
                     break;
                 case "PayToSee" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new PayToSee(currentSquare.get("name"),
-                                    Integer.parseInt(currentSquare.get("pos")),
-                                    Integer.parseInt(currentSquare.get("amountToPay")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                            new PayToSee(currentSquare.get(columnNames[2]),
+                                    Integer.parseInt(currentSquare.get(columnNames[0])),
+                                    Integer.parseInt(currentSquare.get(columnNames[6])));
                     break;
                 case "GoTo" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new GoToRestrooms(currentSquare.get("name"),
-                                    Integer.parseInt(currentSquare.get("pos")),
-                                    Integer.parseInt(currentSquare.get("dest")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                            new GoToRestrooms(currentSquare.get(columnNames[2]),
+                                    Integer.parseInt(currentSquare.get(columnNames[0])),
+                                    Integer.parseInt(currentSquare.get(columnNames[7])));
                     break;
                 case "GetMoney" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new PennyBag(currentSquare.get("name"),
-                                    Integer.parseInt(currentSquare.get("pos")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                            new PennyBag(currentSquare.get(columnNames[2]),
+                                    Integer.parseInt(currentSquare.get(columnNames[0])));
                     break;
                 case "Restrooms" :
-                    allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                            new Restrooms(currentSquare.get("name"),
-                                    Integer.parseInt(currentSquare.get("pos")));
+                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
+                            new Restrooms(currentSquare.get(columnNames[2]),
+                                    Integer.parseInt(currentSquare.get(columnNames[0])));
                     break;
              }
         }
 
-    }
-
-    // Reads a CSV file and stores the result as a list of hashmaps
-    public void readCSV(String file) {
-        // Gets the class loader and reads the file from the ressources folder
-        ClassLoader classLoader = Board.class.getClassLoader();
-        InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(file)));
-
-        // Creates a scanner that reads the inputstream
-        Scanner scan = new Scanner(reader);
-        Scanner lineReader;
-
-        int index = 0;
-        int line = 0;
-
-        // Scans one line at a time and then breaks up the line using the delimiter ","
-        while(scan.hasNextLine()) {
-            lineReader = new Scanner(scan.nextLine());
-            lineReader.useDelimiter(",");
-
-            mapList.add(new HashMap<String, String>());
-
-            // puts the values to the hashmap
-            while(lineReader.hasNext()) {
-                switch (index) {
-                    case 0 :
-                        mapList.get(line).put("pos", lineReader.next());
-                    break;
-                    case 1 :
-                        mapList.get(line).put("type", lineReader.next());
-                        break;
-                    case 2 :
-                        mapList.get(line).put("name", lineReader.next());
-                    break;
-                    case 3 :
-                        mapList.get(line).put("amountGiven", lineReader.next());
-                    break;
-                    case 4 :
-                        mapList.get(line).put("price", lineReader.next());
-                    break;
-                    case 5 :
-                        mapList.get(line).put("color", lineReader.next());
-                    break;
-                    case 6 :
-                        mapList.get(line).put("amountToPay", lineReader.next());
-                    break;
-                    case 7 :
-                        mapList.get(line).put("dest", lineReader.next());
-                    break;
-                }
-
-                index++;
-            }
-
-            index = 0;
-            line++;
-        }
-
-        scan.close();
-
-        try {
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void addBooth(Player player, int position) {

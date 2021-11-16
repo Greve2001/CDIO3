@@ -31,8 +31,6 @@ public class CSVReader {
     }
 
     private void fileAsScanner(String file) {
-        this.FILE = file;
-
         // Gets the class loader and reads the file from the ressources folder
         ClassLoader classLoader = Board.class.getClassLoader();
         InputStreamReader reader = new InputStreamReader(Objects.requireNonNull(classLoader.getResourceAsStream(file)));
