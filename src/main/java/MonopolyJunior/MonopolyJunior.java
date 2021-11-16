@@ -71,7 +71,8 @@ public class MonopolyJunior {
         switch (fieldType){
             case "Amusement":
                 if (((Amusement)board.getSquare(position)).getBoothOwner() == null) {
-                    pay((((Amusement) (board.getSquare(position))).getPrice()));
+                    int squareprice = (((Amusement) (board.getSquare(position))).getPrice());
+                    pay(squareprice);
                     if (currentPlayer.hasBooth()) {
                         board.addBooth(currentPlayer, position);
                         currentPlayer.useOneBooth();
@@ -108,6 +109,8 @@ public class MonopolyJunior {
             case "Go":
                 //do nothing
                 break;
+            default:
+                System.out.println("Switch case input unknown");
         }
     }
 
@@ -121,7 +124,7 @@ public class MonopolyJunior {
         }
         else{
             //todo logik
-            String color = new String(pile.getCard().getColor());
+            String color = new String(pile.getCard().getColor().toString());
             if (!board.hasMonopoly(board.getSquarePosByColor(color)[0]) && currentPlayer.hasBooth()){
                 System.out.print("pick either 1 or 2");//going to gui later
                 board.addBooth(currentPlayer,board.getSquarePosByColor(color)[input.nextInt()-1]);  //need refractor, also because we can't use scanner with GUI
