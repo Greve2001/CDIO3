@@ -41,8 +41,6 @@ public class PlayerHandler {
     }
 
     public Player getCurrentPlayer(){
-        System.out.println("Current Player: " + currentPlayer.getName());
-
         return currentPlayer;
     }
 

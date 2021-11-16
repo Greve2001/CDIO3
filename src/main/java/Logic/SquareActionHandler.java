@@ -29,6 +29,8 @@ public class SquareActionHandler {
         // Get squares which is needed across cases:
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
 
+        System.out.println("Landed on: " + fieldType + " at position: " + position);
+
         switch (fieldType){
             case "Amusement":
                 Amusement amusement = (Amusement) board.getSquare(position);

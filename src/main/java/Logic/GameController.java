@@ -16,7 +16,7 @@ public class GameController {
     Die die = new Die();
 
     Player currentPlayer;
-    boolean gameover = false;
+    boolean gameOver = false;
     int BOARD_SIZE = board.getAllSquares().length;
 
     // Ekstra, remove later
@@ -32,7 +32,7 @@ public class GameController {
     public void startGame(){
         do {
             takeTurn();
-        }while (!gameover);
+        }while (!gameOver);
     }
 
     public void takeTurn(){
@@ -40,15 +40,17 @@ public class GameController {
         currentPlayer = playerHandler.getCurrentPlayer();
 
         // Get action from player
-        System.out.print("Action please");
+        System.out.print("Please press enter");
         input.nextLine();
 
         // Roll die, get value.
         die.roll();
         int spacesToMove = die.getFaceValue();
+        System.out.println("You rolled: " + spacesToMove);
 
         // Move player position
         positionHandler.movePlayer(currentPlayer, spacesToMove);
+
         // Get new position
         int currentPosition = playerHandler.getCurrentPlayer().getPosition();
 
@@ -67,7 +69,7 @@ public class GameController {
         if (currentPlayer.getBalance() >= 0){
             // Found a loser
             findWinner();
-            gameover = true;
+            gameOver = true;
         }
     }
     // Maybe move into playerHandler???
