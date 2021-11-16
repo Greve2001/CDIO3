@@ -19,8 +19,8 @@ public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
-    private final int PENNYBAG_POSITION = board.getPennyBagPos();
-    private final int RESTOROOM_POSITION = board.getRestRoomPos();
+    private final int PENNYBAG_POSITION = board.getFistPosOfSquareByType("GetMoney");
+    private final int RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms");
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
     public void setupGame(int numOfPlayers){
@@ -42,6 +42,7 @@ public class MonopolyJunior {
         do {
             takeTurn();
         } while (!hasWinner);
+        decideAndAnnounceWinner();
     }
 
     
@@ -55,15 +56,12 @@ public class MonopolyJunior {
 
 
     public void takeTurn() {
-        // Might ask for player action
+        input.nextLine();//just as a stop between turns
         die.roll();
         updatePosition(die.getFaceValue());
         handleField(currentPlayer.getPosition());//handle all interaction with the field the player lands on
 
-        //need to finish with an update to the win condition
-        //something like 'current money' < 'money they have to pay'
-
-        //check if a player has no money
+        //check if winCondition is meet
         if (currentPlayer.getBalance() == 0)
             hasWinner = true;
     }
@@ -118,12 +116,18 @@ public class MonopolyJunior {
         if (pile.getCard().getDestination() > 0){
             if (pile.getCard().getDestination() == RESTOROOM_POSITION)
                 currentPlayer.setGoingToRestRoom(true);
-            currentPlayer.setPosition(pile.getCard().getDestination());
+            updatePosition(pile.getCard().getDestination());
             handleField(currentPlayer.getPosition());
         }
         else{
             //todo logik
             //handle placing booth on different colors
+            if (!board.hasMonopoly(12) && currentPlayer.hasBooth()){
+                System.out.print("pick either 1 or 2");//going to gui later
+                board.addBooth(currentPlayer,input.nextInt()-1);
+                currentPlayer.useOneBooth();
+            }
+
         }
     }
 
@@ -135,10 +139,6 @@ public class MonopolyJunior {
             currentPlayer = players[playerIndex + 1];
     }
 
-    public boolean gethasWinner(){
-        return hasWinner;
-    }
-
     public void updatePosition(int moveSpaces){
         int prevPos = currentPlayer.getPosition();
         int endPos = prevPos + moveSpaces;
@@ -146,13 +146,13 @@ public class MonopolyJunior {
             currentPlayer.setPosition(endPos - BOARD_SIZE);
         else
             currentPlayer.setPosition(endPos);
-        hasPassStart(prevPos, endPos, false);
+        hasPassStart(prevPos, endPos, currentPlayer.getGoingToRestRoom());
     }
 
     public void hasPassStart(int prevPos, int endPos, boolean goingToRestrooms){ //
         if (goingToRestrooms) return;
 
-        if (endPos > BOARD_SIZE || prevPos == 0 || endPos < prevPos) { // Maybe get the zero form fieldtype GO position.
+        if (endPos > BOARD_SIZE || prevPos == 1 || endPos < prevPos) { // Maybe get the zero form fieldtype GO position.
             // Give passing start money
             currentPlayer.updateBalance(MOVING_PAST_START);
         }
@@ -173,10 +173,8 @@ public class MonopolyJunior {
             to.updateBalance(amount);
             currentPlayer.updateBalance(-amount);
         }else{
-            // Pay as much as you can
             to.updateBalance(currentPlayer.getBalance());
             currentPlayer.updateBalance(-currentPlayer.getBalance());
-            // Maybe use boolean or a statement to end game?
         }
 
 
