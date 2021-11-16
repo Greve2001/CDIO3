@@ -26,8 +26,8 @@ public class Board {
                 case "GO!" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new Go(currentSquare.get("name"),
-                                    Integer.parseInt(currentSquare.get("amountGiven")),
-                                    Integer.parseInt(currentSquare.get("pos")));
+                                    Integer.parseInt(currentSquare.get("pos")),
+                                    Integer.parseInt(currentSquare.get("amountGiven")));
                     break;
                 case "Amusement" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =

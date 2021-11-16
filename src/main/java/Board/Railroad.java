@@ -3,8 +3,8 @@ package Board;
 public class Railroad extends Square {
     private final String color;
 
-    public Railroad(int position, String color) {
-        super("Railroad", position);
+    public Railroad(String name, int position, String color) {
+        super(name, position);
         this.color = color;
     }
 
