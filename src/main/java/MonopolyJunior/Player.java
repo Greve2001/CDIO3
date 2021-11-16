@@ -4,7 +4,7 @@ import java.awt.*;
 
 public class Player {
     private String name;
-    private int position, balance, boothsOnHand;
+    private int position = 1, balance, boothsOnHand;
     private Color color;
     boolean goingToRestRoom;
 
