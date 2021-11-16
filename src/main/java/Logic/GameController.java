@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class GameController {
 
     PlayerHandler playerHandler;
+    SquareActionHandler squareActionHandler;
     Board board = new Board();
     Deck deck = new Deck();
     Die die = new Die();
@@ -21,6 +22,7 @@ public class GameController {
 
     public void setupGame(){
         playerHandler = new PlayerHandler(4); // Change default when using GUI
+        squareActionHandler = new SquareActionHandler(board);
 
     }
 
@@ -42,7 +44,14 @@ public class GameController {
         die.roll();
         int faceValue = die.getFaceValue();
 
-        // Move player, do action on that field
+        // Move player position
+        
+        int currentPosition;
+
+        // Do action on that field
+        squareActionHandler.doFieldAction();
+
+        // Win check
 
         // Change turn
         playerHandler.changeTurn();

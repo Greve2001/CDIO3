@@ -6,6 +6,5 @@ public class mainTest {
     public static void main(String[] args) {
         GC.setupGame();
         GC.startGame();
-
     }
 }
