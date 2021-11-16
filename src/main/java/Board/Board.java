@@ -43,7 +43,8 @@ public class Board {
                     break;
                 case "Railroad" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
-                        new Railroad(Integer.parseInt(currentSquare.get("pos")),
+                        new Railroad(currentSquare.get("name"),
+                                Integer.parseInt(currentSquare.get("pos")),
                                 currentSquare.get("color"));
                     break;
                 case "PayToSee" :
