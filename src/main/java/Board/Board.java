@@ -164,10 +164,10 @@ public class Board {
         return result;
     }
 
-    public int getPennyBagPos() {
+    public int getFistPosOfSquareByType(String type) {
         int result = -1;
         for (int i = 0; i < allSquares.length; i++) {
-            if (allSquares[i].getClass().getSimpleName().equals("PennyBag"))
+            if (allSquares[i].getClass().getSimpleName().equals(type))
                 result = allSquares[i].getPosition();
         }
         return result;
