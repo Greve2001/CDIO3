@@ -48,7 +48,7 @@ public class Board {
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
                             new PayToSee(currentSquare.get("name"),
                                     Integer.parseInt(currentSquare.get("pos")),
-                                    Integer.parseInt(currentSquare.get("pos")));
+                                    Integer.parseInt(currentSquare.get("amountToPay")));
                     break;
                 case "GoTo" :
                     allSquares[Integer.parseInt(currentSquare.get("pos")) - OFFSET] =
