@@ -71,18 +71,24 @@ public class MonopolyJunior {
         switch (fieldType){
             case "Amusement":
                 if (((Amusement)board.getSquare(position)).getBoothOwner() == null) {
-                    int squareprice = (((Amusement) (board.getSquare(position))).getPrice());
-                    pay(squareprice);
+                    int squarePrice = (((Amusement) (board.getSquare(position))).getPrice());
+                    pay(squarePrice);
                     if (currentPlayer.hasBooth()) {
                         board.addBooth(currentPlayer, position);
                         currentPlayer.useOneBooth();
                     }
                 }
-                else
-                    if(board.hasMonopoly(position))
-                        pay(((Amusement)board.getSquare(position)).getBoothOwner(),((Amusement)board.getSquare(position)).getPrice()*2);
+                else{
+                    int squarePrice = ((Amusement)board.getSquare(position)).getPrice();
+                    Player boothOwner = ((Amusement)board.getSquare(position)).getBoothOwner();
+
+                    if(board.hasMonopoly(position)) {
+                        pay(boothOwner, squarePrice * 2);
+                    }
                     else
-                        pay(((Amusement)board.getSquare(position)).getBoothOwner(),((Amusement)board.getSquare(position)).getPrice());
+                        pay(boothOwner, squarePrice);
+                }
+
                 break;
             case "Railroad":
                 takeTurn();//equels to restart your turn
