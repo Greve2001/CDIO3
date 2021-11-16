@@ -68,10 +68,14 @@ public class MonopolyJunior {
 
     private void handleField(int position) {
         String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
+        // Get squares which is needed across cases:
+        PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
+
         switch (fieldType){
             case "Amusement":
-                if (((Amusement)board.getSquare(position)).getBoothOwner() == null) {
-                    int squarePrice = (((Amusement) (board.getSquare(position))).getPrice());
+                Amusement amusement = (Amusement) (board.getSquare(position));
+                if ((amusement.getBoothOwner() == null)) {
+                    int squarePrice = (amusement.getPrice());
                     pay(squarePrice);
                     if (currentPlayer.hasBooth()) {
                         board.addBooth(currentPlayer, position);
@@ -79,8 +83,8 @@ public class MonopolyJunior {
                     }
                 }
                 else{
-                    int squarePrice = ((Amusement)board.getSquare(position)).getPrice();
-                    Player boothOwner = ((Amusement)board.getSquare(position)).getBoothOwner();
+                    int squarePrice = amusement.getPrice();
+                    Player boothOwner = amusement.getBoothOwner();
 
                     if(board.hasMonopoly(position)) {
                         pay(boothOwner, squarePrice * 2);
@@ -97,10 +101,12 @@ public class MonopolyJunior {
                 handleChance();
                 break;
             case "GoToRestrooms":
+                GoToRestrooms goToRestrooms = (GoToRestrooms)board.getSquare(position);
                 currentPlayer.setGoingToRestRoom(true);
                 currentPlayer.setPosition(((GoToRestrooms)board.getSquare(position)).getDestination());
+                currentPlayer.setPosition(goToRestrooms.getDestination());
                 pay(3);
-                ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(3);
+                pennyBag.addMoney(3);
                 break;
             case "PennyBag":
                 currentPlayer.updateBalance(((PennyBag)board.getSquare(position)).withDraw());
@@ -109,8 +115,9 @@ public class MonopolyJunior {
                 //do nothing
                 break;
             case "PayToSee":
-                pay(((PayToSee)board.getSquare(position)).getAmount());
-                ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(((PayToSee)board.getSquare(position)).getAmount());
+                PayToSee payToSee = (PayToSee)board.getSquare(position);
+                pay(payToSee.getAmount());
+                pennyBag.addMoney(payToSee.getAmount());
                 break;
             case "Go":
                 //do nothing
@@ -183,7 +190,7 @@ public class MonopolyJunior {
             currentPlayer.updateBalance(-amount);
         }else{
             to.updateBalance(currentPlayer.getBalance());
-            currentPlayer.updateBalance(-currentPlayer.getBalance());
+            currentPlayer.updateBalance(-currentPlayer.getBalance()); // Removes last remaning balance
         }
 
 
