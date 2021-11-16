@@ -20,6 +20,7 @@ public class MonopolyJunior {
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
     private final int PENNYBAG_POSITION = board.getPennyBagPos();
+    private final int RESTOROOM_POSITION = board.getRestRoomPos();
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
     public void setupGame(int numOfPlayers){
@@ -57,7 +58,7 @@ public class MonopolyJunior {
         // Might ask for player action
         die.roll();
         updatePosition(die.getFaceValue());
-        handleField(currentPlayer.getPosition()+1);//handle all interaction with the field the player lands on
+        handleField(currentPlayer.getPosition());//handle all interaction with the field the player lands on
 
         //need to finish with an update to the win condition
         //something like 'current money' < 'money they have to pay'
@@ -91,6 +92,7 @@ public class MonopolyJunior {
                 handleChance();
                 break;
             case "GoToRestrooms":
+                currentPlayer.setGoingToRestRoom(true);
                 currentPlayer.setPosition(((GoToRestrooms)board.getSquare(position)).getDest());
                 pay(3);
                 ((PennyBag)board.getSquare(PENNYBAG_POSITION)).addMoney(3);
@@ -114,8 +116,14 @@ public class MonopolyJunior {
     private void handleChance() {
         pile.pullCard();
         if (pile.getCard().getDestination() > 0){
+            if (pile.getCard().getDestination() == RESTOROOM_POSITION)
+                currentPlayer.setGoingToRestRoom(true);
             currentPlayer.setPosition(pile.getCard().getDestination());
             handleField(currentPlayer.getPosition());
+        }
+        else{
+            //todo logik
+            //handle placing booth on different colors
         }
     }
 
