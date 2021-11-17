@@ -68,7 +68,7 @@ public class MonopolyJunior {
         String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);//used multiple placess
         switch (fieldType){
-            case "Amusement":
+             case "Amusement":
                 Amusement amusement = (Amusement) (board.getSquare(position));
                 if ((amusement.getBoothOwner() == null)) {
                     pay(amusement.getPrice());
