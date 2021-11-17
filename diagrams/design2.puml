@@ -30,8 +30,8 @@ class ChanceCard
 class Player
 class "<<singleton>>\nLanguage" as Language
 
-Deck *-right- ChanceCard
-Board *-down- Square
+Deck *- ChanceCard
+Board *-down Square
 Square <|-- Restrooms
 Square <|-- Amusement
 Square <|-- Railroad
@@ -43,12 +43,15 @@ Square <|-- Chance
 GameController -up- PositionHandler
 GameController -up- PlayerHandler
 GameController -up- Die
-GameController -right- SquareActionHandler
-GameController -left- ChanceCard
+GameController -left- SquareActionHandler
+GameController -left- Deck
 GameController -down- Board
 
-PlayerHandler -right- Player
-SquareActionHandler -right- Bank
+PlayerHandler -up- Player
+SquareActionHandler -up- Bank
+SquareActionHandler -- Board
+Bank -up- Player
+PositionHandler -up- Player
 
 
 @enduml
