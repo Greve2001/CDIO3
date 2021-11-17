@@ -3,6 +3,7 @@
 hide empty members
 skinparam groupInheritance 2
 
+
 class Die
 
 package "Game Board" {
@@ -30,8 +31,23 @@ class ChanceCard
 class Player
 class "<<singleton>>\nLanguage" as Language
 
-Deck *- ChanceCard
-Board *-down Square
+GameController -down- Board
+GameController -right- Die
+
+GameController -up- PositionHandler
+GameController -up- SquareActionHandler
+    SquareActionHandler -left- PositionHandler
+    SquareActionHandler -right- PlayerHandler
+    SquareActionHandler -up- Bank
+    SquareActionHandler -up- Deck
+        Deck -left- ChanceCard
+GameController -up- PlayerHandler
+    PlayerHandler -right- Player
+        Player -- Bank
+
+
+
+Board -- Square
 Square <|-- Restrooms
 Square <|-- Amusement
 Square <|-- Railroad
@@ -39,19 +55,6 @@ Square <|-- PayFor
 Square <|-- PennyBag
 Square <|-- Start
 Square <|-- Chance
-
-GameController -up- PositionHandler
-GameController -up- PlayerHandler
-GameController -up- Die
-GameController -left- SquareActionHandler
-GameController -left- Deck
-GameController -down- Board
-
-PlayerHandler -up- Player
-SquareActionHandler -up- Bank
-SquareActionHandler -- Board
-Bank -up- Player
-PositionHandler -up- Player
 
 
 @enduml
