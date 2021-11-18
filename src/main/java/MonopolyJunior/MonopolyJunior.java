@@ -13,7 +13,6 @@ public class MonopolyJunior {
     private Player currentPlayer;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
-    private MJGui gui;
 
     private final int MIN_NR_OF_PLAYERS = 2;
     private final int MAX_NR_OF_PLAYERS = 4;
