@@ -189,6 +189,18 @@ public class MonopolyJunior {
     }
 
     public void decideAndAnnounceWinner(){
-
+        int playerIndex = java.util.Arrays.asList(players).indexOf(currentPlayer);
+        int highestBalance;
+        int amountOfPlayersHavingHighestBalance;
+        if (playerIndex == 2)
+            highestBalance = Math.max(players[0].getBalance(),players[1].getBalance());
+        else if(playerIndex == 3)
+            highestBalance = Math.max(Math.max(players[0].getBalance(),players[1].getBalance()),players[2].getBalance());
+        else if (playerIndex == 4)
+            highestBalance = Math.max(Math.max(players[0].getBalance(),players[1].getBalance()),Math.max(players[2].getBalance(),players[3].getBalance()));
+        for (Player p : players) {
+            if (p.getBalance() == highestBalance)
+                System.out.println(p.getName() + "wins!");
+        }
     }
 }
