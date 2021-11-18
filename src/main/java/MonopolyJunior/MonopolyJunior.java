@@ -190,7 +190,7 @@ public class MonopolyJunior {
 
     public void decideAndAnnounceWinner(){
         int playerIndex = java.util.Arrays.asList(players).indexOf(currentPlayer);
-        int highestBalance;
+        int highestBalance = 0;
         int amountOfPlayersHavingHighestBalance;
         if (playerIndex == 2)
             highestBalance = Math.max(players[0].getBalance(),players[1].getBalance());
