@@ -40,6 +40,7 @@ public class MonopolyJunior {
     public void playGame(){
         do {
             takeTurn();
+            changePlayer();
         } while (!hasWinner);
         decideAndAnnounceWinner();
     }
