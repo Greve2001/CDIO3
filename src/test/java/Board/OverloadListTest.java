@@ -25,7 +25,7 @@ class OverloadListTest {
             list.add(1);
         }
 
-        assertEquals(1, list.get(1,0));
+        assertEquals(1, list.getInt(1));
     }
 
     @Test
@@ -60,7 +60,7 @@ class OverloadListTest {
 
         System.out.println("test");
 
-        String[] myListArr = list.get(0, new String[1]);
+        String[] myListArr = list.getStringArr(0);
 
 
         System.out.println(myListArr[0]);
