@@ -47,7 +47,7 @@ class OverloadListTest {
                 0, 0, 0, 0, 0,
         };
 
-        assertArrayEquals(list.getList(0), expected);
+        assertArrayEquals(list.getListOfInts(), expected);
     }
 
     @Test
