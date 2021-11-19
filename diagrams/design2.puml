@@ -6,8 +6,6 @@ skinparam groupInheritance 2
 skinparam linetype polyline
 
 
-
-
 class Die
 
 package "Game Board" {
@@ -34,19 +32,20 @@ class ChanceCard
 class Player
 class "<<singleton>>\nLanguage" as Language
 
-GameController -down- Board
-GameController -- Die
+GameController -left- PositionHandler
+GameController -right- ActionHandler
+PositionHandler -- ActionHandler
 
-GameController -left- ActionHandler
-    ActionHandler -left- Bank
-    ActionHandler -- Deck
-        Deck -left ChanceCard
-GameController -right- PositionHandler
+GameController -left- Player
+ActionHandler -left- Player
+PositionHandler -left- Player
+ActionHandler -up- Bank
 
-Player -down- ActionHandler
-Player -down- PositionHandler
-Player -down- GameController
-Player -down- Bank
+GameController -down-- Board
+GameController -left- Deck
+    Deck -left- ChanceCard
+GameController -down- Die
+
 
 Board -- Square
 Square <|-- Restrooms

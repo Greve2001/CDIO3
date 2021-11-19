@@ -81,7 +81,6 @@ public class ActionHandler {
 
                 // Change position
                 positionHandler.setPlayerPosition(currentPlayer, goToRestrooms.getDestination(), false);
-
                 break;
 
             case "Restrooms":
