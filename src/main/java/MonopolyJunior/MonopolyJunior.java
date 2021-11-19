@@ -59,6 +59,7 @@ public class MonopolyJunior {
     public void takeTurn() {
         input.nextLine();//just as a stop between turns
         die.roll();
+        currentPlayer.setGoingToRestRoom(false);
         updatePosition(die.getFaceValue());
         handleField(currentPlayer.getPosition());//handle all interaction with the field the player lands on
         if (currentPlayer.getBalance() == 0)//check if winCondition is meet
