@@ -8,7 +8,6 @@ public class Board {
     private final int OFFSET = 1;
     private final Square[] allSquares;
     private int pennyBagPosition;
-    private int restroomsPostion;
 
     public Board (){
         // Loads the information from the board.csv in ressources.
@@ -71,7 +70,6 @@ public class Board {
                     allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
                             new Restrooms(currentSquare.get(columnNames[2]),                        // name
                                     Integer.parseInt(currentSquare.get(columnNames[0])));           // position
-                    restroomsPostion = Integer.parseInt(currentSquare.get(columnNames[0]));
                     break;
              }
         }
@@ -131,10 +129,6 @@ public class Board {
 
     public int getPennyBagPos(){
         return pennyBagPosition;
-    }
-
-    public int getRestroomsPostion(){
-        return restroomsPostion;
     }
 
     public Square[] getAllSquares() {
