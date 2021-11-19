@@ -2,8 +2,6 @@ package Board;
 
 import MonopolyJunior.Player;
 
-import java.util.*;
-
 public class Board {
     private final int OFFSET = 1;
     private final Square[] allSquares;
@@ -12,7 +10,6 @@ public class Board {
     public Board (){
         // Loads the information from the board.csv in ressources.
         CSVReader reader = new CSVReader("board.csv", ",");
-        String[] columnNames = reader.getColumnNames();
         OverloadList listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
 
         allSquares = new Square[listOfAllSquareAndProps.size()];
@@ -120,13 +117,13 @@ public class Board {
         OverloadList listOfPositions = new OverloadList("int");
 
         // Checks the entire array in case there is implemented more than two Amusements of the same color
-        for (int i = 0; i < allSquares.length; i++) {
-            if (((Amusement) allSquares[i]).getColor().equalsIgnoreCase(color)) {
-                listOfPositions.add((allSquares[i].getPosition()));
+        for (Square allSquare : allSquares) {
+            if (((Amusement) allSquare).getColor().equalsIgnoreCase(color)) {
+                listOfPositions.add((allSquare.getPosition()));
             }
         }
 
-        return listOfPositions.getList(0);
+        return listOfPositions.getListOfInts();
     }
 
     public int getPennyBagPos(){
