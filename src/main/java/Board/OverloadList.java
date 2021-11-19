@@ -4,9 +4,12 @@ public class OverloadList {
     private int size = 0;
     private int[] arrOfInts;
     private String[] ArrOfStrings;
-    private String[][] ArrOfStringArrs;
+    private String[][] ArrOfStringArs;
+    private final String TYPE;
 
     public OverloadList(String type) {
+        this.TYPE = type;
+
         switch (type) {
             case "int" :
                 arrOfInts = new int[20];
@@ -15,7 +18,7 @@ public class OverloadList {
                 ArrOfStrings = new String[20];
                 break;
             case "String[]" :
-                ArrOfStringArrs = new String[20][1];
+                ArrOfStringArs = new String[20][1];
                 break;
             default:
                 System.out.println("Type not defined in list");
@@ -23,19 +26,21 @@ public class OverloadList {
     }
 
     public void add(int integer) {
-        if (size >= arrOfInts.length) {
-            int[] increasedSizeArr = new int[arrOfInts.length * 2];
+        if (TYPE.equals("int")) {
+            if (size >= arrOfInts.length) {
+                int[] increasedSizeArr = new int[arrOfInts.length * 2];
 
-            int i = 0;
-            for (int value : arrOfInts) {
+                int i = 0;
+                for (int value : arrOfInts) {
 
-                increasedSizeArr[i++] = value;
-                arrOfInts = increasedSizeArr;
+                    increasedSizeArr[i++] = value;
+                    arrOfInts = increasedSizeArr;
+                }
             }
-        }
 
-        arrOfInts[size] = integer;
-        size++;
+            arrOfInts[size] = integer;
+            size++;
+        }
     }
 
     public int getInt(int index) {
@@ -47,19 +52,21 @@ public class OverloadList {
     }
 
     public void add(String string) {
-        if (size >= ArrOfStrings.length) {
-            String[] increasedSizeArr = new String[ArrOfStrings.length * 2];
+        if (TYPE.equals("String")) {
+            if (size >= ArrOfStrings.length) {
+                String[] increasedSizeArr = new String[ArrOfStrings.length * 2];
 
-            int i = 0;
-            for (String value : ArrOfStrings) {
+                int i = 0;
+                for (String value : ArrOfStrings) {
 
-                increasedSizeArr[i++] = value;
-                ArrOfStrings = increasedSizeArr;
+                    increasedSizeArr[i++] = value;
+                    ArrOfStrings = increasedSizeArr;
+                }
             }
-        }
 
         ArrOfStrings[size] = string;
         size++;
+        }
     }
 
     public String getString(int index) {
@@ -71,27 +78,29 @@ public class OverloadList {
     }
 
     public void add(String[] string) {
-        if (size >= ArrOfStringArrs.length) {
-            String[][] increasedSizeArr = new String[ArrOfStringArrs.length * 2][1];
+        if (TYPE.equals("String[]")) {
+            if (size >= ArrOfStringArs.length) {
+                String[][] increasedSizeArr = new String[ArrOfStringArs.length * 2][1];
 
-            int i = 0;
-            for (String[] value : ArrOfStringArrs) {
+                int i = 0;
+                for (String[] value : ArrOfStringArs) {
 
-                increasedSizeArr[i++] = value;
-                ArrOfStringArrs = increasedSizeArr;
+                    increasedSizeArr[i++] = value;
+                    ArrOfStringArs = increasedSizeArr;
+                }
             }
-        }
 
-        ArrOfStringArrs[size] = string;
-        size++;
+            ArrOfStringArs[size] = string;
+            size++;
+        }
     }
 
     public String[] getStringArr(int index) {
-        return ArrOfStringArrs[index];
+        return ArrOfStringArs[index];
     }
 
     public String[][] getListOfStringArr() {
-        return ArrOfStringArrs;
+        return ArrOfStringArs;
     }
 
     public int size() {
