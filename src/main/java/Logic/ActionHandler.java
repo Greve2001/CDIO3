@@ -14,11 +14,13 @@ public class ActionHandler {
 
     private Board board;
     private Player currentPlayer;
+    private GameController gameController;
     private PositionHandler positionHandler;
 
-    public ActionHandler(Board board, PositionHandler positionHandler){
+    public ActionHandler(GameController gameController, Board board, PositionHandler positionHandler){
         this.board = board;
         this.positionHandler = positionHandler;
+        this.gameController = gameController;
         setVariables();
     }
 
@@ -61,7 +63,8 @@ public class ActionHandler {
                 break;
 
             case "Railroad":
-                // !!!!!!! Figure out how to signal extra turn !!!!!!!
+                // Give extra turn.
+                gameController.giveExtraTurn();
                 break;
 
             case "Chance":

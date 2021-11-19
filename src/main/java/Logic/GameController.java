@@ -17,6 +17,7 @@ public class GameController {
     private Player currentPlayer;
 
     boolean gameOver = false;
+    boolean extraTurn = false;
 
     private final int START_MONEY = 31;
     private final int MAX_BOOTHS = 12;
@@ -28,8 +29,7 @@ public class GameController {
 
     public void setupGame(){
         positionHandler = new PositionHandler(players, board.getAllSquares().length);
-        actionHandler = new ActionHandler(board, positionHandler);
-
+        actionHandler = new ActionHandler(this, board, positionHandler);
     }
 
     public void startGame(){
@@ -39,6 +39,7 @@ public class GameController {
     }
 
     public void takeTurn(){
+
         // Get action from player
         System.out.print("Please press enter");
         input.nextLine();
@@ -61,7 +62,8 @@ public class GameController {
         loseCheck();
 
         // Change turn
-        changeTurn();
+        if (!extraTurn) changeTurn();
+        extraTurn = false;
 
     }
 
@@ -90,9 +92,8 @@ public class GameController {
         System.out.println(winner.getName() + " with a balance of " + winner.getBalance());
     }
 
-    
-    
-    // *** Player Handling *** // 
+
+    // *** Player Handling *** //
     
     private void setupPlayers(int numPlayers){
         players = new Player[numPlayers];
@@ -120,5 +121,9 @@ public class GameController {
 
         System.out.println("Changed player from: " + players[playerIndex].getName() + " to: " +
                 "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName());
+    }
+
+    public void giveExtraTurn(){
+        extraTurn = true;
     }
 }
