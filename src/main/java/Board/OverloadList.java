@@ -19,19 +19,19 @@ public class OverloadList {
     }
 
     public void add(int integer) {
-        if (size > arrOfInts.length) {
+        if (size >= arrOfInts.length) {
             int[] increasedSizeArr = new int[arrOfInts.length * 2];
 
             int i = 0;
             for (int value : arrOfInts) {
 
-                arrOfInts = increasedSizeArr;
                 increasedSizeArr[i++] = value;
+                arrOfInts = increasedSizeArr;
             }
-
-            arrOfInts[size] = integer;
-            size++;
         }
+
+        arrOfInts[size] = integer;
+        size++;
     }
 
     public int get(int index, int typeOf) {
@@ -43,19 +43,19 @@ public class OverloadList {
     }
 
     public void add(String string) {
-        if (size > ArrOfStrings.length) {
+        if (size >= ArrOfStrings.length) {
             String[] increasedSizeArr = new String[ArrOfStrings.length * 2];
 
             int i = 0;
             for (String value : ArrOfStrings) {
 
-                ArrOfStrings = increasedSizeArr;
                 increasedSizeArr[i++] = value;
+                ArrOfStrings = increasedSizeArr;
             }
-
-            ArrOfStrings[size] = string;
-            size++;
         }
+
+        ArrOfStrings[size] = string;
+        size++;
     }
 
     public String get(int index, String typeOf) {
