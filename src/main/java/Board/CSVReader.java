@@ -7,7 +7,7 @@ public class CSVReader {
     private String[] columnNames;
     private Scanner fileScanner;
     private final String DELIMITER;
-    private final List<HashMap<String, String>> FILE_AS_LIST_OF_HASHMAPS = new ArrayList<>();
+    private final List<String[]> FILE_AS_LIST_OF_ARR = new ArrayList<>();
 
     public CSVReader(String file, String delimiter) {
         this.DELIMITER = delimiter;
@@ -19,15 +19,15 @@ public class CSVReader {
         setColumnNames();
 
         // reads the entire file to a list of hashmaps
-        readFileToMap();
+        readFileToArr();
     }
 
     public String[] getColumnNames() {
         return columnNames;
     }
 
-    public List<HashMap<String, String>> getFILE_AS_LIST_OF_HASHMAPS() {
-        return FILE_AS_LIST_OF_HASHMAPS;
+    public List<String[]> getFILE_AS_LIST_OF_ARR() {
+        return FILE_AS_LIST_OF_ARR;
     }
 
     // Opens the file as a scanner object for further use in the class
@@ -45,9 +45,9 @@ public class CSVReader {
     }
 
     // Reads the entire file except the first line to a list of HashMaps and closes the scanner object
-    private void readFileToMap(){
+    private void readFileToArr(){
         while (fileScanner.hasNextLine()) {
-            FILE_AS_LIST_OF_HASHMAPS.add(readLineToHashMap());
+            FILE_AS_LIST_OF_ARR.add(readLineToHashArr());
         }
 
         // Closes the scanner.
@@ -56,15 +56,15 @@ public class CSVReader {
 
 
     // Reads one line at a time and makes it a HashMap
-    private HashMap<String, String> readLineToHashMap() {
-        HashMap<String, String> lineAsMap = new HashMap<>();
+    private String[] readLineToHashArr() {
+        String[] lineAsArr = new String[columnNames.length];
         Scanner currentLine = new Scanner(fileScanner.nextLine());
         currentLine.useDelimiter(DELIMITER);
         int column = 0;
 
         while(currentLine.hasNext()) {
-            lineAsMap.put(columnNames[column++] ,currentLine.next());
+            lineAsArr[column++] = currentLine.next();
         }
-        return lineAsMap;
+        return lineAsArr;
     }
 }

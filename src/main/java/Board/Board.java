@@ -13,63 +13,63 @@ public class Board {
         // Loads the information from the board.csv in ressources.
         CSVReader reader = new CSVReader("board.csv", ",");
         String[] columnNames = reader.getColumnNames();
-        List<HashMap<String, String>> listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_HASHMAPS();
+        List<String[]> listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
 
         allSquares = new Square[listOfAllSquareAndProps.size()];
 
         // initialises the objects in an array based on the hashmap
         for (int i = 0; i < listOfAllSquareAndProps.toArray().length; i++) {
-            HashMap<String, String> currentSquare = listOfAllSquareAndProps.get(i);
+            String[] currentSquare = listOfAllSquareAndProps.get(i);
 
             // Column names is expected to be in the following order in the columnNames:
             // 0 Position; 1 Type; 2 Name; 3 AmountGiven; 4 Price; 5 Color; 6 AmountToPay; 7 Dest
-            switch (currentSquare.get(columnNames[1])) {                                            // type
+            switch (currentSquare[1]) {                                            // type
                 case "GO!" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                            new Go(currentSquare.get(columnNames[2]),                               // name
-                                    Integer.parseInt(currentSquare.get(columnNames[0])),            // position
-                                    Integer.parseInt(currentSquare.get(columnNames[3])));           // amountGiven
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                            new Go(currentSquare[2],                               // name
+                                    Integer.parseInt(currentSquare[0]),            // position
+                                    Integer.parseInt(currentSquare[3]));           // amountGiven
                     break;
                 case "Amusement" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                        new Amusement(currentSquare.get(columnNames[2]),                            // name
-                                Integer.parseInt(currentSquare.get(columnNames[0])),                // position
-                                currentSquare.get(columnNames[5]),                                  // color
-                                Integer.parseInt(currentSquare.get(columnNames[4])));               // price
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                        new Amusement(currentSquare[2],                            // name
+                                Integer.parseInt(currentSquare[0]),                // position
+                                currentSquare[5],                                  // color
+                                Integer.parseInt(currentSquare[4]));               // price
                     break;
                 case "Chance" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                        new Chance(currentSquare.get(columnNames[2]),                               // name
-                                Integer.parseInt(currentSquare.get(columnNames[0])));               // position
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                        new Chance(currentSquare[2],                               // name
+                                Integer.parseInt(currentSquare[0]));               // position
                     break;
                 case "Railroad" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                        new Railroad(currentSquare.get(columnNames[2]),                             // name
-                                Integer.parseInt(currentSquare.get(columnNames[0])),                // position
-                                currentSquare.get(columnNames[5]));                                 // color
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                        new Railroad(currentSquare[2],                             // name
+                                Integer.parseInt(currentSquare[0]),                // position
+                                currentSquare[5]);                                 // color
                     break;
                 case "PayToSee" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                            new PayToSee(currentSquare.get(columnNames[2]),                         // name
-                                    Integer.parseInt(currentSquare.get(columnNames[0])),            // position
-                                    Integer.parseInt(currentSquare.get(columnNames[6])));           // amountToPay
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                            new PayToSee(currentSquare[2],                         // name
+                                    Integer.parseInt(currentSquare[0]),            // position
+                                    Integer.parseInt(currentSquare[6]));           // amountToPay
                     break;
                 case "GoTo" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                            new GoToRestrooms(currentSquare.get(columnNames[2]),                    // name
-                                    Integer.parseInt(currentSquare.get(columnNames[0])),            // position
-                                    Integer.parseInt(currentSquare.get(columnNames[7])));           // destination
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                            new GoToRestrooms(currentSquare[2],                    // name
+                                    Integer.parseInt(currentSquare[0]),            // position
+                                    Integer.parseInt(currentSquare[7]));           // destination
                     break;
                 case "GetMoney" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                            new PennyBag(currentSquare.get(columnNames[2]),                         // name
-                                    Integer.parseInt(currentSquare.get(columnNames[0])));           // position
-                    pennyBagPosition = Integer.parseInt(currentSquare.get(columnNames[0]));
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                            new PennyBag(currentSquare[2],                         // name
+                                    Integer.parseInt(currentSquare[0]));           // position
+                    pennyBagPosition = Integer.parseInt(currentSquare[0]);
                     break;
                 case "Restrooms" :
-                    allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
-                            new Restrooms(currentSquare.get(columnNames[2]),                        // name
-                                    Integer.parseInt(currentSquare.get(columnNames[0])));           // position
+                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
+                            new Restrooms(currentSquare[2],                        // name
+                                    Integer.parseInt(currentSquare[0]));           // position
                     break;
              }
         }
