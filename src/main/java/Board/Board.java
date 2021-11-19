@@ -99,7 +99,7 @@ public class Board {
 
         for (int i = 0; i < allSquares.length; i++) {
             if(allSquares[i].getClass().getSimpleName().equals("Amusement")) {
-                if(i + OFFSET != position && ((Amusement) allSquares[i]).getColor().equals(amusement.getColor()) ) {
+                if(i + OFFSET != position && ((Amusement) allSquares[i]).getColor().equalsIgnoreCase(amusement.getColor()) ) {
                     if (amusement.getBoothOwner() == null ||
                                     ((Amusement) allSquares[i]).getBoothOwner() == null) {
                         result = false;
@@ -115,15 +115,18 @@ public class Board {
         return result;
     }
 
+    // Return int[] so the game logic and chance card knows where to place booths
     public int[] getSquarePosByColor(String color) {
         List<Integer> listOfPositions = new ArrayList<>();
 
+        // Checks the entire array in case there is implemented more than two Amusements of the same color
         for (int i = 0; i < allSquares.length; i++) {
-            if (((Amusement) allSquares[i]).getColor().equals(color)) {
+            if (((Amusement) allSquares[i]).getColor().equalsIgnoreCase(color)) {
                 listOfPositions.add((allSquares[i].getPosition()));
             }
         }
 
+        // Implemented as a stream because typecasting to (Integer[]) introduces the risk of casting errors
         return listOfPositions.stream().mapToInt(integer -> integer).toArray();
     }
 
