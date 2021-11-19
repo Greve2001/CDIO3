@@ -5,7 +5,8 @@ import java.awt.*;
 public class ChanceCard {
 
     private String chanceCardText;
-    private Color color;
+    private String color;
+    //private Color color;
     private int amountToPay;
     private int destination;
 
@@ -36,16 +37,20 @@ public class ChanceCard {
      * @param text represents the text on the chance card, that holds information on what the player must do.
      * @param color represents the color, corresponding to the different colors on the board.
      */
-    public ChanceCard(String text, Color color){
+    public ChanceCard(String text, String color){
         this.chanceCardText = text;
         this.color = color;
     }
+
+    /*public String toString(){
+        return
+    }*/
 
     public String getChanceCardText() {
         return chanceCardText;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
