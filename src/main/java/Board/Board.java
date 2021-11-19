@@ -13,13 +13,13 @@ public class Board {
         // Loads the information from the board.csv in ressources.
         CSVReader reader = new CSVReader("board.csv", ",");
         String[] columnNames = reader.getColumnNames();
-        List<String[]> listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
+        OverloadList listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
 
         allSquares = new Square[listOfAllSquareAndProps.size()];
 
         // initialises the objects in an array based on the hashmap
-        for (int i = 0; i < listOfAllSquareAndProps.toArray().length; i++) {
-            String[] currentSquare = listOfAllSquareAndProps.get(i);
+        for (int i = 0; i < listOfAllSquareAndProps.size(); i++) {
+            String[] currentSquare = listOfAllSquareAndProps.getStringArr(i);
 
             // Column names is expected to be in the following order in the columnNames:
             // 0 Position; 1 Type; 2 Name; 3 AmountGiven; 4 Price; 5 Color; 6 AmountToPay; 7 Dest
