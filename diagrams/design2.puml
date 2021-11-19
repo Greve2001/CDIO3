@@ -26,7 +26,7 @@ package Logic {
     class Bank
     class GameController
     class PositionHandler
-    class SquareActionHandler
+    class ActionHandler
 }
 
 class Deck
@@ -37,13 +37,13 @@ class "<<singleton>>\nLanguage" as Language
 GameController -down- Board
 GameController -- Die
 
-GameController -left- SquareActionHandler
-    SquareActionHandler -left- Bank
-    SquareActionHandler -- Deck
+GameController -left- ActionHandler
+    ActionHandler -left- Bank
+    ActionHandler -- Deck
         Deck -left ChanceCard
 GameController -right- PositionHandler
 
-Player -down- SquareActionHandler
+Player -down- ActionHandler
 Player -down- PositionHandler
 Player -down- GameController
 Player -down- Bank

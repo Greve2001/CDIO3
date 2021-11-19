@@ -3,27 +3,34 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 
-public class SquareActionHandler {
+public class ActionHandler {
 
-    Board board;
+    Deck deck = new Deck();
     Bank bank = new Bank();
 
     private int PENNYBAG_POSITION;
     private int RESTOROOM_POSITION;
     private int MOVING_PAST_START;
 
-    public SquareActionHandler(Board board){
+    private Board board;
+    private Player currentPlayer;
+    private PositionHandler positionHandler;
+
+    public ActionHandler(Board board, PositionHandler positionHandler){
         this.board = board;
+        this.positionHandler = positionHandler;
         setVariables();
     }
 
     private void setVariables(){
-        PENNYBAG_POSITION = board.getFistPosOfSquareByType("PennyBag");
+        PENNYBAG_POSITION = board.getFistPosOfSquareByType("PennyBag"); // Change methode when merged
         RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms");
         MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
     }
 
     public void doFieldAction(Player currentPlayer, int position){
+        this.currentPlayer = currentPlayer;
+
         String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
 
         // Get squares which is needed across cases:
@@ -58,12 +65,20 @@ public class SquareActionHandler {
                 break;
 
             case "Chance":
-                // !!!!! Handle Chance !!!!!!!
+                // Take card
+                ChanceCard card = deck.getCard(); // New method when merged
+                doChanceCard(card);
                 break;
 
             case "GoToRestrooms":
                 GoToRestrooms goToRestrooms = (GoToRestrooms) board.getSquare(position);
-                // !!!!! change position to restroom  !!!!!!
+
+                // Pay 3$
+                bank.payToBank(currentPlayer, 3);
+
+                // Change position
+                positionHandler.setPlayerPosition(currentPlayer, goToRestrooms.getDestination(), false);
+
                 break;
 
             case "Restrooms":
@@ -88,6 +103,27 @@ public class SquareActionHandler {
 
             default:
                 System.out.println("Unknown fieldtype: " + fieldType);
+        }
+    }
+
+    private void doChanceCard(ChanceCard card) {
+        String cardText = card.getChanceCardText();
+
+        // Determine if free ticketbooth card or move-somewhere card.
+        try { // Destination card
+            int dest = card.getDestination();
+            int amount = card.getAmountToPay();
+
+            //Only pay amount if is not zero
+            if (amount > 0){ bank.payToBank(currentPlayer, amount); }
+
+            //Update position after card destination
+            positionHandler.setPlayerPosition(currentPlayer, dest, true);
+
+        } catch (Exception e) { // If dest is null, then it is a free ticketbooth card
+            //String color = getColor();   //TODO Uncomment when merged
+
+            //
         }
     }
 

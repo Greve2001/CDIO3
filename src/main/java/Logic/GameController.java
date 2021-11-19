@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class GameController {
 
-    SquareActionHandler squareActionHandler;
+    ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
     Deck deck = new Deck();
@@ -27,8 +27,8 @@ public class GameController {
     Scanner input = new Scanner(System.in);
 
     public void setupGame(){
-        squareActionHandler = new SquareActionHandler(board);
         positionHandler = new PositionHandler(players, board.getAllSquares().length);
+        actionHandler = new ActionHandler(board, positionHandler);
 
     }
 
@@ -55,7 +55,7 @@ public class GameController {
         int currentPosition = currentPlayer.getPosition();
 
         // Do action on that field
-        squareActionHandler.doFieldAction(currentPlayer, currentPosition);
+        actionHandler.doFieldAction(currentPlayer, currentPosition);
 
         // Lose check - Only for currentPlayer, since it's not possible for others to be a zero now.
         loseCheck();
