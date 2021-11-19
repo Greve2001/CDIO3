@@ -11,6 +11,7 @@ public class MonopolyJunior {
     private final Board board = new Board();
     private final Deck pile = new Deck();
     private Player currentPlayer;
+    private ChanceCard currentCard;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
 
@@ -99,14 +100,12 @@ public class MonopolyJunior {
             case "PennyBag":
                 currentPlayer.updateBalance(pennyBag.withDraw());
                 break;
-            case "Restrooms":
-                //do nothing
-                break;
             case "PayToSee":
                 PayToSee payToSee = (PayToSee)board.getSquare(position);
                 pay(payToSee.getAmount());
                 pennyBag.addMoney(payToSee.getAmount());
                 break;
+            case "Restrooms":
             case "Go":
                 //do nothing
                 break;
@@ -116,15 +115,15 @@ public class MonopolyJunior {
     }
 
     private void handleChance() {
-        pile.pullCard();
-        if (pile.getCard().getDestination() > 0){
-            if (pile.getCard().getDestination() == RESTOROOM_POSITION)
+        currentCard = pile.pullCard();
+        if (currentCard.getDestination() > 0){
+            if (currentCard.getDestination() == RESTOROOM_POSITION)
                 currentPlayer.setGoingToRestRoom(true);
-            updatePosition(pile.getCard().getDestination());
+            updatePosition(currentCard.getDestination());
             handleField(currentPlayer.getPosition());
         }
         else{
-            String color = new String(pile.getCard().getColor().toString());
+            String color = new String(currentCard.getColor().toString());
             if (!board.hasMonopoly(board.getSquarePosByColor(color)[0]) && currentPlayer.hasBooth()){
                 System.out.print("pick either 1 or 2");//going to gui later
                 board.addBooth(currentPlayer,board.getSquarePosByColor(color)[input.nextInt()-1]);  //need refractor, also because we can't use scanner with GUI
