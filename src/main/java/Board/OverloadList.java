@@ -42,7 +42,7 @@ public class OverloadList {
         return arrOfInts[index];
     }
 
-    public int[] getList(int typeOf) {
+    public int[] getListOfInts() {
         return arrOfInts;
     }
 
@@ -66,7 +66,7 @@ public class OverloadList {
         return ArrOfStrings[index];
     }
 
-    public String[] getList(String typeOf) {
+    public String[] getListOfStrings() {
         return ArrOfStrings;
     }
 
@@ -90,7 +90,7 @@ public class OverloadList {
         return ArrOfStringArrs[index];
     }
 
-    public String[][] getList(String[] typeOf) {
+    public String[][] getListOfStringArr() {
         return ArrOfStringArrs;
     }
 
