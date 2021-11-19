@@ -20,7 +20,7 @@ public class MonopolyJunior {
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
     private final int PENNYBAG_POSITION = board.getPennyBagPos();
-    private final int RESTOROOM_POSITION = board.getRestRoomPosition();
+    private final int RESTOROOM_POSITION = 11;//need to get this info from the board
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
     public void setupGame(int numOfPlayers){
