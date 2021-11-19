@@ -7,6 +7,8 @@ import java.util.*;
 public class Board {
     private final int OFFSET = 1;
     private final Square[] allSquares;
+    private int pennyBagPosition;
+    private int restroomsPostion;
 
     public Board (){
         // Loads the information from the board.csv in ressources.
@@ -63,11 +65,13 @@ public class Board {
                     allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
                             new PennyBag(currentSquare.get(columnNames[2]),                         // name
                                     Integer.parseInt(currentSquare.get(columnNames[0])));           // position
+                    pennyBagPosition = Integer.parseInt(currentSquare.get(columnNames[0]));
                     break;
                 case "Restrooms" :
                     allSquares[Integer.parseInt(currentSquare.get(columnNames[0])) - OFFSET] =
                             new Restrooms(currentSquare.get(columnNames[2]),                        // name
                                     Integer.parseInt(currentSquare.get(columnNames[0])));           // position
+                    restroomsPostion = Integer.parseInt(currentSquare.get(columnNames[0]));
                     break;
              }
         }
@@ -113,7 +117,7 @@ public class Board {
         return result;
     }
 
-    public Integer[] getSquarePosByColor(String color) {
+    public int[] getSquarePosByColor(String color) {
         List<Integer> listOfPositions = new ArrayList<>();
 
         for (int i = 0; i < allSquares.length; i++) {
@@ -122,16 +126,15 @@ public class Board {
             }
         }
 
-        return (Integer[]) listOfPositions.toArray();
+        return listOfPositions.stream().mapToInt(integer -> integer).toArray();
     }
 
-    public int getFistPosOfSquareByType(String type) {
-        int result = -1;
-        for (int i = 0; i < allSquares.length; i++) {
-            if (allSquares[i].getClass().getSimpleName().equals(type))
-                result = allSquares[i].getPosition();
-        }
-        return result;
+    public int getPennyBagPos(){
+        return pennyBagPosition;
+    }
+
+    public int getRestroomsPostion(){
+        return restroomsPostion;
     }
 
     public Square[] getAllSquares() {
