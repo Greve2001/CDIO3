@@ -14,33 +14,39 @@ class OverloadListTest {
             list.add(1);
         }
 
-        System.out.println(list.get(0,1));
-
-        assertEquals(1, list.get(1,0));
         assertEquals(22, list.size());
     }
 
     @Test
     void getInt() {
+        OverloadList list = new OverloadList("int");
+
+        for (int i = 0; i < 22; i++) {
+            list.add(1);
+        }
+
+        assertEquals(1, list.get(1,0));
     }
 
     @Test
     void getIntList() {
-    }
+        OverloadList list = new OverloadList("int");
 
-    @Test
-    void addString() {
-    }
+        for (int i = 0; i < 22; i++) {
+            list.add(1);
+        }
 
-    @Test
-    void getString() {
-    }
+        int[] expected = {
+                1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1,
+                1, 1, 1, 1, 1,
+                1, 1, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+        };
 
-    @Test
-    void getStringList() {
-    }
-
-    @Test
-    void size() {
+        assertArrayEquals(list.getList(0), expected);
     }
 }
