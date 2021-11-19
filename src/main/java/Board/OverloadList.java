@@ -4,6 +4,7 @@ public class OverloadList {
     private int size = 0;
     private int[] arrOfInts;
     private String[] ArrOfStrings;
+    private String[][] ArrOfStringArrs;
 
     public OverloadList(String type) {
         switch (type) {
@@ -12,6 +13,9 @@ public class OverloadList {
                 break;
             case "String" :
                 ArrOfStrings = new String[20];
+                break;
+            case "String[]" :
+                ArrOfStringArrs = new String[20][1];
                 break;
             default:
                 System.out.println("Type not defined in list");
@@ -64,6 +68,30 @@ public class OverloadList {
 
     public String[] getList(String typeOf) {
         return ArrOfStrings;
+    }
+
+    public void add(String[] string) {
+        if (size >= ArrOfStringArrs.length) {
+            String[][] increasedSizeArr = new String[ArrOfStringArrs.length * 2][1];
+
+            int i = 0;
+            for (String[] value : ArrOfStringArrs) {
+
+                increasedSizeArr[i++] = value;
+                ArrOfStringArrs = increasedSizeArr;
+            }
+        }
+
+        ArrOfStringArrs[size] = string;
+        size++;
+    }
+
+    public String[] get(int index, String[] typeOf) {
+        return ArrOfStringArrs[index];
+    }
+
+    public String[][] getList(String[] typeOf) {
+        return ArrOfStringArrs;
     }
 
     public int size() {

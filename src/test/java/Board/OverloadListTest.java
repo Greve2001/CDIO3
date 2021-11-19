@@ -49,4 +49,20 @@ class OverloadListTest {
 
         assertArrayEquals(list.getList(0), expected);
     }
+
+    @Test
+    void generalTesting() {
+        OverloadList list = new OverloadList("String[]");
+
+        String[] myArr = {"Name", "Type"};
+
+        list.add(myArr);
+
+        System.out.println("test");
+
+        String[] myListArr = list.get(0, new String[1]);
+
+
+        System.out.println(myListArr[0]);
+    }
 }
