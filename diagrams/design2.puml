@@ -3,6 +3,10 @@
 hide empty members
 skinparam groupInheritance 2
 
+skinparam linetype polyline
+
+
+
 
 class Die
 
@@ -21,7 +25,6 @@ package "Game Board" {
 package Logic {
     class Bank
     class GameController
-    class PlayerHandler
     class PositionHandler
     class SquareActionHandler
 }
@@ -32,20 +35,18 @@ class Player
 class "<<singleton>>\nLanguage" as Language
 
 GameController -down- Board
-GameController -right- Die
+GameController -- Die
 
-GameController -up- PositionHandler
-GameController -up- SquareActionHandler
-    SquareActionHandler -left- PositionHandler
-    SquareActionHandler -right- PlayerHandler
-    SquareActionHandler -up- Bank
-    SquareActionHandler -up- Deck
-        Deck -left- ChanceCard
-GameController -up- PlayerHandler
-    PlayerHandler -right- Player
-        Player -- Bank
+GameController -left- SquareActionHandler
+    SquareActionHandler -left- Bank
+    SquareActionHandler -- Deck
+        Deck -left ChanceCard
+GameController -right- PositionHandler
 
-
+Player -down- SquareActionHandler
+Player -down- PositionHandler
+Player -down- GameController
+Player -down- Bank
 
 Board -- Square
 Square <|-- Restrooms

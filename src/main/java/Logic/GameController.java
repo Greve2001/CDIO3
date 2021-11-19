@@ -5,27 +5,30 @@ import MonopolyJunior.*;
 
 import java.util.Scanner;
 
-
 public class GameController {
 
-    PlayerHandler playerHandler;
     SquareActionHandler squareActionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
     Deck deck = new Deck();
     Die die = new Die();
 
-    Player currentPlayer;
+    private Player[] players;
+    private Player currentPlayer;
+
     boolean gameOver = false;
+
+    private final int START_MONEY = 31;
+    private final int MAX_BOOTHS = 12;
+    private final int MIN_BOOTHS = 10;
     int BOARD_SIZE = board.getAllSquares().length;
 
     // Ekstra, remove later
     Scanner input = new Scanner(System.in);
 
     public void setupGame(){
-        playerHandler = new PlayerHandler(4); // Change default when using GUI
         squareActionHandler = new SquareActionHandler(board);
-        positionHandler = new PositionHandler(playerHandler.getPlayers(), board.getAllSquares().length);
+        positionHandler = new PositionHandler(players, board.getAllSquares().length);
 
     }
 
@@ -36,9 +39,6 @@ public class GameController {
     }
 
     public void takeTurn(){
-        // Get all new relevant information
-        currentPlayer = playerHandler.getCurrentPlayer();
-
         // Get action from player
         System.out.print("Please press enter");
         input.nextLine();
@@ -52,7 +52,7 @@ public class GameController {
         positionHandler.movePlayer(currentPlayer, spacesToMove);
 
         // Get new position
-        int currentPosition = playerHandler.getCurrentPlayer().getPosition();
+        int currentPosition = currentPlayer.getPosition();
 
         // Do action on that field
         squareActionHandler.doFieldAction(currentPlayer, currentPosition);
@@ -61,7 +61,7 @@ public class GameController {
         loseCheck();
 
         // Change turn
-        playerHandler.changeTurn();
+        changeTurn();
 
     }
 
@@ -74,8 +74,6 @@ public class GameController {
     }
     // Maybe move into playerHandler???
     private void findWinner(){
-        Player[] players = playerHandler.getPlayers();
-
         Player winner = players[0]; // Just to have a starting point
 
         for (Player player : players){
@@ -90,5 +88,37 @@ public class GameController {
         // Announce winner
         System.out.println("We have a winner!!!!");
         System.out.println(winner.getName() + " with a balance of " + winner.getBalance());
+    }
+
+    
+    
+    // *** Player Handling *** // 
+    
+    private void setupPlayers(int numPlayers){
+        players = new Player[numPlayers];
+
+        for (int player = 0; player < numPlayers; player++) {
+            players[player] = new Player("Player " + (player + 1));
+            players[player].setupStartBalance(START_MONEY);
+            players[player].setBooths( (numPlayers > 2) ? MIN_BOOTHS : MAX_BOOTHS );
+        }
+
+        currentPlayer = players[0]; // Default change later
+
+        System.out.println("Players Initialized");
+    }
+    
+    private void changeTurn(){
+        // Get index of current player
+        int playerIndex = java.util.Arrays.asList(players).indexOf(currentPlayer);
+
+        if (playerIndex >= (players.length-1)){
+            currentPlayer = players[0];
+        }else{
+            currentPlayer = players[playerIndex +1];
+        }
+
+        System.out.println("Changed player from: " + players[playerIndex].getName() + " to: " +
+                "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName());
     }
 }
