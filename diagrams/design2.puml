@@ -42,9 +42,9 @@ PositionHandler -left- Player
 ActionHandler -up- Bank
 
 GameController -down-- Board
-GameController -left- Deck
-    Deck -left- ChanceCard
-GameController -down- Die
+ActionHandler -right- Deck
+    Deck -right- ChanceCard
+GameController -left- Die
 
 
 Board -- Square
