@@ -81,7 +81,7 @@ public class GameController {
     // Maybe move into playerHandler???
     private void findWinner(){
         Player[] winners = new Player[players.length-1]; // need to handle a tie with one less player than playing.
-        winners[0] = new Player("Test"); // Just a startpoint to go out from
+        winners[0] = new Player(" "); // Just a startpoint to go out from
         winners[0].setBalance(-1);
 
         for (Player player : players){
