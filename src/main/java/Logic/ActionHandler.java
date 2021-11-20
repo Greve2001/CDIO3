@@ -25,8 +25,9 @@ public class ActionHandler {
     }
 
     private void setVariables(){
-        PENNYBAG_POSITION = board.getFistPosOfSquareByType("PennyBag"); // Change methode when merged
-        RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms");
+        PENNYBAG_POSITION = board.getPennyBagPos();
+        RESTOROOM_POSITION = 11;
+        //RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms"); // Change methode when merged
         MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
     }
 
@@ -69,7 +70,7 @@ public class ActionHandler {
 
             case "Chance":
                 // Take card
-                ChanceCard card = deck.getCard(); // New method when merged
+                ChanceCard card = deck.pullCard();
                 doChanceCard(card);
                 break;
 
