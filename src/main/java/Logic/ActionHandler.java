@@ -9,13 +9,13 @@ public class ActionHandler {
     Bank bank = new Bank();
 
     private int PENNYBAG_POSITION;
-    private int RESTOROOM_POSITION;
-    private int MOVING_PAST_START;
+    private int RESTOROOM_POSITION;//never used
+    private int MOVING_PAST_START;//never used
 
-    private Board board;
+    private final Board board;
     private Player currentPlayer;
-    private GameController gameController;
-    private PositionHandler positionHandler;
+    private final GameController gameController;
+    private final PositionHandler positionHandler;
 
     public ActionHandler(GameController gameController, Board board, PositionHandler positionHandler){
         this.board = board;
@@ -25,16 +25,16 @@ public class ActionHandler {
     }
 
     private void setVariables(){
-        PENNYBAG_POSITION = board.getPennyBagPos();
-        RESTOROOM_POSITION = 11;
-        //RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms"); // Change methode when merged
+        this.PENNYBAG_POSITION = board.getPennyBagPos();
+        this.RESTOROOM_POSITION = 11;
+        //this.RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms"); // Change methode when merged
         MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
     }
 
     public void doFieldAction(Player currentPlayer, int position){
         this.currentPlayer = currentPlayer;
 
-        String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
+        String fieldType = board.getSquare(position).getClass().getSimpleName();
 
         // Get squares which is needed across cases:
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
@@ -110,7 +110,7 @@ public class ActionHandler {
     }
 
     private void doChanceCard(ChanceCard card) {
-        String cardText = card.getChanceCardText();
+        //String cardText = card.getChanceCardText();//unused for now
 
         // Determine if free ticketbooth card or move-somewhere card.
         try { // Destination card

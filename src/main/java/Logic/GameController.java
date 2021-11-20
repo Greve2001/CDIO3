@@ -10,7 +10,7 @@ public class GameController {
     ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
-    Deck deck = new Deck();
+    Deck deck = new Deck();//never used objekt
     Die die = new Die();
 
     private Player[] players;
@@ -19,9 +19,6 @@ public class GameController {
     boolean gameOver = false;
     boolean extraTurn = false;
 
-    private final int START_MONEY = 31;
-    private final int MAX_BOOTHS = 12;
-    private final int MIN_BOOTHS = 10;
     int BOARD_SIZE = board.getAllSquares().length;
 
     // Ekstra, remove later
@@ -80,7 +77,7 @@ public class GameController {
         Player winner = players[0]; // Just to have a starting point
 
         for (Player player : players){
-            if (winner.getBalance() > player.getBalance() && player != winner){
+            if (winner.getBalance() > player.getBalance()){
                 winner = player;
             }
             else if (winner.getBalance() == player.getBalance() && player != winner){
@@ -97,6 +94,10 @@ public class GameController {
     // *** Player Handling *** //
     
     private void setupPlayers(int numPlayers){
+        final int START_MONEY = 31;
+        final int MAX_BOOTHS = 12;
+        final int MIN_BOOTHS = 10;
+
         players = new Player[numPlayers];
 
         for (int player = 0; player < numPlayers; player++) {
