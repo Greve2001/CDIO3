@@ -19,9 +19,9 @@ public class PositionHandler {
         int endPos = player.getPosition() + spacesToMove;
 
         // Make sure player loops on board
-        if (endPos >= boardSize){
+        if (endPos > boardSize){
             player.setPosition(endPos - boardSize);
-            System.out.println(player.getName() + " position now at: " + (endPos-boardSize));
+            System.out.println(player.getName() + " position now at: " + (endPos - boardSize));
             payBonus(player);
         }
         else {
