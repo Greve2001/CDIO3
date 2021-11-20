@@ -7,7 +7,7 @@ public class PositionHandler {
     Player[] players;
 
     int boardSize;
-    int startBonus = 2; // Evt få fra controlleren
+    int startBonus = 2; // should get this from controller
 
     public PositionHandler(Player[] players, int boardLength) {
         this.players = players;
@@ -15,7 +15,6 @@ public class PositionHandler {
     }
 
     public void movePlayer(Player player, int spacesToMove){
-        int prevPos = player.getPosition();
         int endPos = player.getPosition() + spacesToMove;
 
         // Make sure player loops on board
@@ -30,13 +29,12 @@ public class PositionHandler {
         }
     }
 
-    public void setPlayerPosition(Player player, int position, boolean getsStartBonus){
+    public void setPlayerPosition(Player player, int endPos, boolean getsStartBonus){
         int prevPos = player.getPosition();
-        int endPos = position;
 
         // Make sure start is passed, and that the player is allowed a bonus.
         if (getsStartBonus && endPos < prevPos) payBonus(player);
-        player.setPosition(position);
+        player.setPosition(endPos);
         System.out.println(player.getName() + " position now at: " + endPos);
     }
 
