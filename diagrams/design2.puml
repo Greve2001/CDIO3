@@ -1,0 +1,60 @@
+@startuml
+
+hide empty members
+skinparam groupInheritance 2
+
+skinparam linetype polyline
+
+
+class Die
+
+package "Game Board" {
+    class Board
+    class "<<abstract>>\nSquare" as Square
+        class Amusement
+        class Restrooms
+        class Start
+        class Railroad
+        class Chance
+        class PennyBag
+        class PayFor
+}
+
+package Logic {
+    class Bank
+    class GameController
+    class PositionHandler
+    class ActionHandler
+}
+
+class Deck
+class ChanceCard
+class Player
+class "<<singleton>>\nLanguage" as Language
+
+GameController -left- PositionHandler
+GameController -right- ActionHandler
+PositionHandler -- ActionHandler
+
+GameController -left- Player
+ActionHandler -left- Player
+PositionHandler -left- Player
+ActionHandler -up- Bank
+
+GameController -down-- Board
+GameController -left- Deck
+    Deck -left- ChanceCard
+GameController -down- Die
+
+
+Board -- Square
+Square <|-- Restrooms
+Square <|-- Amusement
+Square <|-- Railroad
+Square <|-- PayFor
+Square <|-- PennyBag
+Square <|-- Start
+Square <|-- Chance
+
+
+@enduml
