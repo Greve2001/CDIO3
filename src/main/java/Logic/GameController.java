@@ -4,6 +4,7 @@ import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameController {
@@ -79,20 +80,33 @@ public class GameController {
     }
     // Maybe move into playerHandler???
     private void findWinner(){
-        Player winner = players[0]; // Just to have a starting point
+        Player[] winners = new Player[players.length-1]; // need to handle a tie with one less player than playing.
+        winners[0] = new Player("Test"); // Just a startpoint to go out from
+        winners[0].setBalance(-1);
 
         for (Player player : players){
-            if (winner.getBalance() > player.getBalance()){
-                winner = player;
+            if (player.getBalance() > winners[0].getBalance()){ // This player has a higher balance
+                // Remove all previous winners from the array.
+                winners = new Player[players.length-1];
+                winners[0] = player;
             }
-            else if (winner.getBalance() == player.getBalance() && player != winner){
-                Debug.println("Its a tie");
+            else if (player.getBalance() == winners[0].getBalance()){ // Tie case
+                for (int i = 0; i < players.length-1; i++) {
+                    if (winners[i] == null){ // Look for next place in array to place tied player
+                        winners[i] = player;
+                        break;
+                    }
+                }
             }
         }
 
-        // Announce winner
-        Debug.println("We have a winner!!!!");
-        Debug.println(winner.getName() + " with a balance of " + winner.getBalance());
+        // Announce winner(s)
+        Debug.println("\n We have a winner!!!!");
+        for (int i = 0; i < winners.length; i++) {
+            if (winners[i] != null){
+                Debug.println(winners[i].getName() + ", with a balance of " + winners[i].getBalance());
+            }
+        }
     }
 
 
