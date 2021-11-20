@@ -23,7 +23,6 @@ public class Debug {
             System.out.println(str);
         }
     }
-
     public static void print(String str){
         if (showPrints){
             System.out.print(str);
