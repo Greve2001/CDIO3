@@ -10,13 +10,19 @@ public class Debug {
         return instance;
     }
 
-    boolean showPrints = true;
+    static boolean showPrints = true;
 
     // Handles prints, will not print when boolean is false.
     // Should only be used for debugging
-    public void print(String str){
+    public static void println(String str){
         if (showPrints){
             System.out.println(str);
+        }
+    }
+
+    public static void print(String str){
+        if (showPrints){
+            System.out.print(str);
         }
     }
 }

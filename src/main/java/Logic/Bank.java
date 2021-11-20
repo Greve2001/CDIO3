@@ -1,19 +1,20 @@
 package Logic;
 
 import MonopolyJunior.Player;
+import Utilities.Debug;
 
 public class Bank {
 
 
     public void payToBank(Player fromPlayer, int amount){
         fromPlayer.updateBalance(-ableToPay(fromPlayer, amount));
-        System.out.println(fromPlayer.getName() + " paid " + amount + " to the bank");
+        Debug.println(fromPlayer.getName() + " paid " + amount + " to the bank");
     }
 
     public void payToPlayer(Player fromPlayer, Player toPlayer, int amount){
         fromPlayer.updateBalance(-ableToPay(fromPlayer, amount));
         toPlayer.updateBalance(ableToPay(fromPlayer, amount));
-        System.out.println(fromPlayer.getName() + " paid " + amount + " to " + toPlayer.getName());
+        Debug.println(fromPlayer.getName() + " paid " + amount + " to " + toPlayer.getName());
     }
 
     public int ableToPay(Player player, int amount){

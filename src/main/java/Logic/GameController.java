@@ -2,6 +2,7 @@ package Logic;
 
 import Board.*;
 import MonopolyJunior.*;
+import Utilities.Debug;
 
 import java.util.Scanner;
 
@@ -39,13 +40,13 @@ public class GameController {
     public void takeTurn(){
 
         // Get action from player
-        System.out.print("Please press enter");
+        Debug.print("Please press enter");
         input.nextLine();
 
         // Roll die, get value.
         die.roll();
         int spacesToMove = die.getFaceValue();
-        System.out.println("You rolled: " + spacesToMove);
+        Debug.println("You rolled: " + spacesToMove);
 
         // Move player position
         positionHandler.movePlayer(currentPlayer, spacesToMove);
@@ -81,13 +82,13 @@ public class GameController {
                 winner = player;
             }
             else if (winner.getBalance() == player.getBalance() && player != winner){
-                System.out.println("Its a tie");
+                Debug.println("Its a tie");
             }
         }
 
         // Announce winner
-        System.out.println("We have a winner!!!!");
-        System.out.println(winner.getName() + " with a balance of " + winner.getBalance());
+        Debug.println("We have a winner!!!!");
+        Debug.println(winner.getName() + " with a balance of " + winner.getBalance());
     }
 
 
@@ -108,7 +109,7 @@ public class GameController {
 
         currentPlayer = players[0]; // Default change later
 
-        System.out.println("Players Initialized");
+        Debug.println("Players Initialized");
     }
     
     private void changeTurn(){
@@ -121,7 +122,7 @@ public class GameController {
             currentPlayer = players[playerIndex +1];
         }
 
-        System.out.println("Changed player from: " + players[playerIndex].getName() + " to: " +
+        Debug.println("Changed player from: " + players[playerIndex].getName() + " to: " +
                 "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName());
     }
 

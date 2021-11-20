@@ -1,6 +1,7 @@
 package Logic;
 
 import MonopolyJunior.Player;
+import Utilities.Debug;
 
 public class PositionHandler {
 
@@ -20,12 +21,12 @@ public class PositionHandler {
         // Make sure player loops on board
         if (endPos > boardSize){
             player.setPosition(endPos - boardSize);
-            System.out.println(player.getName() + " position now at: " + (endPos - boardSize));
+            Debug.println(player.getName() + " position now at: " + (endPos - boardSize));
             payBonus(player);
         }
         else {
             player.setPosition(endPos);
-            System.out.println(player.getName() + " position now at: " + endPos);
+            Debug.println(player.getName() + " position now at: " + endPos);
         }
     }
 
@@ -35,12 +36,12 @@ public class PositionHandler {
         // Make sure start is passed, and that the player is allowed a bonus.
         if (getsStartBonus && endPos < prevPos) payBonus(player);
         player.setPosition(endPos);
-        System.out.println(player.getName() + " position now at: " + endPos);
+        Debug.println(player.getName() + " position now at: " + endPos);
     }
 
     private void payBonus(Player player){
         player.updateBalance(startBonus);
-        System.out.println(player.getName() + "just got a bonus of " + startBonus);
+        Debug.println(player.getName() + "just got a bonus of " + startBonus);
     }
 }
 

@@ -2,6 +2,7 @@ package Logic;
 
 import Board.*;
 import MonopolyJunior.*;
+import Utilities.Debug;
 
 public class ActionHandler {
 
@@ -39,7 +40,7 @@ public class ActionHandler {
         // Get squares which is needed across cases:
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
 
-        System.out.println("Landed on: " + fieldType + " at position: " + position);
+        Debug.println("Landed on: " + fieldType + " at position: " + position);
 
         switch (fieldType){
             case "Amusement":
@@ -105,7 +106,7 @@ public class ActionHandler {
                 break;
 
             default:
-                System.out.println("Unknown fieldtype: " + fieldType);
+                Debug.println("Unknown fieldtype: " + fieldType);
         }
     }
 
@@ -161,7 +162,7 @@ public class ActionHandler {
                 doChanceCard(newCard);
             }
             else{ // Player has no more booths, can't get new card
-                System.out.println("Can't draw new card, you have no more booths");
+                Debug.println("Can't draw new card, you have no more booths");
             }
 
             //
