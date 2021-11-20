@@ -1,16 +1,15 @@
-import MonopolyJunior.MonopolyJunior;
+import MonopolyJunior.MonopolyJunior_old;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 
 import MonopolyJunior.*;
-import Board.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MonopolyJuniorTest {
-    MonopolyJunior game;
+class MonopolyJuniorOldTest {
+    MonopolyJunior_old game;
     Player player1;
     Player player2;
     Player[] curPlayers = {};
@@ -19,7 +18,7 @@ class MonopolyJuniorTest {
     Field currentPlayer;
 
     @BeforeEach void setup() throws NoSuchFieldException {
-        game = new MonopolyJunior();
+        game = new MonopolyJunior_old();
         player1 = new Player("Player1");
         player2 = new Player("Player2");
 
@@ -62,7 +61,7 @@ class MonopolyJuniorTest {
     @Test
     void OnlyAllowNumberOfPlayersAccordingToRules() throws NoSuchFieldException, IllegalAccessException {
         // **** Minimum of players ****
-        game = new MonopolyJunior();
+        game = new MonopolyJunior_old();
         game.setupGame(2);
         getPlayers();
 
@@ -73,7 +72,7 @@ class MonopolyJuniorTest {
 
 
         // **** Max players ****
-        game = new MonopolyJunior();
+        game = new MonopolyJunior_old();
         game.setupGame(4);
         getPlayers();
 
@@ -84,7 +83,7 @@ class MonopolyJuniorTest {
 
 
         // **** Under minimum ****
-        game = new MonopolyJunior();
+        game = new MonopolyJunior_old();
         game.setupGame(-2);
         getPlayers();
 
@@ -92,14 +91,14 @@ class MonopolyJuniorTest {
 
 
         // **** Over max ****
-        game = new MonopolyJunior();
+        game = new MonopolyJunior_old();
         game.setupGame(10);
         getPlayers();
 
         assertNull(curPlayers);
 
         // **** Zero exception? ****
-        game = new MonopolyJunior();
+        game = new MonopolyJunior_old();
         game.setupGame(0);
         getPlayers();
 

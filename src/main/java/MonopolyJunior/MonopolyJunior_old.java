@@ -4,7 +4,7 @@ import Board.*;
 
 import java.util.Scanner;
 
-public class MonopolyJunior {
+public class MonopolyJunior_old {
 
     private Player[] players;
     private final Die die = new Die();
