@@ -24,46 +24,88 @@ public class GUIController {
         colorMap.put("yellow", Color.YELLOW);
     }
 
-    public void setPlayer(int playerTurn, int balance) {
+    public int selectNumbersOfPlayers(){
+        return Integer.valueOf(gui.getUserSelection("Select numbers of players?", "2", "3", "4"));
+    }
+
+    public boolean setPlayer(int playerTurn, int balance) {
         String playerName = gui.getUserString("Player " + playerTurn + ": Enter your name please.");
         String color = gui.getUserSelection("Select your color?", "green", "red", "yellow", "blue").toLowerCase();
         Color primaryColor = colorMap.get(color);
         GUI_Car car = new GUI_Car(primaryColor, primaryColor, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
         GUI_Player player = new GUI_Player(playerName, balance, car);
-        gui.addPlayer(player);
+        if ( gui.addPlayer(player)== true) {
+            return true;
+        }
+
+        return false;
     }
 
     public void showRoll(Die die) {
         gui.setDie(die.getFaceValue());
     }
 
-    public void moveCar(GUI_Player player, int from, int to) {
-        gui.getFields()[from].setCar(player, false);
-        gui.getFields()[to].setCar(player, true);
-    }
-
-    public void showChance(String message){
-        gui.displayChanceCard(message);
-    }
-    public void setOwner(GUI_Ownable field, String color) {
-        String newPrice = gui.getUserString("Enter your price:");
-        field.setSubText(newPrice);
-        field.setBorder(Color.getColor(color.toLowerCase(Locale.ROOT)));
-    }
-
-    public void updatePennyBag(String playerName, int pbIndex, int money) {
-        if(money> 0) {
-            gui.getUserButtonPressed(playerName + " you recive" + money, "Receive");
-        }else{
-            gui.getUserButtonPressed(playerName + " you pay" + money, "pay");
+    public boolean moveCar(GUI_Player player, int from, int to) {
+        try {
+            gui.getFields()[from].setCar(player, false);
+            gui.getFields()[to].setCar(player, true);
+            return true;
+        }catch (Exception error){
+            error.printStackTrace();
+            return false;
         }
-
-        int  balance=Integer.valueOf(gui.getFields()[pbIndex].getSubText()) + money;
-        gui.getFields()[pbIndex].setSubText(String.valueOf(balance));
     }
 
-    public void ShowWinner(GUI_Player player){
-        gui.getUserButtonPressed("winner: "+ player.getName() + " with balance: "+ player.getBalance(), "ok");
+    public boolean showChance(String message){
+        try {
+            gui.displayChanceCard(message);
+            return true;
+        }catch (Exception error){
+            error.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean setOwner(GUI_Ownable field, String color) {
+        try {
+            String newPrice = gui.getUserString("Enter your price:");
+            field.setSubText(newPrice);
+            field.setBorder(Color.getColor(color.toLowerCase(Locale.ROOT)));
+            return true;
+        }catch (Exception error){
+            error.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean addToPennyBag(String playerName, int pbIndex, int money) {
+        try {
+            gui.getUserButtonPressed(playerName + " you pay" + money, "pay");
+            int  balance=Integer.valueOf(gui.getFields()[pbIndex].getSubText()) + money;
+            gui.getFields()[pbIndex].setSubText(String.valueOf(balance));
+            return true;
+        }catch (Exception error){
+            error.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean withdrawPennyBag(String playerName, int pbIndex, int money) {
+        try {
+            gui.getUserButtonPressed(playerName + " you recive" + money, "Receive");
+            int  balance=Integer.valueOf(gui.getFields()[pbIndex].getSubText()) + money;
+            gui.getFields()[pbIndex].setSubText(String.valueOf(balance));
+            return true;
+        }catch (Exception error){
+            error.printStackTrace();
+            return false;
+        }
+    }
+
+    public String ShowWinner(GUI_Player player){
+        String input;
+       input= gui.getUserButtonPressed("winner: "+ player.getName() + " with balance: "+ player.getBalance(), "ok");
+        return input;
     }
 
 }
