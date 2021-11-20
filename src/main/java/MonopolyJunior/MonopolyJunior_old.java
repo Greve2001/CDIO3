@@ -11,7 +11,6 @@ public class MonopolyJunior_old {
     private final Board board = new Board();
     private final Deck pile = new Deck();
     private Player currentPlayer;
-    private ChanceCard currentCard;
     private boolean hasWinner = false;
     private final Scanner input = new Scanner(System.in);
 
@@ -67,7 +66,7 @@ public class MonopolyJunior_old {
     }
 
     private void handleField(int position) {
-        String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
+        String fieldType = board.getSquare(position).getClass().getSimpleName();
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);//used multiple placess
         switch (fieldType){
              case "Amusement":
@@ -116,7 +115,7 @@ public class MonopolyJunior_old {
     }
 
     private void handleChance() {
-        currentCard = pile.pullCard();
+        ChanceCard currentCard = pile.pullCard();
         if (currentCard.getDestination() > 0){
             if (currentCard.getDestination() == RESTOROOM_POSITION)
                 currentPlayer.setGoingToRestRoom(true);

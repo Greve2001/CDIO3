@@ -10,8 +10,6 @@ public class ActionHandler {
     Bank bank = new Bank();
 
     private int PENNYBAG_POSITION;
-    private int RESTOROOM_POSITION;//never used
-    private int MOVING_PAST_START;//never used
 
     private final Board board;
     private Player currentPlayer;
@@ -27,9 +25,6 @@ public class ActionHandler {
 
     private void setVariables(){
         this.PENNYBAG_POSITION = board.getPennyBagPos();
-        this.RESTOROOM_POSITION = 11;
-        //this.RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms"); // Change methode when merged
-        MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
     }
 
     public void doFieldAction(Player currentPlayer, int position){

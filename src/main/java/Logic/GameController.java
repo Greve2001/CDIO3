@@ -4,15 +4,11 @@ import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class GameController {
 
     ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
-    Deck deck = new Deck();//never used objekt
     Die die = new Die();
 
     private Player[] players;
@@ -102,11 +98,39 @@ public class GameController {
 
         // Announce winner(s)
         Debug.println("\n We have a winner!!!!");
-        for (int i = 0; i < winners.length; i++) {
-            if (winners[i] != null){
-                Debug.println(winners[i].getName() + ", with a balance of " + winners[i].getBalance());
+        for (Player winner : winners) {
+            if (winner != null) {
+                Debug.println(winner.getName() + ", with a balance of " + winner.getBalance());
             }
         }
+    }
+
+    private void findWinner2(/*version 2*/){
+        int amountOfWinners = 0;
+        int highestAmountOfMoney = 0;
+        StringBuilder announce = new StringBuilder();
+        //finds the hightest amount of cash in a single players hand, and how many have that amount.
+        for (Player p : players){
+            if (p.getBalance() > highestAmountOfMoney) {
+                amountOfWinners = 1;
+                highestAmountOfMoney = p.getBalance();
+            }
+            else if (p.getBalance() == highestAmountOfMoney){
+                amountOfWinners++;
+            }
+        }
+        //construct the winning message
+        if (amountOfWinners > 1)
+            announce.append("the game were tie between: ");
+        else
+            announce.append("the winner is: ");
+        for (Player p : players){
+            if (p.getBalance() == highestAmountOfMoney){
+                announce.append(p.getName()).append(" ");
+            }
+        }
+        //announce the winner
+        System.out.println(announce);
     }
 
 
