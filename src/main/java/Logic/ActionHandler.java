@@ -40,7 +40,7 @@ public class ActionHandler {
         // Get squares which is needed across cases:
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
 
-        Debug.println("Landed on: " + fieldType + " at position: " + position);
+        Debug.println("Landed on: " + fieldType + "-square at position: " + position);
 
         switch (fieldType){
             case "Amusement":
@@ -50,12 +50,18 @@ public class ActionHandler {
                 if (amusement.getBoothOwner() == null){ // There is not a booth
                     // Buy booth
                     bank.payToBank(currentPlayer, amusement.getPrice());
-                    // Give booth
+                    // add booth to board
                     board.addBooth(currentPlayer, position);
+                    // Remove one booth
+                    currentPlayer.useOneBooth();
+
+                    Debug.println(currentPlayer.getName() + ", bought booth at " + amusement.getName());
                 }
                 else{ // There is a booth
+                    Debug.println(amusement.getBoothOwner().getName() + ", has a booth on this square" );
                     // Pay to the one who owns the booth
                     if (board.hasMonopoly(position)){ // Has monopoly, x2
+                        Debug.println("That player has monopoly you will pay x2.");
                         bank.payToPlayer(currentPlayer, amusement.getBoothOwner(), amusement.getPrice()*2);
                     }
                     else{ // Has not, normal price
@@ -67,6 +73,7 @@ public class ActionHandler {
             case "Railroad":
                 // Give extra turn.
                 gameController.giveExtraTurn();
+                Debug.println("You get an extra turn!");
                 break;
 
             case "Chance":
@@ -113,8 +120,12 @@ public class ActionHandler {
     private void doChanceCard(ChanceCard card) {
         //String cardText = card.getChanceCardText();//unused for now
 
+        Debug.println("You pulled a chance card");
+
         // Determine if free ticketbooth card or move-somewhere card.
         try { // Destination card
+            Debug.println("Chance card: " + card.getChanceCardText());
+
             int dest = card.getDestination();
             int amount = card.getAmountToPay();
 

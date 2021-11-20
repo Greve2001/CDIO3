@@ -22,9 +22,6 @@ public class GameController {
 
     int BOARD_SIZE = board.getAllSquares().length;
 
-    // Ekstra, remove later
-    Scanner input = new Scanner(System.in);
-
     public void setupGame(int amountOfPlayers){
         setupPlayers(amountOfPlayers);
         positionHandler = new PositionHandler(players, BOARD_SIZE);
@@ -39,9 +36,16 @@ public class GameController {
 
     public void takeTurn(){
 
+        // Print players turn and stats
+        String name = currentPlayer.getName();
+        int balance = currentPlayer.getBalance();
+        int position = currentPlayer.getPosition();
+
+        Debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" + "booths " + currentPlayer.getBoothsOnHand());
+
         // Get action from player
-        Debug.print("Please press enter");
-        input.nextLine();
+        Debug.print("Please press ENTER to roll");
+        Debug.strInput();
 
         // Roll die, get value.
         die.roll();
@@ -109,7 +113,7 @@ public class GameController {
 
         currentPlayer = players[0]; // Default change later
 
-        Debug.println("Players Initialized");
+        Debug.println("~Players Initialized~");
     }
     
     private void changeTurn(){
@@ -122,8 +126,8 @@ public class GameController {
             currentPlayer = players[playerIndex +1];
         }
 
-        Debug.println("Changed player from: " + players[playerIndex].getName() + " to: " +
-                "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName());
+        Debug.println("~Changed player from: " + players[playerIndex].getName() + " to: " +
+                "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName() + "~");
     }
 
     public void giveExtraTurn(){

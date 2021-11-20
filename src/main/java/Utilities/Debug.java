@@ -1,6 +1,10 @@
 package Utilities;
 
+import java.util.Scanner;
+
 public class Debug {
+
+    static Scanner input = new Scanner(System.in);
 
     private static final Debug instance = new Debug();
 
@@ -23,6 +27,12 @@ public class Debug {
     public static void print(String str){
         if (showPrints){
             System.out.print(str);
+        }
+    }
+
+    public static void strInput(){
+        if (showPrints){
+            input.nextLine();
         }
     }
 }
