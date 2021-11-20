@@ -122,6 +122,7 @@ public class ActionHandler {
 
             //Update position after card destination
             positionHandler.setPlayerPosition(currentPlayer, dest, true);
+            doFieldAction(currentPlayer, currentPlayer.getPosition());
 
         } catch (Exception e) { // If dest is null, then it is a free ticketbooth card
             //String color = getColor();   //TODO Uncomment when merged
