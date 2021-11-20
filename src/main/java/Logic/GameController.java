@@ -27,12 +27,13 @@ public class GameController {
     // Ekstra, remove later
     Scanner input = new Scanner(System.in);
 
-    public void setupGame(){
+    public void setupGame(int amountOfPlayers){
+        setupPlayers(amountOfPlayers);
         positionHandler = new PositionHandler(players, board.getAllSquares().length);
         actionHandler = new ActionHandler(this, board, positionHandler);
     }
 
-    public void startGame(){
+    public void playGame(){
         do {
             takeTurn();
         }while (!gameOver);
