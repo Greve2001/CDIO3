@@ -1,4 +1,4 @@
-package Board;
+package Utilities;
 
 import java.io.InputStreamReader;
 import java.util.*;
