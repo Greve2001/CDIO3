@@ -125,7 +125,44 @@ public class ActionHandler {
             doFieldAction(currentPlayer, currentPlayer.getPosition());
 
         } catch (Exception e) { // If dest is null, then it is a free ticketbooth card
-            //String color = getColor();   //TODO Uncomment when merged
+            String color = card.getColor();
+
+            int[] squares = board.getSquarePosByColor(color);
+            boolean monopoly = board.hasMonopoly(squares[0]);
+
+            if (!monopoly && currentPlayer.hasBooth()) {// Use booth
+                // Get fields
+                Amusement square1 = (Amusement) board.getSquare(squares[0]);
+                Amusement square2 = (Amusement) board.getSquare(squares[1]);
+
+                if (square1.getBoothOwner() == null && square2.getBoothOwner() == null){
+                    // Choose a square to place booth
+                    // TODO use utility class to get a choice from players
+                    currentPlayer.useOneBooth();
+                    board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
+                }
+                else if (square1.getBoothOwner() == null) { // Square1 is free
+                    currentPlayer.useOneBooth();
+                    board.addBooth(currentPlayer, square1.getPosition());
+                }
+                else if (square2.getBoothOwner() == null){ // Square 2
+                    currentPlayer.useOneBooth();
+                    board.addBooth(currentPlayer, square2.getPosition());
+                }
+                else{ // Both are taken with different colored booths
+                    // TODO use utility class to get a choice from players
+
+                    currentPlayer.useOneBooth();
+                    board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
+                }
+            }
+            else if(monopoly){ // There is monopoly, draw new card
+                ChanceCard newCard = deck.pullCard();
+                doChanceCard(newCard);
+            }
+            else{ // Player has no more booths, can't get new card
+                System.out.println("Can't draw new card, you have no more booths");
+            }
 
             //
         }
