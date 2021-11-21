@@ -16,26 +16,29 @@ class ActionHandlerTest {
     PositionHandler positionHandler;
     Board board;
     Deck deck;
-    Player player1;
-    Player player2;
+    Player[] players;
+    ChanceCard currentCard;
+
+    final int BOARD_SIZE = 32;
 
     @BeforeEach
     void setup() {
         board = new Board();
         deck = new Deck();
+        players = new Player[2];
 
-        player1 = new Player("player 1");
-        player2 = new Player("player 2");
         gameController = new GameController();
-        //positionHandler = new PositionHandler();
+        positionHandler = new PositionHandler(players, BOARD_SIZE);
         ah = new ActionHandler(gameController, board, positionHandler);
 
-        Player currentPlayer = player1;
+        Player currentPlayer = new Player("player1");
     }
 
     @Test
     void drawAFreeTicketBoothCard() { //where neither are owned
         deck.setDrawCardCount(12);
+        currentCard = deck.getCard();
+        ah.doChanceCard(currentCard);
 
     }
 }
