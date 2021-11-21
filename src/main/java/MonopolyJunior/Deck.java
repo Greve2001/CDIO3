@@ -72,4 +72,8 @@ public class Deck {
     public void setDrawCardCount(int drawCardCount) {//only for test
         this.drawCardCount = drawCardCount;
     }
+
+    public ChanceCard getCard(){
+        return chanceCardDeck[this.drawCardCount];
+    }
 }
