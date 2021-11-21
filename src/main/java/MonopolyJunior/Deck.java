@@ -1,6 +1,8 @@
 package MonopolyJunior;
 
-import static java.awt.Color.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Deck {
 
@@ -40,19 +42,31 @@ public class Deck {
 
         shuffleDeck();
     }
+
+    /**
+     * One-argument constructor, that initializes the deck with the input array.
+     * Primarily used for unit-testing.
+     * @param cards
+     */
     public Deck(ChanceCard[] cards){
        if(cards == null){
            throw new IllegalArgumentException("You cannot initialize an empty array.");
        }
-       this.chanceCardDeck = cards;
-    }
-
-    private void shuffleDeck(){
-        //Implementation otw
+       ChanceCard[] copy = Arrays.copyOf(cards, cards.length); //Makes sure that no changes is applied to original input-array
+       this.chanceCardDeck = copy;
     }
 
     /**
-     * @return the ChanceCard that is currently at the top of the deck.
+     * Takes the chanceCard array and shuffles it.
+     */
+    public void shuffleDeck(){
+        List<ChanceCard> list = Arrays.asList(chanceCardDeck);
+        Collections.shuffle(list);
+        chanceCardDeck = list.toArray(new ChanceCard[0]);
+    }
+
+    /**
+     * @returns the ChanceCard that is currently at the top of the deck.
      */
     public ChanceCard pullCard(){
         try{
@@ -66,14 +80,14 @@ public class Deck {
 
         }
 
+    }
 
+    //FIXME slettes på et senere tidspunkt?
+    public ChanceCard getCard() {
+        return chanceCardDeck[drawCardCount];
     }
 
     public void setDrawCardCount(int drawCardCount) {//only for test
         this.drawCardCount = drawCardCount;
-    }
-
-    public ChanceCard getCard(){
-        return chanceCardDeck[this.drawCardCount];
     }
 }

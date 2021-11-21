@@ -119,7 +119,7 @@ public class ActionHandler {
 
         // Determine if free ticketbooth card or move-somewhere card.
         try { // Destination card
-            Debug.println("Chance card: " + card.getChanceCardText());
+            Debug.println("Chance card: " + card);
 
             int dest = card.getDestination();
             int amount = card.getAmountToPay();

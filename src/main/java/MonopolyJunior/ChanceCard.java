@@ -1,12 +1,9 @@
 package MonopolyJunior;
 
-import java.awt.*;
-
 public class ChanceCard {
 
     private String chanceCardText;
     private String color;
-    //private Color color;
     private int amountToPay;
     private int destination;
 
@@ -42,11 +39,7 @@ public class ChanceCard {
         this.color = color;
     }
 
-    /*public String toString(){
-        return
-    }*/
-
-    public String getChanceCardText() {
+    public String toString(){
         return chanceCardText;
     }
 
