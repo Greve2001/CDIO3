@@ -134,8 +134,10 @@ public class ActionHandler {
         } catch (Exception e) { // If dest is null, then it is a free ticketbooth card
             System.out.println("test out, kontrol point a");//temp for test
             String color = card.getColor();
+            System.out.println(color); // for test purpose
 
             int[] squares = board.getSquarePosByColor(color);
+            System.out.println(squares[0] + " and " + squares[2]); //for test purpose
             boolean monopoly = board.hasMonopoly(squares[0]);
 
             if (!monopoly && currentPlayer.hasBooth()) {// Use booth
