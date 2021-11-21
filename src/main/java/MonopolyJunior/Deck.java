@@ -83,11 +83,12 @@ public class Deck {
     }
 
     //FIXME slettes på et senere tidspunkt?
+    //This section is only for test purpose
     public ChanceCard getCard() {
         return chanceCardDeck[drawCardCount];
     }
 
-    public void setDrawCardCount(int drawCardCount) {//only for test
+    public void setDrawCardCount(int drawCardCount) {
         this.drawCardCount = drawCardCount;
     }
 }
