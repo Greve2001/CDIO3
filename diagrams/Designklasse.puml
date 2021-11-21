@@ -85,13 +85,17 @@ class Player {
 }
 
 class Deck {
-    -chanceCards: ChanceCard[]
+    -chanceCardDeck: ChanceCard[]
 
     +pullCard(): ChanceCard
+    +shuffleDeck(): void
 }
 class ChanceCard {
-    -text: String
-    -Effect?!
+    -chanceCardText: String
+    -color: String
+    -amountToPay: int
+    -destination: int
+
 }
 class Amusement {
     -boothOwner: Player
