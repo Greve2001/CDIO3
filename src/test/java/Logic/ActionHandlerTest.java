@@ -18,6 +18,7 @@ class ActionHandlerTest {
     Deck deck;
     Player[] players;
     ChanceCard currentCard;
+    Player currentPlayer;
     Player player2, player3;
 
     final int BOARD_SIZE = 32;
@@ -32,7 +33,7 @@ class ActionHandlerTest {
         positionHandler = new PositionHandler(players, BOARD_SIZE);
         ah = new ActionHandler(gameController, board, positionHandler);
 
-        Player currentPlayer = new Player("player1");
+        currentPlayer = new Player("player1");
         player2 = new Player("player2");
         player3 = new Player("player3");
     }
@@ -78,6 +79,19 @@ class ActionHandlerTest {
         board.addBooth(player2,13);
         currentCard = deck.getCard();
         ah.doChanceCard(currentCard);
+    }
+
+    //test regarding chanceCard that make the player move.
+    @Test
+    void drawAMoveChanceCard(){
+        ah.setCurrentPlayer(currentPlayer);
+        deck.setDrawCardCount(3);
+        ah.doChanceCard(deck.getCard());
+
+        int expected = 9;
+        int actual = currentPlayer.getPosition();
+        assertEquals(expected, actual);
+
     }
 }
 

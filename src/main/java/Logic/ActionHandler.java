@@ -178,4 +178,8 @@ public class ActionHandler {
         }
     }
 
+    public void setCurrentPlayer(Player p){//for test purpose
+        currentPlayer = p;
+    }
+
 }
