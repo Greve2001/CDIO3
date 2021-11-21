@@ -56,4 +56,17 @@ class BoardTest {
 
         assertTrue(board.hasMonopoly(3));
     }
+
+    @Test
+    void getSquarePosByColor() {
+        int[] actual = board.getSquarePosByColor("Purple");
+        int[] expected = {
+                3, 4, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0,
+        };
+
+        assertArrayEquals(expected, actual);
+    }
 }

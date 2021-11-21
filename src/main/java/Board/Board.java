@@ -119,9 +119,11 @@ public class Board {
         OverloadList listOfPositions = new OverloadList("int");
 
         // Checks the entire array in case there is implemented more than two Amusements of the same color
-        for (Square allSquare : allSquares) {
-            if (((Amusement) allSquare).getColor().equalsIgnoreCase(color)) {
-                listOfPositions.add((allSquare.getPosition()));
+        for (Square square : allSquares) {
+            if(square instanceof Amusement) {
+                if (((Amusement) square).getColor().equalsIgnoreCase(color)) {
+                    listOfPositions.add((square.getPosition()));
+                }
             }
         }
 
