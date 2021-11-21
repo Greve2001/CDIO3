@@ -69,4 +69,7 @@ public class Deck {
 
     }
 
+    public void setDrawCardCount(int drawCardCount) {//only for test
+        this.drawCardCount = drawCardCount;
+    }
 }
