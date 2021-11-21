@@ -112,7 +112,7 @@ public class ActionHandler {
         }
     }
 
-    private void doChanceCard(ChanceCard card) {
+    public void doChanceCard(ChanceCard card) {
         //String cardText = card.getChanceCardText();//unused for now
 
         Debug.println("You pulled a chance card");
@@ -132,6 +132,7 @@ public class ActionHandler {
             doFieldAction(currentPlayer, currentPlayer.getPosition());
 
         } catch (Exception e) { // If dest is null, then it is a free ticketbooth card
+            System.out.println("test out, kontrol point a");//temp for test
             String color = card.getColor();
 
             int[] squares = board.getSquarePosByColor(color);
