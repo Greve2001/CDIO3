@@ -147,7 +147,7 @@ class PositionHandlerTest {
 
         // Position
         int actualPos = player.getPosition();
-        int expectedPos = 28; // 1+5
+        int expectedPos = 28; // 33 or 1 -> 28
         assertEquals(expectedPos, actualPos);
     }
 }

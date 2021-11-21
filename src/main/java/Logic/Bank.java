@@ -19,7 +19,7 @@ public class Bank {
         Debug.println(fromPlayer.getName() + ", paid $" + pay + " to " + toPlayer.getName());
     }
 
-    public int ableToPay(Player player, int amount){
+    private int ableToPay(Player player, int amount){
         if (player.getBalance() <= 0 || amount <= 0){
             return 0;
         }
