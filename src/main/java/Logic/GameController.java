@@ -31,7 +31,7 @@ public class GameController {
         }while (!gameOver);
     }
 
-    public void takeTurn(){
+    private void takeTurn(){
 
         // Print players turn and stats
         String name = currentPlayer.getName();
