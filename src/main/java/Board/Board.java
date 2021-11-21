@@ -1,83 +1,83 @@
 package Board;
 
 import MonopolyJunior.Player;
-
-import java.util.*;
+import Utilities.CSVReader;
+import Utilities.OverloadList;
 
 public class Board {
     private final int OFFSET = 1;
     private final Square[] allSquares;
     private int pennyBagPosition;
 
-    public Board (){
+    public Board() {
         // Loads the information from the board.csv in ressources.
         CSVReader reader = new CSVReader("board.csv", ",");
-        String[] columnNames = reader.getColumnNames();
-        List<String[]> listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
+        OverloadList listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
 
         allSquares = new Square[listOfAllSquareAndProps.size()];
 
         // initialises the objects in an array based on the hashmap
-        for (int i = 0; i < listOfAllSquareAndProps.toArray().length; i++) {
-            String[] currentSquare = listOfAllSquareAndProps.get(i);
+        for (int i = 0; i < listOfAllSquareAndProps.size(); i++) {
+            String[] currentSquare = listOfAllSquareAndProps.getStringArr(i);
 
             // Column names is expected to be in the following order in the columnNames:
-            // 0 Position; 1 Type; 2 Name; 3 AmountGiven; 4 Price; 5 Color; 6 AmountToPay; 7 Dest
-            switch (currentSquare[1]) {                                            // type
-                case "GO!" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                            new Go(currentSquare[2],                               // name
-                                    Integer.parseInt(currentSquare[0]),            // position
-                                    Integer.parseInt(currentSquare[3]));           // amountGiven
+            int position = 0, type = 1, name = 2, amountGiven = 3, price = 4, color = 5, amountToPay = 6, dest = 7;
+            
+            switch (currentSquare[type]) {
+                case "GO!":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new Go(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]),
+                                    Integer.parseInt(currentSquare[amountGiven]));
                     break;
-                case "Amusement" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                        new Amusement(currentSquare[2],                            // name
-                                Integer.parseInt(currentSquare[0]),                // position
-                                currentSquare[5],                                  // color
-                                Integer.parseInt(currentSquare[4]));               // price
+                case "Amusement":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new Amusement(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]),
+                                    currentSquare[color],
+                                    Integer.parseInt(currentSquare[price]));
                     break;
-                case "Chance" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                        new Chance(currentSquare[2],                               // name
-                                Integer.parseInt(currentSquare[0]));               // position
+                case "Chance":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new Chance(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]));
                     break;
-                case "Railroad" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                        new Railroad(currentSquare[2],                             // name
-                                Integer.parseInt(currentSquare[0]),                // position
-                                currentSquare[5]);                                 // color
+                case "Railroad":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new Railroad(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]),
+                                    currentSquare[color]);
                     break;
-                case "PayToSee" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                            new PayToSee(currentSquare[2],                         // name
-                                    Integer.parseInt(currentSquare[0]),            // position
-                                    Integer.parseInt(currentSquare[6]));           // amountToPay
+                case "PayToSee":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new PayToSee(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]),
+                                    Integer.parseInt(currentSquare[amountToPay]));
                     break;
-                case "GoTo" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                            new GoToRestrooms(currentSquare[2],                    // name
-                                    Integer.parseInt(currentSquare[0]),            // position
-                                    Integer.parseInt(currentSquare[7]));           // destination
+                case "GoTo":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new GoToRestrooms(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]),
+                                    Integer.parseInt(currentSquare[dest]));
                     break;
-                case "GetMoney" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                            new PennyBag(currentSquare[2],                         // name
-                                    Integer.parseInt(currentSquare[0]));           // position
-                    pennyBagPosition = Integer.parseInt(currentSquare[0]);
+                case "GetMoney":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new PennyBag(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]));
+                    pennyBagPosition = Integer.parseInt(currentSquare[position]);
                     break;
-                case "Restrooms" :
-                    allSquares[Integer.parseInt(currentSquare[0]) - OFFSET] =
-                            new Restrooms(currentSquare[2],                        // name
-                                    Integer.parseInt(currentSquare[0]));           // position
+                case "Restrooms":
+                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                            new Restrooms(currentSquare[name],
+                                    Integer.parseInt(currentSquare[position]));
                     break;
-             }
+            }
         }
 
     }
 
     public void addBooth(Player player, int position) {
-        if(getSquare(position) instanceof Amusement amusement) {
+        if (getSquare(position) instanceof Amusement amusement) {
             amusement.setBoothOwner(player);
         } else {
             System.out.println("This Square is not an Amusement... Ignoring addBooth");
@@ -85,7 +85,7 @@ public class Board {
     }
 
     public void removeBooth(int position) {
-        if(getSquare(position) instanceof Amusement amusement) {
+        if (getSquare(position) instanceof Amusement amusement) {
             amusement.setBoothOwner(null);
         } else {
             System.out.println("This Square is not an Amusement... Ignoring removeBooth");
@@ -98,13 +98,12 @@ public class Board {
         boolean result = true;
 
         for (int i = 0; i < allSquares.length; i++) {
-            if(allSquares[i].getClass().getSimpleName().equals("Amusement")) {
-                if(i + OFFSET != position && ((Amusement) allSquares[i]).getColor().equalsIgnoreCase(amusement.getColor()) ) {
+            if (allSquares[i].getClass().getSimpleName().equals("Amusement")) {
+                if (i + OFFSET != position && ((Amusement) allSquares[i]).getColor().equalsIgnoreCase(amusement.getColor())) {
                     if (amusement.getBoothOwner() == null ||
-                                    ((Amusement) allSquares[i]).getBoothOwner() == null) {
+                            ((Amusement) allSquares[i]).getBoothOwner() == null) {
                         result = false;
-                    }
-                    else if(!(((Amusement) allSquares[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
+                    } else if (!(((Amusement) allSquares[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
 
                         result = false;
                     }
@@ -120,16 +119,16 @@ public class Board {
         OverloadList listOfPositions = new OverloadList("int");
 
         // Checks the entire array in case there is implemented more than two Amusements of the same color
-        for (int i = 0; i < allSquares.length; i++) {
-            if (((Amusement) allSquares[i]).getColor().equalsIgnoreCase(color)) {
-                listOfPositions.add((allSquares[i].getPosition()));
+        for (Square allSquare : allSquares) {
+            if (((Amusement) allSquare).getColor().equalsIgnoreCase(color)) {
+                listOfPositions.add((allSquare.getPosition()));
             }
         }
 
-        return listOfPositions.getList(0);
+        return listOfPositions.getListOfInts();
     }
 
-    public int getPennyBagPos(){
+    public int getPennyBagPos() {
         return pennyBagPosition;
     }
 

@@ -19,6 +19,14 @@ package "Game Board" {
         class PayFor
 }
 
+package Logic {
+    class Bank
+    class GameController
+    class PlayerHandler
+    class PositionHandler
+    class SquareActionHandler
+}
+
 class Deck
 class ChanceCard
 class Player

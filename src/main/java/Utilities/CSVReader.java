@@ -1,4 +1,4 @@
-package Board;
+package Utilities;
 
 import java.io.InputStreamReader;
 import java.util.*;
@@ -7,7 +7,7 @@ public class CSVReader {
     private String[] columnNames;
     private Scanner fileScanner;
     private final String DELIMITER;
-    private final List<String[]> FILE_AS_LIST_OF_ARR = new ArrayList<>();
+    private final OverloadList FILE_AS_LIST_OF_ARR = new OverloadList("String[]");
 
     public CSVReader(String file, String delimiter) {
         this.DELIMITER = delimiter;
@@ -26,7 +26,7 @@ public class CSVReader {
         return columnNames;
     }
 
-    public List<String[]> getFILE_AS_LIST_OF_ARR() {
+    public OverloadList getFILE_AS_LIST_OF_ARR() {
         return FILE_AS_LIST_OF_ARR;
     }
 

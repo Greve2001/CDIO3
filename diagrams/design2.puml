@@ -1,0 +1,108 @@
+@startuml
+
+hide empty members
+skinparam groupInheritance 2
+
+skinparam linetype polyline
+
+
+class Die
+
+package "Game Board" {
+    class Board
+    class "<<abstract>>\nSquare" as Square
+        class Amusement
+        class Restrooms
+        class Start
+        class Railroad
+        class Chance
+        class PennyBag
+        class PayFor
+}
+
+package Logic {
+    class Bank
+    class GameController
+    class PositionHandler
+    class ActionHandler
+}
+
+class Deck
+class ChanceCard
+class Player
+class "<<singleton>>\nLanguage" as Language
+
+GameController -left- PositionHandler
+GameController -right- ActionHandler
+PositionHandler -- ActionHandler
+
+GameController -left- Player
+ActionHandler -left- Player
+PositionHandler -left- Player
+ActionHandler -up- Bank
+
+GameController -down-- Board
+ActionHandler -right- Deck
+    Deck -right- ChanceCard
+GameController -left- Die
+
+
+Board -- Square
+Square <|-- Restrooms
+Square <|-- Amusement
+Square <|-- Railroad
+Square <|-- PayFor
+Square <|-- PennyBag
+Square <|-- Start
+Square <|-- Chance
+
+
+class GameController {
+    -currentPlayer : Player
+    -players : Player[]
+    -extraTurn : boolean
+    -gameOver : boolean
+
+    +setupGame() : void
+    +startGame() : void
+    -setupPlayers(int) : void
+    -takeTurn() : void
+    -loseCheck() : void
+    -findWinner() : void
+    -changeTurn() : void
+    +giveExtraTurn() : void
+}
+
+class PositionHandler {
+    -players : Player[]
+    -boardSize : int
+    -startBonus : int
+
+    +PositionHandler(Player[], boardLength:int)
+    +movePlayer(Player, position:int) : void
+    +setPlayerPosition(Player, int, boolean) : void
+    -payBonus(Player) : void
+}
+
+class ActionHandler {
+    -deck : Deck
+    -bank : Bank
+    -board : Board
+    -gameController : GameController
+    -positionHandler : PositionHandler
+    -currentPlayer : Player
+
+    -PENNYBAG_POSITION : int
+
+    +ActionHandler(GameController, Board, PositionHandler)
+    +doFieldAction(Player, position:int) : void
+    doChanceCard(ChanceCard) : void
+}
+
+class Bank {
+    +payToBank(Player, amount:int) : void
+    +PayToPlayer(from:Player, to:Player, amount:int) : void
+    -ableToPay(Player, amount:int) : void
+}
+
+@enduml

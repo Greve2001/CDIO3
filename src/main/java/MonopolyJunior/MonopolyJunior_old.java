@@ -4,7 +4,7 @@ import Board.*;
 
 import java.util.Scanner;
 
-public class MonopolyJunior {
+public class MonopolyJunior_old {
 
     private Player[] players;
     private final Die die = new Die();
@@ -18,8 +18,8 @@ public class MonopolyJunior {
     private final int MAX_NR_OF_PLAYERS = 4;
     private final int START_MONEY = 31;
     private final int BOARD_SIZE = board.getAllSquares().length;
-    private final int PENNYBAG_POSITION = board.getFistPosOfSquareByType("GetMoney");
-    private final int RESTOROOM_POSITION = board.getFistPosOfSquareByType("Restrooms");
+    private final int PENNYBAG_POSITION = board.getPennyBagPos();
+    private final int RESTOROOM_POSITION = 11;//need to get this info from the board
     private final int MOVING_PAST_START = ((Go) board.getSquare(1)).getAmount();
 
     public void setupGame(int numOfPlayers){
@@ -58,6 +58,7 @@ public class MonopolyJunior {
     public void takeTurn() {
         input.nextLine();//just as a stop between turns
         die.roll();
+        currentPlayer.setGoingToRestRoom(false);
         updatePosition(die.getFaceValue());
         handleField(currentPlayer.getPosition());//handle all interaction with the field the player lands on
         if (currentPlayer.getBalance() == 0)//check if winCondition is meet
@@ -65,7 +66,7 @@ public class MonopolyJunior {
     }
 
     private void handleField(int position) {
-        String fieldType = new String(board.getSquare(position).getClass().getSimpleName());
+        String fieldType = board.getSquare(position).getClass().getSimpleName();
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);//used multiple placess
         switch (fieldType){
              case "Amusement":
@@ -99,14 +100,12 @@ public class MonopolyJunior {
             case "PennyBag":
                 currentPlayer.updateBalance(pennyBag.withDraw());
                 break;
-            case "Restrooms":
-                //do nothing
-                break;
             case "PayToSee":
                 PayToSee payToSee = (PayToSee)board.getSquare(position);
                 pay(payToSee.getAmount());
                 pennyBag.addMoney(payToSee.getAmount());
                 break;
+            case "Restrooms":
             case "Go":
                 //do nothing
                 break;
@@ -116,15 +115,15 @@ public class MonopolyJunior {
     }
 
     private void handleChance() {
-        pile.pullCard();
-        if (pile.getCard().getDestination() > 0){
-            if (pile.getCard().getDestination() == RESTOROOM_POSITION)
+        ChanceCard currentCard = pile.pullCard();
+        if (currentCard.getDestination() > 0){
+            if (currentCard.getDestination() == RESTOROOM_POSITION)
                 currentPlayer.setGoingToRestRoom(true);
-            updatePosition(pile.getCard().getDestination());
+            updatePosition(currentCard.getDestination());
             handleField(currentPlayer.getPosition());
         }
         else{
-            String color = new String(pile.getCard().getColor().toString());
+            String color = new String(currentCard.getColor().toString());
             if (!board.hasMonopoly(board.getSquarePosByColor(color)[0]) && currentPlayer.hasBooth()){
                 System.out.print("pick either 1 or 2");//going to gui later
                 board.addBooth(currentPlayer,board.getSquarePosByColor(color)[input.nextInt()-1]);  //need refractor, also because we can't use scanner with GUI

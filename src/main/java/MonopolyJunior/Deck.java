@@ -81,8 +81,13 @@ public class Deck {
         }
 
     }
+
     //FIXME slettes på et senere tidspunkt?
-    public ChanceCard getCard(){
-        return null;
+    public ChanceCard getCard() {
+        return chanceCardDeck[drawCardCount];
+    }
+
+    public void setDrawCardCount(int drawCardCount) {//only for test
+        this.drawCardCount = drawCardCount;
     }
 }
