@@ -108,7 +108,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    //this test will result in drawing a new chanceCard, so the result may variate
+    //this test will result in drawing a new chanceCard, so the result may vary
     void drawAFreeTicketBoothCard5(){ //if monopoly eksists
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
