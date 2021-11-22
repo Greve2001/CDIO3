@@ -31,7 +31,7 @@ class PlayerTest {
         player.setBalance(200);
         //When input is a Positiv value
         player.updateBalance(+15);
-        actual = 200;
+        actual = 215;
 
         assertEquals(player.getBalance(),actual);
     }
