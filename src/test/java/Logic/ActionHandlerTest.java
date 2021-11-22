@@ -133,12 +133,52 @@ class ActionHandlerTest {
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
         Amusement amusement2 = (Amusement) board.getSquare(13); //Amusement that match the color
 
-        currentPlayer.setBooths(0); //to ensure that the player have booths to place on the board
+        amusement2.setBoothOwner(player2);
+
+        currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
+        actionHandler.doChanceCard(currentCard, currentPlayer);
+
+        assertEquals(9, currentPlayer.getBoothsOnHand());
+        assertEquals(currentPlayer, amusement1.getBoothOwner());
+        assertEquals(currentPlayer, amusement2.getBoothOwner());
+    }
+
+    @Test
+    void drawAFreeTicketBoothCard7(){ //if you own amusement1, and 2 is owned by another player
+        currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
+
+        Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
+        Amusement amusement2 = (Amusement) board.getSquare(13); //Amusement that match the color
+
+        amusement1.setBoothOwner(currentPlayer);
+        amusement2.setBoothOwner(player2);
+
+        currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
+        player2.setBooths(9);
+        actionHandler.doChanceCard(currentCard, currentPlayer);
+
+        assertEquals(9, currentPlayer.getBoothsOnHand());
+        assertEquals(10, player2.getBoothsOnHand());
+        assertEquals(currentPlayer, amusement1.getBoothOwner());
+        assertEquals(currentPlayer, amusement2.getBoothOwner());
+    }
+
+    @Test
+    void drawAFreeTicketBoothCard8(){ //if it's possible to play a booth, but player doesn't have one
+        currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
+
+        Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
+        Amusement amusement2 = (Amusement) board.getSquare(13); //Amusement that match the color
+
+        amusement1.setBoothOwner(player2);
+
+        currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
         actionHandler.doChanceCard(currentCard, currentPlayer);
 
         assertEquals(0, currentPlayer.getBoothsOnHand());
-        assertNull(amusement1.getBoothOwner());
-        assertNull(amusement2.getBoothOwner());
+        assertEquals(10, player2.getBoothsOnHand());
+        assertEquals(currentPlayer, amusement1.getBoothOwner());
+        assertEquals(currentPlayer, amusement2.getBoothOwner());
     }
 
     //test regarding chanceCard that make the player move.
@@ -332,8 +372,7 @@ class ActionHandlerTest {
         assertEquals(expected, actual);
 
         //owner of amusement check
-        Player exp = currentPlayer;
         Player act = ((Amusement) board.getSquare(currentPlayer.getPosition())).getBoothOwner();
-        assertEquals(exp, act);
+        assertNull(act);
     }
 }
