@@ -121,6 +121,7 @@ public class ActionHandler {
 
         debug.println("You pulled a chance card");
 
+
         // Determine if free ticketbooth card or move-somewhere card.
         if (card.getDestination() != 0) {
             debug.println("Chance card: " + card);
@@ -129,8 +130,17 @@ public class ActionHandler {
             int amount = card.getAmountToPay();
 
             //Only pay amount if is not zero
+            // Only one card. When going to the restrooms
             if (amount > 0) {
                 bank.payToBank(currentPlayer, amount);
+            }
+
+            // Restroom card
+            if (dest == 11){
+                PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
+                pennyBag.addMoney(amount);
+                positionHandler.setPlayerPosition(currentPlayer, dest, false);
+                return;
             }
 
             //Update position after card destination
