@@ -64,6 +64,7 @@ public class GameController {
 
         // Lose check - Only for currentPlayer, since it's not possible for others to be a zero now.
         loseCheck();
+        if (gameOver){ return; }
 
         // Change turn
         if (!extraTurn)
