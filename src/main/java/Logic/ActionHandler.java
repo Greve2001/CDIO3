@@ -120,11 +120,12 @@ public class ActionHandler {
         debug.println("You pulled a chance card");
 
         // Determine if free ticketbooth card or move-somewhere card.
-        try { // Destination card
+        if (card.getDestination() != 0){
             debug.println("Chance card: " + card);
 
             int dest = card.getDestination();
             int amount = card.getAmountToPay();
+            debug.println("test position 5");
 
             //Only pay amount if is not zero
             if (amount > 0){ bank.payToBank(currentPlayer, amount); }
@@ -133,16 +134,14 @@ public class ActionHandler {
             positionHandler.setPlayerPosition(currentPlayer, dest, true);
             doFieldAction(currentPlayer, currentPlayer.getPosition());
 
-        } catch (Exception e) { // If dest is null, then it is a free ticketbooth card
-            System.out.println("test out, kontrol point a");//temp for test
+        } else { // If dest is null, then it is a free ticketbooth card
             String color = card.getColor();
-            System.out.println(color); // for test purpose
 
             int[] squares = board.getSquarePosByColor(color);
-            System.out.println(squares[0] + " and " + squares[1]); //for test purpose
             boolean monopoly = board.hasMonopoly(squares[0]);
 
             if (!monopoly && currentPlayer.hasBooth()) {// Use booth
+                debug.println("test position 6");
                 // Get fields
                 Amusement square1 = (Amusement) board.getSquare(squares[0]);
                 Amusement square2 = (Amusement) board.getSquare(squares[1]);
@@ -169,14 +168,13 @@ public class ActionHandler {
                 }
             }
             else if(monopoly){ // There is monopoly, draw new card
+                debug.println("test position 7");
                 ChanceCard newCard = deck.pullCard();
                 doChanceCard(newCard , currentPlayer);
             }
             else{ // Player has no more booths, can't get new card
                 debug.println("Can't draw new card, you have no more booths");
             }
-
-            //
         }
     }
 
