@@ -14,6 +14,10 @@ public class Player {
 
     }
 
+    public void getOneBooth(){
+        this.boothsOnHand +=1;
+    }
+
     public Player(String name) {
         this.name = name;
     }
