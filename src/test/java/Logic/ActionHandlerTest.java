@@ -39,15 +39,7 @@ class ActionHandlerTest {
         player2 = new Player("player2");
         player3 = new Player("player3");
 
-        //changing the method from private to public, inorder to test individual methods.
-        /*try {
-            //null control
-            Method method = actionHandler.getClass().getDeclaredMethod("doChanceCard", ChanceCard.class, Player.class);
-            method.setAccessible(true);
-        } catch (NoSuchMethodException e){
-            System.out.println("error");
-        }*/
-    }
+        }
 
     //test regarding free ticket booth chance cards.
     //in this test, the amusement with the color magenta is used, witch have position 12 & 13 on the board.

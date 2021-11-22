@@ -20,6 +20,10 @@ class GameControllerTest {
     @Test
     void setupGameTest(){
 
+        int amountOfPlayer = 4;
+
+        gameController.setupGame(amountOfPlayer);
+
     }
 
 
