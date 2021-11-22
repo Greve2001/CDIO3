@@ -3,6 +3,7 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
+import org.assertj.core.util.VisibleForTesting;
 
 public class ActionHandler {
 
@@ -116,6 +117,7 @@ public class ActionHandler {
         }
     }
 
+    @VisibleForTesting
     public void doChanceCard(ChanceCard card, Player currentPlayer) {
         //String cardText = card.getChanceCardText();//unused for now
 

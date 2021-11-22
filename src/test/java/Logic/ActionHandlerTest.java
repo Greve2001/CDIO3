@@ -7,6 +7,8 @@ import MonopolyJunior.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Method;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionHandlerTest {
@@ -36,6 +38,15 @@ class ActionHandlerTest {
         currentPlayer = new Player("player1");
         player2 = new Player("player2");
         player3 = new Player("player3");
+
+        //changing the method from private to public, inorder to test individual methods.
+        /*try {
+            //null control
+            Method method = actionHandler.getClass().getDeclaredMethod("doChanceCard", ChanceCard.class, Player.class);
+            method.setAccessible(true);
+        } catch (NoSuchMethodException e){
+            System.out.println("error");
+        }*/
     }
 
     //test regarding free ticket booth chance cards.
