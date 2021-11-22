@@ -112,7 +112,6 @@ public class GameController {
 
 
     // *** Player Handling *** //
-    
     private void setupPlayers(int numPlayers){
         final int START_MONEY = 31;
         final int MAX_BOOTHS = 12;
