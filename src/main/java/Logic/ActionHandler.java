@@ -157,7 +157,8 @@ public class ActionHandler {
                 // If either the first one is free, or you own the second, buy the first
                 else if (square1.getBoothOwner() == null || square2.getBoothOwner() == currentPlayer) {
                     // Check if the ones you take is owned by another, then remove exitsting
-                    if (square1.getBoothOwner() != currentPlayer && square1.getBoothOwner() != null){
+                    if (square1.getBoothOwner() != null){
+                        square1.getBoothOwner().getOneBooth();
                         board.removeBooth(square1.getPosition());
                     }
 
@@ -167,11 +168,13 @@ public class ActionHandler {
                 // If either the secoind one is free, or you own the first, buy the second
                 else if (square2.getBoothOwner() == null || square1.getBoothOwner() == currentPlayer){
                     // Check if the ones you take is owned by another, then remove exitsting
-                    if (square2.getBoothOwner() != currentPlayer && square2.getBoothOwner() != null){
+                    if (square2.getBoothOwner() != null){
+                        square2.getBoothOwner().getOneBooth();
                         board.removeBooth(square2.getPosition());
                     }
+                    currentPlayer.useOneBooth();
+                    board.addBooth(currentPlayer, square2.getPosition()); // Deafult, remove with extended features
 
-                    board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
                 } else if (square1.getBoothOwner() == null) { // Square1 is free
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition());

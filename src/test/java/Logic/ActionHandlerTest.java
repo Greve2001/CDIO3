@@ -127,7 +127,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard6(){ //if it's possible to play a booth, but player doesn't have one
+    void drawAFreeTicketBoothCard6(){ //if it's possible to place a booth, when player doesn't have one
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
