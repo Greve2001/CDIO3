@@ -27,6 +27,8 @@ package Logic {
     class SquareActionHandler
 }
 
+
+
 class Deck
 class ChanceCard
 class Player
@@ -51,13 +53,35 @@ class Game {
     -currentPlayer: Player
     -board: Board[]
     -deck: Deck
+    -die: Die
+    -hasWinner: boolean
+    -MIN_NR_OF_PLAYERS: int
+    -MAX_NR_OF_PLAYERS: int
+    -START_MONEY: int
+    -RESTOROOM_POSITION: int
+    -MOVING_PAST_START: int
+    -BOARD_SIZE: int
+    -PENNYBAG_POSITION: int
 
+    -handleField(int position): void
+    -handleChance(): void
     +setupGame(): void
     +playGame(): void
+    +initializePlayers(int numOfPlayers): void
+    +takeTurn(): void
+    +chancePlayer(): void
+    +updatePosition(int moveSpaces): void
+    +hasPassStart(int prevPos, int endPos, boolean goingToRestrooms) : void
+    +pay(int amount): void
+    +pay(Player to, int amount): void
+    +paymentPossible(Player player, int amount): boolean
+    +decideAndAnnounceWinner(): void
+
 }
 
 class Board {
     -squares: Square[]
+    -pennyBagPosition: int
 
     +getSquare(): Square
     +addBooth(Player, position:int) : void
@@ -77,7 +101,7 @@ class Die {
     -faceValue: int
     -nrOfSides: int
 
-    +rollDie(): void
+    +roll(): void
 }
 
 class Player {
@@ -86,14 +110,17 @@ class Player {
     -position: int
     -balance: int
     -boothsOnHand: int
+    -goingToRestroom: boolean
 
-    +payMoney(balance): void
-    +addMoney(balance): void
+    +hasBooth(): boolean
+    +updateBalance(int update): void
     +useOneBooth(): void
+    +setupStartBalance(int startMoney): void
 }
 
 class Deck {
     -chanceCardDeck: ChanceCard[]
+    -drawCardCount: int
 
     +pullCard(): ChanceCard
     +shuffleDeck(): void
