@@ -47,10 +47,12 @@ public class ActionHandler {
                 if (amusement.getBoothOwner() == null){ // There is not a booth
                     // Buy booth
                     bank.payToBank(currentPlayer, amusement.getPrice());
-                    // add booth to board
-                    board.addBooth(currentPlayer, position);
-                    // Remove one booth
-                    currentPlayer.useOneBooth();
+                    if (currentPlayer.hasBooth()) {
+                        // add booth to board
+                        board.addBooth(currentPlayer, position);
+                        // Remove one booth
+                        currentPlayer.useOneBooth();
+                    }
 
                     debug.println(currentPlayer.getName() + ", bought booth at " + amusement.getName());
                 }
