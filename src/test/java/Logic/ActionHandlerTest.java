@@ -133,14 +133,12 @@ class ActionHandlerTest {
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
         Amusement amusement2 = (Amusement) board.getSquare(13); //Amusement that match the color
 
-        amusement2.setBoothOwner(player2);
-
-        currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
+        currentPlayer.setBooths(0); //to ensure that the player have booths to place on the board
         actionHandler.doChanceCard(currentCard, currentPlayer);
 
-        assertEquals(9, currentPlayer.getBoothsOnHand());
-        assertEquals(currentPlayer, amusement1.getBoothOwner());
-        assertEquals(currentPlayer, amusement2.getBoothOwner());
+        assertEquals(0, currentPlayer.getBoothsOnHand());
+        assertNull(amusement1.getBoothOwner());
+        assertNull(amusement2.getBoothOwner());
     }
 
     @Test
