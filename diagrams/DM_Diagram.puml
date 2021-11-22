@@ -16,14 +16,29 @@ Player : Position
 Player : Balance
 Player : Color
 
+
 Square : Type
 Square : Owner
+Square : Position
 
-Deck          "1"         -l-   "1"                 game    : \t
-Square         "32"       -u-   "1"                 board
-board          "1   "     -u-   "1"                 game
-Player         "2..4"     -r-   "1"                 game    : \t
-Die            "1"        -d-   "         1"        game    : \t
-chance         "24"       -l-   " 1"                Deck    :\t
+chance : Text
+chance : color
+chance : amounttopay
+chance : destination
+
+board : pennyBagPosition
+
+
+
+
+
+Deck          "1   "      -l-   "1   "          game: Holds    \t Held by
+Square         "32"       -u-   "1"                board: Uses  \n \n \n  Held by
+board          "1"        -u-   "1"                game: Holds \t \n \n \nIs used by
+Player         "2..4"     -r-   "1   "             game: Plays  \t Is played by
+Die            "1"        -d-   "1"                game: Throws on \t\n\n\nHolds
+chance         "24  "     -l-   " 1  "            Deck: Uses        \t Is used on deck
+
+
 
 @enduml
