@@ -38,7 +38,7 @@ public class Deck {
         chanceCardDeck[20] = new ChanceCard("Free ticket booth", "turquoise");
         chanceCardDeck[21] = new ChanceCard("Free ticket booth", "yellow");
         chanceCardDeck[22] = new ChanceCard("Free ticket booth", "orange");
-        chanceCardDeck[23] = new ChanceCard("Free ticket booth", "lilla");
+        chanceCardDeck[23] = new ChanceCard("Free ticket booth", "purple");
 
         shuffleDeck();
     }

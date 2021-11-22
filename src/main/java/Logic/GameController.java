@@ -3,6 +3,7 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
+import Utilities.Debug;
 
 public class GameController {
 
@@ -10,6 +11,8 @@ public class GameController {
     PositionHandler positionHandler;
     Board board = new Board();
     Die die = new Die();
+    
+    Debug debug = Debug.getInstance();
 
     private Player[] players;
     private Player currentPlayer;
@@ -38,16 +41,16 @@ public class GameController {
         int balance = currentPlayer.getBalance();
         int position = currentPlayer.getPosition();
 
-        Debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" + "booths " + currentPlayer.getBoothsOnHand());
+        debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" + "booths " + currentPlayer.getBoothsOnHand());
 
         // Get action from player
-        Debug.print("Please press ENTER to roll");
-        Debug.strInput();
+        debug.print("Please press ENTER to roll");
+        debug.strInput();
 
         // Roll die, get value.
         die.roll();
         int spacesToMove = die.getFaceValue();
-        Debug.println("You rolled: " + spacesToMove);
+        debug.println("You rolled: " + spacesToMove);
 
         // Move player position
         positionHandler.movePlayer(currentPlayer, spacesToMove);
@@ -97,10 +100,10 @@ public class GameController {
         }
 
         // Announce winner(s)
-        Debug.println("\n We have a winner!!!!");
+        debug.println("\n We have a winner!!!!");
         for (Player winner : winners) {
             if (winner != null) {
-                Debug.println(winner.getName() + ", with a balance of " + winner.getBalance());
+                debug.println(winner.getName() + ", with a balance of " + winner.getBalance());
             }
         }
     }
@@ -151,7 +154,7 @@ public class GameController {
 
         currentPlayer = players[0]; // Default change later
 
-        Debug.println("~Players Initialized~");
+        debug.println("~Players Initialized~");
     }
     
     private void changeTurn(){
@@ -164,7 +167,7 @@ public class GameController {
             currentPlayer = players[playerIndex +1];
         }
 
-        Debug.println("~Changed player from: " + players[playerIndex].getName() + " to: " +
+        debug.println("~Changed player from: " + players[playerIndex].getName() + " to: " +
                 "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName() + "~");
     }
 

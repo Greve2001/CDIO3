@@ -5,18 +5,19 @@ import Utilities.Debug;
 
 public class Bank {
 
+    Debug debug = Debug.getInstance();
 
     public void payToBank(Player fromPlayer, int amount){
         int pay = ableToPay(fromPlayer, amount);
         fromPlayer.updateBalance(-pay);
-        Debug.println(fromPlayer.getName() + ", paid $" + pay + " to the bank");
+        debug.println(fromPlayer.getName() + ", paid $" + pay + " to the bank");
     }
 
     public void payToPlayer(Player fromPlayer, Player toPlayer, int amount){
         int pay = ableToPay(fromPlayer, amount);
         fromPlayer.updateBalance(-pay);
         toPlayer.updateBalance(pay);
-        Debug.println(fromPlayer.getName() + ", paid $" + pay + " to " + toPlayer.getName());
+        debug.println(fromPlayer.getName() + ", paid $" + pay + " to " + toPlayer.getName());
     }
 
     private int ableToPay(Player player, int amount){

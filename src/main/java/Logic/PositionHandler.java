@@ -5,6 +5,8 @@ import Utilities.Debug;
 
 public class PositionHandler {
 
+    Debug debug = Debug.getInstance();
+
     Player[] players;
 
     int boardSize;
@@ -38,7 +40,7 @@ public class PositionHandler {
 
     private void payBonus(Player player){
         player.updateBalance(startBonus);
-        Debug.println(player.getName() + ", just got a bonus of " + startBonus);
+        debug.println(player.getName() + ", just got a bonus of " + startBonus);
     }
 }
 
