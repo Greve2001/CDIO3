@@ -76,7 +76,7 @@ public class ActionHandler {
             case "Chance":
                 // Take card
                 ChanceCard card = deck.pullCard();
-                doChanceCard(card);
+                doChanceCard(card, currentPlayer);
                 break;
 
             case "GoToRestrooms":
@@ -114,7 +114,7 @@ public class ActionHandler {
         }
     }
 
-    public void doChanceCard(ChanceCard card) {
+    public void doChanceCard(ChanceCard card, Player currentPlayer) {
         //String cardText = card.getChanceCardText();//unused for now
 
         debug.println("You pulled a chance card");
@@ -170,7 +170,7 @@ public class ActionHandler {
             }
             else if(monopoly){ // There is monopoly, draw new card
                 ChanceCard newCard = deck.pullCard();
-                doChanceCard(newCard);
+                doChanceCard(newCard , currentPlayer);
             }
             else{ // Player has no more booths, can't get new card
                 debug.println("Can't draw new card, you have no more booths");
@@ -180,8 +180,5 @@ public class ActionHandler {
         }
     }
 
-    public void setCurrentPlayer(Player p){//for test purpose
-        currentPlayer = p;
-    }
 
 }
