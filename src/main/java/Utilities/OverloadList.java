@@ -1,5 +1,7 @@
 package Utilities;
 
+import java.util.Arrays;
+
 public class OverloadList {
     private int size = 0;
     private int[] arrOfInts;
@@ -48,7 +50,7 @@ public class OverloadList {
     }
 
     public int[] getListOfInts() {
-        return arrOfInts;
+        return Arrays.copyOf(arrOfInts, size);
     }
 
     public void add(String string) {
@@ -74,7 +76,7 @@ public class OverloadList {
     }
 
     public String[] getListOfStrings() {
-        return ArrOfStrings;
+        return Arrays.copyOf(ArrOfStrings, size);
     }
 
     public void add(String[] string) {
@@ -100,7 +102,7 @@ public class OverloadList {
     }
 
     public String[][] getListOfStringArr() {
-        return ArrOfStringArs;
+        return Arrays.copyOf(ArrOfStringArs, size);
     }
 
     public int size() {
