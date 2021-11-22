@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ActionHandlerTest {
 
     GameController gameController;
-    ActionHandler ah;
+    ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board;
     Deck deck;
@@ -31,7 +31,7 @@ class ActionHandlerTest {
 
         gameController = new GameController();
         positionHandler = new PositionHandler(players, BOARD_SIZE);
-        ah = new ActionHandler(gameController, board, positionHandler);
+        actionHandler = new ActionHandler(gameController, board, positionHandler);
 
         currentPlayer = new Player("player1");
         player2 = new Player("player2");
@@ -43,8 +43,11 @@ class ActionHandlerTest {
     @Test
     void drawAFreeTicketBoothCard() { //where neither are owned
         deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
-        currentCard = deck.getCard();
-        ah.doChanceCard(currentCard);
+        currentCard = new ChanceCard("Free ticket booth", "magenta");
+        currentPlayer.setBooths(10);
+        actionHandler.setCurrentPlayer(currentPlayer);
+        actionHandler.doChanceCard(currentCard);
+        System.out.println();
     }
 
     @Test
@@ -52,7 +55,7 @@ class ActionHandlerTest {
         deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
         board.addBooth(player2,12);
         currentCard = deck.getCard();
-        ah.doChanceCard(currentCard);
+        actionHandler.doChanceCard(currentCard);
     }
 
     @Test
@@ -60,7 +63,7 @@ class ActionHandlerTest {
         deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
         board.addBooth(player2,13);
         currentCard = deck.getCard();
-        ah.doChanceCard(currentCard);
+        actionHandler.doChanceCard(currentCard);
     }
 
     @Test
@@ -69,7 +72,7 @@ class ActionHandlerTest {
         board.addBooth(player2,12);
         board.addBooth(player3,13);
         currentCard = deck.getCard();
-        ah.doChanceCard(currentCard);
+        actionHandler.doChanceCard(currentCard);
     }
 
     @Test
@@ -78,15 +81,15 @@ class ActionHandlerTest {
         board.addBooth(player2,12);
         board.addBooth(player2,13);
         currentCard = deck.getCard();
-        ah.doChanceCard(currentCard);
+        actionHandler.doChanceCard(currentCard);
     }
 
     //test regarding chanceCard that make the player move.
     @Test
     void drawAMoveChanceCard(){
-        ah.setCurrentPlayer(currentPlayer);
+        actionHandler.setCurrentPlayer(currentPlayer);
         deck.setDrawCardCount(3);
-        ah.doChanceCard(deck.getCard());
+        actionHandler.doChanceCard(deck.getCard());
 
         int expected = 9;
         int actual = currentPlayer.getPosition();
