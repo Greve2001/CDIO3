@@ -15,7 +15,6 @@ public class ActionHandler {
     private int PENNYBAG_POSITION;
 
     private final Board board;
-    private Player currentPlayer;
     private final GameController gameController;
     private final PositionHandler positionHandler;
 
@@ -31,7 +30,6 @@ public class ActionHandler {
     }
 
     public void doFieldAction(Player currentPlayer, int position){
-        this.currentPlayer = currentPlayer;
 
         String fieldType = board.getSquare(position).getClass().getSimpleName();
 
