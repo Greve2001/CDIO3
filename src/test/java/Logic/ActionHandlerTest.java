@@ -42,54 +42,46 @@ class ActionHandlerTest {
     //in this test, the amusement with the color magenta is used, witch have position 12 & 13 on the board.
     @Test
     void drawAFreeTicketBoothCard() { //where neither are owned
-        deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
-        currentCard = new ChanceCard("Free ticket booth", "magenta");
-        currentPlayer.setBooths(10);
-        actionHandler.setCurrentPlayer(currentPlayer);
-        actionHandler.doChanceCard(currentCard);
-        System.out.println();
+        currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
+        currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
+        actionHandler.doChanceCard(currentCard, currentPlayer);
+        //System.out.println(board.get);
     }
 
     @Test
     void drawAFreeTicketBoothCard2(){ //if the first are owned and the second isn't
-        deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
         board.addBooth(player2,12);
-        currentCard = deck.getCard();
-        actionHandler.doChanceCard(currentCard);
+        //currentCard = deck.getCard();
+        actionHandler.doChanceCard(currentCard, currentPlayer);
     }
 
     @Test
     void drawAFreeTicketBoothCard3(){ //if the second are owned and the first isn't
-        deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
         board.addBooth(player2,13);
-        currentCard = deck.getCard();
-        actionHandler.doChanceCard(currentCard);
+        //currentCard = deck.getCard();
+        actionHandler.doChanceCard(currentCard, currentPlayer);
     }
 
     @Test
     void drawAFreeTicketBoothCard4(){ //if both are owned, but there isn't monopoly
-        deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
         board.addBooth(player2,12);
         board.addBooth(player3,13);
-        currentCard = deck.getCard();
-        actionHandler.doChanceCard(currentCard);
+        //currentCard = deck.getCard();
+        actionHandler.doChanceCard(currentCard, currentPlayer);
     }
 
     @Test
     void drawAFreeTicketBoothCard5(){ //if monopoly eksisk
-        deck.setDrawCardCount(12); //draw the card, "place a ticket booth on magenta"
         board.addBooth(player2,12);
         board.addBooth(player2,13);
-        currentCard = deck.getCard();
-        actionHandler.doChanceCard(currentCard);
+        //currentCard = deck.getCard();
+        actionHandler.doChanceCard(currentCard, currentPlayer);
     }
 
     //test regarding chanceCard that make the player move.
     @Test
     void drawAMoveChanceCard(){
-        actionHandler.setCurrentPlayer(currentPlayer);
-        deck.setDrawCardCount(3);
-        actionHandler.doChanceCard(deck.getCard());
+        //actionHandler.doChanceCard(deck.getCard());
 
         int expected = 9;
         int actual = currentPlayer.getPosition();
