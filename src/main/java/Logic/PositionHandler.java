@@ -19,15 +19,22 @@ public class PositionHandler {
 
     public void movePlayer(Player player, int spacesToMove){
         int endPos = player.getPosition() + spacesToMove;
+        if (spacesToMove == Math.abs(spacesToMove)) {
 
-        // Make sure player loops on board
-        if (endPos > boardSize){
-            player.setPosition(endPos - boardSize);
-            payBonus(player);
+            // Make sure player loops on board
+            if (endPos > boardSize) {
+                player.setPosition(endPos - boardSize);
+                payBonus(player);
+            } else {
+                player.setPosition(endPos);
+            }
+        }else{
+            if (endPos < 0)
+                player.setPosition(endPos + boardSize);
+            else
+                player.setPosition(endPos);
         }
-        else {
-            player.setPosition(endPos);
-        }
+
     }
 
     public void setPlayerPosition(Player player, int endPos, boolean getsStartBonus){
