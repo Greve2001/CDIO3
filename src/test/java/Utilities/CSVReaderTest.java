@@ -1,6 +1,5 @@
-package Board;
+package Utilities;
 
-import Utilities.CSVReader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
