@@ -41,7 +41,8 @@ public class GameController {
         int balance = currentPlayer.getBalance();
         int position = currentPlayer.getPosition();
 
-        debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" + "booths " + currentPlayer.getBoothsOnHand());
+        debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" +
+                "booths " + currentPlayer.getBoothsOnHand());
 
         // Get action from player
         debug.print("Please press ENTER to roll");
@@ -65,7 +66,9 @@ public class GameController {
         loseCheck();
 
         // Change turn
-        if (!extraTurn) changeTurn();
+        if (!extraTurn)
+            changeTurn();
+
         extraTurn = false;
 
     }

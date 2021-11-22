@@ -150,21 +150,33 @@ public class ActionHandler {
                     // Choose a square to place booth
                     // TODO use utility class to get a choice from players
                     currentPlayer.useOneBooth();
-                    board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
+                    board.addBooth(currentPlayer, square1.getPosition()); // Default, remove with extended features
                 }
-                else if (square1.getBoothOwner() == null) { // Square1 is free
+                // If either the first one is free, or you own the second, buy the first
+                else if (square1.getBoothOwner() == null || square2.getBoothOwner() == currentPlayer) {
+                    // Check if the ones you take is owned by another, then remove exitsting
+                    if (square1.getBoothOwner() != currentPlayer && square1.getBoothOwner() != null){
+                        board.removeBooth(square1.getPosition());
+                    }
+
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition());
                 }
-                else if (square2.getBoothOwner() == null){ // Square 2
+                // If either the secoind one is free, or you own the first, buy the second
+                else if (square2.getBoothOwner() == null || square1.getBoothOwner() == currentPlayer){
+                    // Check if the ones you take is owned by another, then remove exitsting
+                    if (square2.getBoothOwner() != currentPlayer && square2.getBoothOwner() != null){
+                        board.removeBooth(square2.getPosition());
+                    }
+
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square2.getPosition());
                 }
                 else{ // Both are taken with different colored booths
                     // TODO use utility class to get a choice from players
-
+                    // Quick solution:
                     currentPlayer.useOneBooth();
-                    board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
+                    board.addBooth(currentPlayer, square1.getPosition()); // Default, remove with extended features
                 }
             }
             else if(monopoly){ // There is monopoly, draw new card
