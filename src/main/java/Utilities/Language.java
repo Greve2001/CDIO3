@@ -66,7 +66,9 @@ public class Language {
         Language.language = language;
 
         // Creates new input stream with the data from the language file
-        InputStreamReader streamReader = new InputStreamReader(Objects.requireNonNull(Language.class.getResourceAsStream(language + ".json")), StandardCharsets.UTF_8);
+        InputStreamReader streamReader = new InputStreamReader(
+                Objects.requireNonNull(Language.class.getResourceAsStream("/languages/" + language + ".json")),
+                StandardCharsets.UTF_8);
 
         // Parses the data from the inputstream to a json object
         JSONObject jsonObject = (JSONObject) new JSONParser().parse(streamReader);
