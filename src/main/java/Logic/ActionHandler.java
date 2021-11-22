@@ -125,7 +125,6 @@ public class ActionHandler {
 
             int dest = card.getDestination();
             int amount = card.getAmountToPay();
-            debug.println("test position 5");
 
             //Only pay amount if is not zero
             if (amount > 0){ bank.payToBank(currentPlayer, amount); }
@@ -141,7 +140,6 @@ public class ActionHandler {
             boolean monopoly = board.hasMonopoly(squares[0]);
 
             if (!monopoly && currentPlayer.hasBooth()) {// Use booth
-                debug.println("test position 6");
                 // Get fields
                 Amusement square1 = (Amusement) board.getSquare(squares[0]);
                 Amusement square2 = (Amusement) board.getSquare(squares[1]);
@@ -168,7 +166,6 @@ public class ActionHandler {
                 }
             }
             else if(monopoly){ // There is monopoly, draw new card
-                debug.println("test position 7");
                 ChanceCard newCard = deck.pullCard();
                 doChanceCard(newCard , currentPlayer);
             }
