@@ -4,33 +4,40 @@ import java.util.Scanner;
 
 public class Debug {
 
-    static Scanner input = new Scanner(System.in);
+    static boolean enableDebugging = true;
+    static Scanner input;
+    
+    private static Debug instance;
 
-    private static final Debug instance = new Debug();
-
-    private Debug(){}
+    private Debug(){
+        if (enableDebugging){
+            input = new Scanner(System.in);
+        }
+    }
 
     public static Debug getInstance(){
+        if (instance == null){
+            instance = new Debug();
+        }
         return instance;
     }
 
-    static boolean showPrints = true;
 
     // Handles prints, will not print when boolean is false.
     // Should only be used for debugging
     public static void println(String str){
-        if (showPrints){
+        if (enableDebugging){
             System.out.println(str);
         }
     }
     public static void print(String str){
-        if (showPrints){
+        if (enableDebugging){
             System.out.print(str);
         }
     }
 
     public static void strInput(){
-        if (showPrints){
+        if (enableDebugging){
             input.nextLine();
         }
     }
