@@ -122,14 +122,16 @@ public class ActionHandler {
         debug.println("You pulled a chance card");
 
         // Determine if free ticketbooth card or move-somewhere card.
-        if (card.getDestination() != 0){
+        if (card.getDestination() != 0) {
             debug.println("Chance card: " + card);
 
             int dest = card.getDestination();
             int amount = card.getAmountToPay();
 
             //Only pay amount if is not zero
-            if (amount > 0){ bank.payToBank(currentPlayer, amount); }
+            if (amount > 0) {
+                bank.payToBank(currentPlayer, amount);
+            }
 
             //Update position after card destination
             positionHandler.setPlayerPosition(currentPlayer, dest, true);
@@ -146,36 +148,29 @@ public class ActionHandler {
                 Amusement square1 = (Amusement) board.getSquare(squares[0]);
                 Amusement square2 = (Amusement) board.getSquare(squares[1]);
 
-                if (square1.getBoothOwner() == null && square2.getBoothOwner() == null){
+                if (square1.getBoothOwner() == null && square2.getBoothOwner() == null) {
                     // Choose a square to place booth
                     // TODO use utility class to get a choice from players
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
-                }
-                else if (square1.getBoothOwner() == null) { // Square1 is free
+                } else if (square1.getBoothOwner() == null) { // Square1 is free
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition());
-                }
-                else if (square2.getBoothOwner() == null){ // Square 2
+                } else if (square2.getBoothOwner() == null) { // Square 2
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square2.getPosition());
-                }
-                else{ // Both are taken with different colored booths
+                } else { // Both are taken with different colored booths
                     // TODO use utility class to get a choice from players
 
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition()); // Deafult, remove with extended features
                 }
-            }
-            else if(monopoly){ // There is monopoly, draw new card
+            } else if (monopoly) { // There is monopoly, draw new card
                 ChanceCard newCard = deck.pullCard();
-                doChanceCard(newCard , currentPlayer);
-            }
-            else{ // Player has no more booths, can't get new card
+                doChanceCard(newCard, currentPlayer);
+            } else { // Player has no more booths, can't get new card
                 debug.println("Can't draw new card, you have no more booths");
             }
         }
     }
-
-
 }
