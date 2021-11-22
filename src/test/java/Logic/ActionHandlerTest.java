@@ -1,6 +1,6 @@
 package Logic;
 
-import Board.Board;
+import Board.*;
 import MonopolyJunior.ChanceCard;
 import MonopolyJunior.Deck;
 import MonopolyJunior.Player;
@@ -43,9 +43,19 @@ class ActionHandlerTest {
     @Test
     void drawAFreeTicketBoothCard() { //where neither are owned
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
+        currentPlayer.setPosition(2);
+
+        Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
+        Amusement amusement2 = (Amusement) board.getSquare(13); //Amusement that match the color
+
         currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
         actionHandler.doChanceCard(currentCard, currentPlayer);
-        //System.out.println(board.get);
+
+        assertEquals(9, currentPlayer.getBoothsOnHand());
+        assertEquals(currentPlayer, amusement1.getBoothOwner());
+        assertNull(amusement2.getBoothOwner());
+        System.out.println(currentPlayer.getPosition());
+        //assertEquals(0, currentPlayer.getBalance());
     }
 
     @Test
