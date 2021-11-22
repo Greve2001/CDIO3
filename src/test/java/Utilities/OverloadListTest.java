@@ -1,4 +1,4 @@
-package Board;
+package Utilities;
 
 import Utilities.OverloadList;
 import org.junit.jupiter.api.Test;
@@ -49,18 +49,14 @@ class OverloadListTest {
     }
 
     @Test
-    void generalTesting() {
+    void stringArrOutPutTest() {
         OverloadList list = new OverloadList("String[]");
 
         String[] myArr = {"Name", "Type"};
-
         list.add(myArr);
 
-        System.out.println("test");
+        String[] actual = list.getStringArr(0);
 
-        String[] myListArr = list.getStringArr(0);
-
-
-        System.out.println(myListArr[0]);
+        assertArrayEquals(myArr, actual);
     }
 }
