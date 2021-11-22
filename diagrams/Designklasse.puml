@@ -12,19 +12,77 @@ package "Game Board" {
     class "<<abstract>>\nSquare" as Square
         class Amusement
         class Restrooms
-        class Start
-        class Railroad
+        class Go{
+          -AMOUNT: int
+        }
+        'before was start
+        class Railroad{
+           -COLOR: String
+        }
         class Chance
-        class PennyBag
-        class PayFor
+        class PennyBag{
+           amountOfMoneyPlaced: int
+
+           +addMoney(int amount): void
+           +withDraw(): int
+
+        }
+        class PayForSee{
+           -AMOUNT: int
+        }
 }
 
 package Logic {
-    class Bank
-    class GameController
-    class PlayerHandler
-    class PositionHandler
-    class SquareActionHandler
+    class Bank{
+         debug: Debug
+        -ableToPay(Player player,int amount): void
+        +payToBank(Player fromPlayer,int amount): void
+        +payToPlayer(Player fromPlayer,Player toPlayer,int amount): void
+
+
+    }
+    class GameController{
+
+      'debug: Debug'
+      'actionHandler: ActionHandler'
+      'positionHandler: PositionHandler'
+      'board: Board
+      'die: Die
+      'gameOver: boolean
+      'extraTurn: boolean
+      '-players: Player[]
+      '-currentPlayer: Player
+
+
+
+
+    }
+    'class PlayerHandler'
+    class PositionHandler{
+       debug: Debug
+       players: Player[]
+       boardSize: int
+       startBonus: int
+
+       -payBonus(Player player):void
+       +movePlayer(Player player, int spacesToMove): void
+
+    }
+    'class SquareActionHandler'
+     class ActionHandler{
+         -BOARD: board
+         -currentPlayer: Player
+         -GAMECONTROLLER: GameController
+         -POSITIONHANDLER: PositionHandler
+
+         +doFieldAction(Player currentPlayer, int position): void
+         +doChanceCard(Chancecard card, Player currentPlayer):void
+
+
+
+
+     }
+
 }
 
 
@@ -43,9 +101,9 @@ Game -down- Board
     Square <|-- Restrooms
     Square <|-- Amusement
     Square <|-- Railroad
-    Square <|-- PayFor
+    Square <|-- PayForSee
     Square <|-- PennyBag
-    Square <|-- Start
+    Square <|-- Go
     Square <|-- Chance
 
 class Game {
@@ -134,8 +192,8 @@ class ChanceCard {
 }
 class Amusement {
     -boothOwner: Player
-    -color: String
-    -price: int
+    -COLOR: String
+    -PRICE: int
 
 }
 
