@@ -12,7 +12,7 @@ public class Deck {
     /**
      * Instantiates an array with 24 elements, to hold the chance cards for the game.
      */
-    public Deck(){
+    public Deck() {
         this.chanceCardDeck = new ChanceCard[24];
 
         chanceCardDeck[0] = new ChanceCard("Take a ride on the GREEN LINE RAILROAD and roll again", 14);
@@ -46,20 +46,21 @@ public class Deck {
     /**
      * One-argument constructor, that initializes the deck with the input array.
      * Primarily used for unit-testing.
+     *
      * @param cards
      */
-    public Deck(ChanceCard[] cards){
-       if(cards == null){
-           throw new IllegalArgumentException("You cannot initialize an empty array.");
-       }
-       ChanceCard[] copy = Arrays.copyOf(cards, cards.length); //Makes sure that no changes is applied to original input-array
-       this.chanceCardDeck = copy;
+    public Deck(ChanceCard[] cards) {
+        if (cards == null) {
+            throw new IllegalArgumentException("You cannot initialize an empty array.");
+        }
+        ChanceCard[] copy = Arrays.copyOf(cards, cards.length); //Makes sure that no changes is applied to original input-array
+        this.chanceCardDeck = copy;
     }
 
     /**
      * Takes the chanceCard array and shuffles it.
      */
-    public void shuffleDeck(){
+    public void shuffleDeck() {
         List<ChanceCard> list = Arrays.asList(chanceCardDeck);
         Collections.shuffle(list);
         chanceCardDeck = list.toArray(new ChanceCard[0]);
@@ -68,11 +69,11 @@ public class Deck {
     /**
      * @returns the ChanceCard that is currently at the top of the deck.
      */
-    public ChanceCard pullCard(){
-        try{
+    public ChanceCard pullCard() {
+        try {
             return chanceCardDeck[drawCardCount++];
 
-        } catch (ArrayIndexOutOfBoundsException ex){
+        } catch (ArrayIndexOutOfBoundsException ex) {
             // If an ArrayOutOfBoundsException is thrown, the deck is empty and the drawCardCount is reset
             // to 0 making sure that the next card will be drawn from the top of the deck.
             drawCardCount = 0;
@@ -80,15 +81,5 @@ public class Deck {
 
         }
 
-    }
-
-    //FIXME slettes på et senere tidspunkt?
-    //This section is only for test purpose
-    public ChanceCard getCard() {
-        return chanceCardDeck[drawCardCount];
-    }
-
-    public void setDrawCardCount(int drawCardCount) {
-        this.drawCardCount = drawCardCount;
     }
 }
