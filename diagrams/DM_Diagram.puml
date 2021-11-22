@@ -32,12 +32,12 @@ board : pennyBagPosition
 
 
 
-Deck          "1   "      -l-   "1   "          game: Holds    \t Held by
-Square         "32"       -u-   "1"                board: Uses  \n \n \n  Held by
-board          "1"        -u-   "1"                game: Holds \t \n \n \nIs used by
-Player         "2..4"     -r-   "1   "             game: Plays  \t Is played by
-Die            "1"        -d-   "1"                game: Throws on \t\n\n\nHolds
-chance         "24  "     -l-   " 1  "            Deck: Uses        \t Is used on deck
+game          "1   "      -r-   "1   "          Deck: Is played with >
+board         "32"       -d-   "1"                Square: Is played with >
+game          "1"        -d-   "1"                 board: Is played on >
+game          "1   "      -l   "2..4 "            Player : Plays <
+game           "1"        -u-   "1 "                Die: Is played with >
+chance         "24  "     -l-   " 1  "            Deck: Holds <
 
 
 
