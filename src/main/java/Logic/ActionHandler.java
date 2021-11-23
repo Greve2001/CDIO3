@@ -120,7 +120,7 @@ public class ActionHandler {
 
         Debug.println("You pulled a chance card");
 
-        GUIController2.displayChanceCard(card.toString());
+        GUIController2.displayChanceCard(card);
 
 
         // Determine if free ticketbooth card or move-somewhere card.

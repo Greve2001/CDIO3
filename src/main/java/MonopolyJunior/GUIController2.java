@@ -102,9 +102,9 @@ public class GUIController2 {
         to.setCar(playerToMove, true);
     }
 
-    public static void displayChanceCard(String description) {
-        gui.setChanceCard(description);
-        gui.displayChanceCard();
+    public static void displayChanceCard(ChanceCard card) {
+        gui.displayChanceCard("CHANCE CARD: \n" + card.toString() + "\n" +
+                card.getColor());
     }
 
     public static void clearChanceCard() {

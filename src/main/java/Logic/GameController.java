@@ -132,7 +132,8 @@ public class GameController {
             }
         }
         //announce the winner
-        System.out.println(announce);
+        Debug.println(announce.toString());
+        GUIController2.showCenterMessage(announce.toString());
     }
 
 
