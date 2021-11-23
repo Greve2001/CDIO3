@@ -45,6 +45,7 @@ public class GUIController2 {
                 case "Railroad" :
                     squares[i] = new GUI_Street();
                     squares[i].setSubText(Language.getText("rollAgain"));
+                    squares[i].setBackGroundColor(convertColor((((Railroad) allSquares[i])).getColor()));
                     break;
                 case "PayToSee" :
                     squares[i] = new GUI_Street();

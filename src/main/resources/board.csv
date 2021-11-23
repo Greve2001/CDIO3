@@ -28,6 +28,6 @@ Position,Type,Name,AmountGiven,Price,Color,AmountToPay,Dest
 27,GoTo,Go to the Restrooms,,,,3,11
 28,Amusement,Bumper Cars,,4,Green,,
 29,Amusement,Ferris Wheel,,4,Green,,
-30,Railroad,Redline Railroad,,,,,
+30,Railroad,Redline Railroad,,,Red,,
 31,Amusement,Loop the Loop,,5,Blue,,
 32,Amusement,Roller Coaster,,5,Blue,,
