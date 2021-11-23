@@ -3,9 +3,6 @@
 hide empty members
 skinparam groupInheritance 2
 
-class "Monopoly Junior" as Game
-class Die
-
 package "Game Board" {
     class Board
 
@@ -99,21 +96,21 @@ package Logic {
 }
 
 package MonopolyJunior{
-   class Game
+   class "Monopoly Junior" as Game
+   class Die
    class Player
    class Deck
-   class Die
+   class ChanceCard
+   class Game
 
 }
 
-
-class "<<singleton>>\nLanguage" as Language
-
-Game -up- Die
-Game -right- Deck
+    GameController -- Game
+    Game -up- Die
+    Game -right- Deck
     Deck *-right- ChanceCard
-Game -left- Player
-Game -down- Board
+    Game -left- Player
+    Game -down- Board
     Board *-down- Square
     Square <|-- Restrooms
     Square <|-- Amusement
@@ -122,6 +119,8 @@ Game -down- Board
     Square <|-- PennyBag
     Square <|-- Go
     Square <|-- Chance
+
+class "<<singleton>>\nLanguage" as Language
 
 class Game {
     -players: Player[]
