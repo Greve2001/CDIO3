@@ -12,7 +12,13 @@
     "chanceGoToArcadeVideo" : "GO to the ARCADE VIDEO",
     "chanceGoToTheRestrooms" : "Pay 3 dollars to take the tramway to the restrooms",
     "chanceGoToGo" : "GO to GO. Collect 2 dollars allowance as you pass",
-    "chanceFreeTicketBooth" : "Free ticket booth"
+    "chanceFreeTicketBooth" : "Free ticket booth",
 
+    "selectNumOfPlayers" : "Select number of players: ",
+    "enterName" : "Enter your name: ",
+    "valueOfSquare" : "Value: ",
+    "getMoneyFromSquare" : "Get: ",
+    "rollAgain" : "Roll Again",
+    "payToLandOn" : "Pay: "
   }
 }

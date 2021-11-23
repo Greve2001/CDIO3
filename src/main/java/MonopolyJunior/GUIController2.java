@@ -1,6 +1,7 @@
-/*package MonopolyJunior;
+package MonopolyJunior;
 
 import Board.*;
+import Utilities.Language;
 import gui_fields.*;
 import gui_main.GUI;
 
@@ -30,13 +31,13 @@ public class GUIController2 {
                 case "Go" :
                     squares[i] = new GUI_Start();
                     squares[i].setTitle(allSquares[i].getName());
-                    squares[i].setSubText("Get: " + ((Go) allSquares[i]).getAmount());
+                    squares[i].setSubText(Language.getText("getMoneyFromSquare") + ((Go) allSquares[i]).getAmount() + "$");
                     break;
                 case "Amusement" :
                     squares[i] = new GUI_Street();
                     squares[i].setTitle(allSquares[i].getName());
-                    squares[i].setSubText(((Amusement)allSquares[i]).getPrice() + "");
-                    ((GUI_Ownable) squares[i]).setRent(((Amusement)allSquares[i]).getPrice() + "");
+                    squares[i].setSubText(((Amusement)allSquares[i]).getPrice() + "$");
+                    ((GUI_Ownable) squares[i]).setRent(((Amusement)allSquares[i]).getPrice() + "$");
                     break;
                 case "Chance" :
                     squares[i] = new GUI_Chance();
@@ -46,11 +47,12 @@ public class GUIController2 {
                 case "Railroad" :
                     squares[i] = new GUI_Street();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText(Language.getText("rollAgain"));
                     break;
                 case "PayToSee" :
                     squares[i] = new GUI_Street();
                     squares[i].setTitle(allSquares[i].getName());
-                    squares[i].setSubText("Pay: " + ((PayToSee) allSquares[i]).getAmount());
+                    squares[i].setSubText(Language.getText("payToLandOn") + ((PayToSee) allSquares[i]).getAmount() + "$");
                     break;
                 case "GoToRestrooms" :
                     squares[i] = new GUI_Street();
@@ -60,7 +62,7 @@ public class GUIController2 {
                 case "PennyBag" :
                     squares[i] = new GUI_Refuge();
                     squares[i].setTitle(allSquares[i].getName());
-                    squares[i].setSubText("Value: " + ((PennyBag) allSquares[i]).getAmountOfMoneyPlaced());
+                    squares[i].setSubText(Language.getText("valueOfSquare") + ((PennyBag) allSquares[i]).getAmountOfMoneyPlaced() + "$");
                     break;
                 case "Restrooms" :
                     squares[i] = new GUI_Jail();
@@ -75,14 +77,14 @@ public class GUIController2 {
 
     public static void createPlayers(int startBalance) {
         int numberOfPlayers = Integer.parseInt(
-                gui.getUserSelection("Select number of players: ", "2", "3", "4"));
+                gui.getUserSelection(Language.getText("selectNumOfPlayers"), "2", "3", "4"));
 
         playerNames = new String[numberOfPlayers];
         guiPlayers = new GUI_Player[numberOfPlayers];
         playerPositions = new int[numberOfPlayers];
 
         for (int i = 0; i < numberOfPlayers; i++) {
-            playerNames[i] = gui.getUserString("Enter you name: ");
+            playerNames[i] = gui.getUserString(Language.getText("enterName"));
 
             guiPlayers[i] = new GUI_Player(playerNames[i], startBalance);
             gui.addPlayer(guiPlayers[i]);
@@ -142,7 +144,7 @@ public class GUIController2 {
     }
 
     public static void setPennyBagValue(int position, int value) {
-        squares[position - 1].setSubText("Value: " + value);
+        squares[position - 1].setSubText(Language.getText("valueOfSquare") + value);
     }
 
     public static void setPlayerBalance(Player player, int value){
@@ -157,4 +159,3 @@ public class GUIController2 {
         return playerNames;
     }
 }
-*/
