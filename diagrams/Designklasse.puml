@@ -4,10 +4,28 @@ hide empty members
 skinparam groupInheritance 2
 
 package "Game Board" {
-    class Board
+    class Board{
+    -squares: Square[]
+        -pennyBagPosition: int
 
-    class "<<abstract>>\nSquare" as Square
-        class Amusement
+        +getSquare(): Square
+        +addBooth(Player, position:int) : void
+        +removeBooth(position): void
+        +hasMonopoly(): boolean
+
+        -readCSV(): void
+    }
+
+    class "<<abstract>>\nSquare" as Square{
+        -name: String
+        -position: int
+        -Effect?!
+    }
+        class Amusement{
+          -boothOwner: Player
+          -COLOR: String
+          -PRICE: int
+        }
         class Restrooms
         class Go{
           -AMOUNT: int
@@ -54,20 +72,7 @@ package Logic {
         +setupGame() : void
         +startGame() : void
 
-      'debug: Debug'
-      'actionHandler: ActionHandler'
-      'positionHandler: PositionHandler'
-      'board: Board
-      'die: Die
-      'gameOver: boolean
-      'extraTurn: boolean
-      '-players: Player[]
-      '-currentPlayer: Player
-
-
-
     }
-    'class PlayerHandler'
     class PositionHandler{
        debug: Debug
        players: Player[]
@@ -78,34 +83,90 @@ package Logic {
        +movePlayer(Player player, int spacesToMove): void
 
     }
-    'class SquareActionHandler'
      class ActionHandler{
-         -BOARD: board
-         -currentPlayer: Player
-         -GAMECONTROLLER: GameController
-         -POSITIONHANDLER: PositionHandler
+        -BOARD: board
+        -currentPlayer: Player
+        -GAMECONTROLLER: GameController
+        -POSITIONHANDLER: PositionHandler
 
-         +doFieldAction(Player currentPlayer, int position): void
-         +doChanceCard(Chancecard card, Player currentPlayer):void
-
-
-
+        +doFieldAction(Player currentPlayer, int position): void
+        +doChanceCard(Chancecard card, Player currentPlayer):void
 
      }
-
 }
-
 package MonopolyJunior{
-   class "Monopoly Junior" as Game
-   class Die
-   class Player
-   class Deck
-   class ChanceCard
-   class Game
+   class "Monopoly Junior" as Game{
+       -players: Player[]
+       -currentPlayer: Player
+       -board: Board[]
+       -deck: Deck
+       -die: Die
+       -hasWinner: boolean
+       -MIN_NR_OF_PLAYERS: int
+       -MAX_NR_OF_PLAYERS: int
+       -START_MONEY: int
+       -RESTOROOM_POSITION: int
+       -MOVING_PAST_START: int
+       -BOARD_SIZE: int
+       -PENNYBAG_POSITION: int
 
+       -handleField(int position): void
+       -handleChance(): void
+       +setupGame(): void
+       +playGame(): void
+       +initializePlayers(int numOfPlayers): void
+       +takeTurn(): void
+       +chancePlayer(): void
+       +updatePosition(int moveSpaces): void
+       +hasPassStart(int prevPos, int endPos, boolean goingToRestrooms) : void
+       +pay(int amount): void
+       +pay(Player to, int amount): void
+       +paymentPossible(Player player, int amount): boolean
+       +decideAndAnnounceWinner(): void
+
+   }
+   class Die{
+      -faceValue: int
+      -nrOfSides: int
+
+      +roll(): void
+
+   }
+   class Player{
+       -color: Color:
+       -name: String
+       -position: int
+       -balance: int
+       -boothsOnHand: int
+       -goingToRestroom: boolean
+
+       +hasBooth(): boolean
+       +updateBalance(int update): void
+       +useOneBooth(): void
+       +setupStartBalance(int startMoney): void
+   }
+   class Deck{
+      -chanceCardDeck: ChanceCard[]
+      -drawCardCount: int
+
+      +pullCard(): ChanceCard
+      +shuffleDeck(): void
+   }
+   class ChanceCard{
+      -chanceCardText: String
+      -color: String
+      -amountToPay: int
+      -destination: int
+   }
 }
 
+class "<<singleton>>\nLanguage" as Language
+
+
+    Bank -- Player
     GameController -- Game
+    PositionHandler -- Game
+    ActionHandler -- Game
     Game -up- Die
     Game -right- Deck
     Deck *-right- ChanceCard
@@ -119,98 +180,5 @@ package MonopolyJunior{
     Square <|-- PennyBag
     Square <|-- Go
     Square <|-- Chance
-
-class "<<singleton>>\nLanguage" as Language
-
-class Game {
-    -players: Player[]
-    -currentPlayer: Player
-    -board: Board[]
-    -deck: Deck
-    -die: Die
-    -hasWinner: boolean
-    -MIN_NR_OF_PLAYERS: int
-    -MAX_NR_OF_PLAYERS: int
-    -START_MONEY: int
-    -RESTOROOM_POSITION: int
-    -MOVING_PAST_START: int
-    -BOARD_SIZE: int
-    -PENNYBAG_POSITION: int
-
-    -handleField(int position): void
-    -handleChance(): void
-    +setupGame(): void
-    +playGame(): void
-    +initializePlayers(int numOfPlayers): void
-    +takeTurn(): void
-    +chancePlayer(): void
-    +updatePosition(int moveSpaces): void
-    +hasPassStart(int prevPos, int endPos, boolean goingToRestrooms) : void
-    +pay(int amount): void
-    +pay(Player to, int amount): void
-    +paymentPossible(Player player, int amount): boolean
-    +decideAndAnnounceWinner(): void
-
-}
-
-class Board {
-    -squares: Square[]
-    -pennyBagPosition: int
-
-    +getSquare(): Square
-    +addBooth(Player, position:int) : void
-    +removeBooth(position): void
-    +hasMonopoly(): boolean
-
-    -readCSV(): void
-}
-
-class Square {
-    -name: String
-    -position: int
-    -Effect?!
-}
-
-class Die {
-    -faceValue: int
-    -nrOfSides: int
-
-    +roll(): void
-}
-
-class Player {
-    -color: Color:
-    -name: String
-    -position: int
-    -balance: int
-    -boothsOnHand: int
-    -goingToRestroom: boolean
-
-    +hasBooth(): boolean
-    +updateBalance(int update): void
-    +useOneBooth(): void
-    +setupStartBalance(int startMoney): void
-}
-
-class Deck {
-    -chanceCardDeck: ChanceCard[]
-    -drawCardCount: int
-
-    +pullCard(): ChanceCard
-    +shuffleDeck(): void
-}
-class ChanceCard {
-    -chanceCardText: String
-    -color: String
-    -amountToPay: int
-    -destination: int
-
-}
-class Amusement {
-    -boothOwner: Player
-    -COLOR: String
-    -PRICE: int
-
-}
 
 @enduml
