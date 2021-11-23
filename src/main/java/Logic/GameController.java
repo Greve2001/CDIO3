@@ -3,16 +3,17 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
-import Utilities.Debug;
+
+import java.util.Scanner;
 
 public class GameController {
+
+    Scanner s = new Scanner(System.in);
 
     ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
     Die die = new Die();
-    
-    Debug debug = Debug.getInstance();
 
     private Player[] players;
     private Player currentPlayer;
@@ -41,17 +42,17 @@ public class GameController {
         int balance = currentPlayer.getBalance();
         int position = currentPlayer.getPosition();
 
-        debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" +
+        Debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" +
                 "booths " + currentPlayer.getBoothsOnHand());
 
         // Get action from player
-        debug.print("Please press ENTER to roll");
-        debug.strInput();
+        Debug.print("Please press ENTER to roll");
+        s.nextLine();
 
         // Roll die, get value.
         die.roll();
         int spacesToMove = die.getFaceValue();
-        debug.println("You rolled: " + spacesToMove);
+        Debug.println("You rolled: " + spacesToMove);
 
         // Move player position
         positionHandler.movePlayer(currentPlayer, spacesToMove);
@@ -127,7 +128,7 @@ public class GameController {
 
         currentPlayer = players[0]; // Default change later
 
-        debug.println("~Players Initialized~");
+        Debug.println("~Players Initialized~");
     }
     
     private void changeTurn(){
@@ -140,7 +141,7 @@ public class GameController {
             currentPlayer = players[playerIndex +1];
         }
 
-        debug.println("~Changed player from: " + players[playerIndex].getName() + " to: " +
+        Debug.println("~Changed player from: " + players[playerIndex].getName() + " to: " +
                 "" + players[ (playerIndex==players.length-1) ? 0 : playerIndex+1 ].getName() + "~");
     }
 

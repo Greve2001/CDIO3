@@ -7,8 +7,6 @@ import org.assertj.core.util.VisibleForTesting;
 
 public class ActionHandler {
 
-    Debug debug = Debug.getInstance();
-
     Deck deck = new Deck();
     Bank bank = new Bank();
 
@@ -36,7 +34,7 @@ public class ActionHandler {
         // Get squares which is needed across cases:
         PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
 
-        debug.println("Landed on: " + fieldType + "-square at position: " + position);
+        Debug.println("Landed on: " + fieldType + "-square at position: " + position);
 
         switch (fieldType){
             case "Amusement":
@@ -53,13 +51,13 @@ public class ActionHandler {
                         currentPlayer.useOneBooth();
                     }
 
-                    debug.println(currentPlayer.getName() + ", bought booth at " + amusement.getName());
+                    Debug.println(currentPlayer.getName() + ", bought booth at " + amusement.getName());
                 }
                 else{ // There is a booth
-                    debug.println(amusement.getBoothOwner().getName() + ", has a booth on this square" );
+                    Debug.println(amusement.getBoothOwner().getName() + ", has a booth on this square" );
                     // Pay to the one who owns the booth
                     if (board.hasMonopoly(position)){ // Has monopoly, x2
-                        debug.println("That player has monopoly you will pay x2.");
+                        Debug.println("That player has monopoly you will pay x2.");
                         bank.payToPlayer(currentPlayer, amusement.getBoothOwner(), amusement.getPrice()*2);
                     }
                     else{ // Has not, normal price
@@ -71,7 +69,7 @@ public class ActionHandler {
             case "Railroad":
                 // Give extra turn.
                 gameController.giveExtraTurn();
-                debug.println("You get an extra turn!");
+                Debug.println("You get an extra turn!");
                 break;
 
             case "Chance":
@@ -111,19 +109,19 @@ public class ActionHandler {
                 break;
 
             default:
-                debug.println("Unknown fieldtype: " + fieldType);
+                Debug.println("Unknown fieldtype: " + fieldType);
         }
     }
 
     public void doChanceCard(ChanceCard card, Player currentPlayer) {
         //String cardText = card.getChanceCardText();//unused for now
 
-        debug.println("You pulled a chance card");
+        Debug.println("You pulled a chance card");
 
 
         // Determine if free ticketbooth card or move-somewhere card.
         if (card.getDestination() != 0) {
-            debug.println("Chance card: " + card);
+            Debug.println("Chance card: " + card);
 
             int dest = card.getDestination();
             int amount = card.getAmountToPay();
@@ -200,7 +198,7 @@ public class ActionHandler {
                 ChanceCard newCard = deck.pullCard();
                 doChanceCard(newCard, currentPlayer);
             } else { // Player has no more booths, can't get new card
-                debug.println("Can't draw new card, you have no more booths");
+                Debug.println("Can't draw new card, you have no more booths");
             }
         }
     }
