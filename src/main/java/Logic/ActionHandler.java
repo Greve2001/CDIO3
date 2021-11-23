@@ -84,8 +84,10 @@ public class ActionHandler {
             case "GoToRestrooms":
                 GoToRestrooms goToRestrooms = (GoToRestrooms) board.getSquare(position);
 
-                // Pay 3$
+                // Pay 3$ and adds them to pennybag
                 bank.payToBank(currentPlayer, 3);
+                pennyBag.addMoney(3);
+                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
 
                 // Change position
                 positionHandler.setPlayerPosition(currentPlayer, goToRestrooms.getDestination(), false);
