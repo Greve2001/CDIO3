@@ -4,22 +4,26 @@ import Board.*;
 import gui_fields.*;
 import gui_main.GUI;
 
-public class GUIController {
+public class GUIController2 {
     private static GUI gui;
     private static String[] playerNames;
     private static GUI_Player[] guiPlayers;
     private static int[] playerPositions;
+    static Square[] allSquares;
+    static GUI_Field[] squares;
 
     public static void main(String[] args) {
         gui = new GUI(createBoard());
         createPlayers(31); // add balance from gamecontroller
         movePlayer(new Player("Mikael"), 4);
+        displayChanceCard("VIS MIG!");
+        clearChanceCard();
     }
 
     public static GUI_Field[] createBoard() {
         Board board = new Board();
-        Square[] allSquares =  board.getAllSquares();
-        GUI_Field[] squares = new GUI_Field[allSquares.length];
+        allSquares =  board.getAllSquares();
+        squares = new GUI_Field[allSquares.length];
 
         for (int i = 0; i < squares.length; i++) {
             switch (allSquares[i].getClass().getSimpleName()) {
@@ -36,6 +40,7 @@ public class GUIController {
                 case "Chance" :
                     squares[i] = new GUI_Chance();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText("");
                     break;
                 case "Railroad" :
                     squares[i] = new GUI_Street();
@@ -44,18 +49,22 @@ public class GUIController {
                 case "PayToSee" :
                     squares[i] = new GUI_Street();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText("Pay: " + ((PayToSee) allSquares[i]).getAmount());
                     break;
                 case "GoToRestrooms" :
                     squares[i] = new GUI_Street();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText("");
                     break;
                 case "PennyBag" :
                     squares[i] = new GUI_Refuge();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText("Value: " + ((PennyBag) allSquares[i]).getAmountOfMoneyPlaced());
                     break;
                 case "Restrooms" :
                     squares[i] = new GUI_Jail();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText(allSquares[i].getName());
                     break;
             }
         }
@@ -99,6 +108,36 @@ public class GUIController {
 
 
         to.setCar(playerToMove, true);
+    }
+
+    public static void displayChanceCard(String description) {
+        gui.setChanceCard(description);
+        gui.displayChanceCard();
+    }
+
+    public static void clearChanceCard() {
+        gui.setChanceCard("");
+    }
+
+    public static void askPlayerToThrowDie(Player player){
+        gui.showMessage(player.getName() + ", throw dice:");
+    }
+
+    public static void showDie(int value){
+        gui.setDie(value);
+    }
+
+    public static void showTicketBooth(int position, boolean show){
+        for (int square = 0; square < allSquares.length; square++) {
+            if (allSquares[square].getPosition() == position-1){
+                GUI_Street street = (GUI_Street) squares[square];
+                if (show)
+                    street.setHouses(1);
+                else
+                    street.setHouses(0);
+
+            }
+        }
     }
 
     public static String[] getPlayers() {
