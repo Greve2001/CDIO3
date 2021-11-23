@@ -5,6 +5,8 @@ import Utilities.Language;
 import gui_fields.*;
 import gui_main.GUI;
 
+import java.awt.*;
+
 public class GUIController2 {
     private static GUI gui;
     private static String[] playerNames;
@@ -32,10 +34,12 @@ public class GUIController2 {
                     squares[i] = new GUI_Street();
                     squares[i].setSubText(((Amusement)allSquares[i]).getPrice() + "$");
                     ((GUI_Ownable) squares[i]).setRent(((Amusement)allSquares[i]).getPrice() + "$");
+                    squares[i].setBackGroundColor(convertColor((((Amusement) allSquares[i])).getColor()));
                     break;
                 case "Chance" :
                     squares[i] = new GUI_Chance();
                     squares[i].setSubText("");
+                    squares[i].setBackGroundColor(convertColor("orange"));
                     break;
                 case "Railroad" :
                     squares[i] = new GUI_Street();
@@ -146,5 +150,38 @@ public class GUIController2 {
 
     public static String[] getPlayers() {
         return playerNames;
+    }
+
+    private static Color convertColor(String color) {
+        Color result = Color.white;
+
+        switch (color.toLowerCase()) {
+            case "red" :
+                result = Color.red;
+                break;
+            case "green" :
+                result = Color.green;
+                break;
+            case "blue" :
+                result = new Color(45, 137, 239);
+                break;
+            case "yellow" :
+                result = Color.yellow;
+                break;
+            case "purple" :
+                result = new Color(255, 90, 255);
+                break;
+            case "turquoise" :
+                result = new Color(0,255,239);
+                break;
+            case "magenta" :
+                result = new Color(255,0,151);
+                break;
+            case "orange" :
+                result = new Color(235,97,35);
+                break;
+        }
+
+        return result;
     }
 }
