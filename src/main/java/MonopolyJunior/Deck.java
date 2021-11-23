@@ -20,7 +20,7 @@ public class Deck {
         chanceCardDeck[0] = new ChanceCard(Language.getText("chanceGreenlineRailroad"), 14);
         chanceCardDeck[1] = new ChanceCard(Language.getText("chanceBluelineRailroad"), 22);
         chanceCardDeck[2] = new ChanceCard(Language.getText("chanceRedlineRailroad"), 30);
-        chanceCardDeck[3] = new ChanceCard(Language.getText("chanceGoToWaterShow"), 2);
+        chanceCardDeck[3] = new ChanceCard(Language.getText("chanceGoToWaterShow"), 25);
         chanceCardDeck[4] = new ChanceCard(Language.getText("chanceGoToFireworks"), 9);
         chanceCardDeck[5] = new ChanceCard(Language.getText("chanceGoToMerryGoRound"), 12);
         chanceCardDeck[6] = new ChanceCard(Language.getText("chanceGoToWaterSlide"), 15);
