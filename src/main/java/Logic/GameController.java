@@ -48,11 +48,18 @@ public class GameController {
     }
 
     private void takeTurn(){
+        // GUI operations
+        for (Player p : players){
+            GUIController2.setPlayerBalance(p, p.getBalance());
+        }
+
 
         // Print players turn and stats
         String name = currentPlayer.getName();
         int balance = currentPlayer.getBalance();
         int position = currentPlayer.getPosition();
+
+
 
         Debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" +
                 "booths " + currentPlayer.getBoothsOnHand());
@@ -123,7 +130,8 @@ public class GameController {
             }
         }
         //announce the winner
-        System.out.println(announce);
+        Debug.println(announce.toString());
+        GUIController2.showCenterMessage(announce.toString());
     }
 
 

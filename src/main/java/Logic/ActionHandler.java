@@ -46,6 +46,7 @@ public class ActionHandler {
                     if (currentPlayer.hasBooth()) {
                         // add booth to board
                         board.addBooth(currentPlayer, position);
+                        GUIController2.showTicketBooth(currentPlayer.getName(), position, true);
                         // Remove one booth
                         currentPlayer.useOneBooth();
                     }
@@ -101,6 +102,8 @@ public class ActionHandler {
                 // Add money to pennybag
                 bank.payToBank(currentPlayer, payToSee.getAmount());
                 pennyBag.addMoney(payToSee.getAmount());
+                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
+
                 break;
 
             case "Go":
@@ -116,6 +119,8 @@ public class ActionHandler {
         //String cardText = card.getChanceCardText();//unused for now
 
         Debug.println("You pulled a chance card");
+
+        GUIController2.displayChanceCard(card);
 
 
         // Determine if free ticketbooth card or move-somewhere card.
@@ -135,6 +140,8 @@ public class ActionHandler {
             if (dest == 11){
                 PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
                 pennyBag.addMoney(amount);
+                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
+
                 positionHandler.setPlayerPosition(currentPlayer, dest, false);
                 return;
             }
@@ -159,6 +166,7 @@ public class ActionHandler {
                     // TODO use utility class to get a choice from players
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition()); // Default, remove with extended features
+                    GUIController2.showTicketBooth(currentPlayer.getName(), square1.getPosition(), true);
                 }
                 // If either the first one is free, or you own the second, buy the first
                 else if (square1.getBoothOwner() == null || square2.getBoothOwner() == currentPlayer) {
@@ -166,10 +174,14 @@ public class ActionHandler {
                     if (square1.getBoothOwner() != null){
                         square1.getBoothOwner().getOneBooth();
                         board.removeBooth(square1.getPosition());
+                        GUIController2.showTicketBooth(null, square1.getPosition(), false);
+
                     }
 
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition());
+                    GUIController2.showTicketBooth(currentPlayer.getName(), square1.getPosition(), true);
+
                 }
                 // If either the secoind one is free, or you own the first, buy the second
                 else if (square2.getBoothOwner() == null || square1.getBoothOwner() == currentPlayer){
@@ -177,14 +189,20 @@ public class ActionHandler {
                     if (square2.getBoothOwner() != null){
                         square2.getBoothOwner().getOneBooth();
                         board.removeBooth(square2.getPosition());
+                        GUIController2.showTicketBooth(null, square1.getPosition(), false);
+
                     }
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square2.getPosition()); // Deafult, remove with extended features
+                    GUIController2.showTicketBooth(currentPlayer.getName(), square2.getPosition(), true);
+
                 } else { // Both are taken with different colored booths
                     // TODO use utility class to get a choice from players
                     // Quick solution:
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition()); // Default, remove with extended features
+                    GUIController2.showTicketBooth(currentPlayer.getName(), square2.getPosition(), true);
+
                 }
             } else if (monopoly) { // There is monopoly, draw new card
                 ChanceCard newCard = deck.pullCard();

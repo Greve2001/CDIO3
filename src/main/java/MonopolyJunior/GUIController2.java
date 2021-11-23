@@ -106,13 +106,9 @@ public class GUIController2 {
         to.setCar(playerToMove, true);
     }
 
-    public static void displayChanceCard(String description) {
-        gui.setChanceCard(description);
-        gui.displayChanceCard();
-    }
-
-    public static void clearChanceCard() {
-        gui.setChanceCard("");
+    public static void displayChanceCard(ChanceCard card) {
+        gui.displayChanceCard("CHANCE CARD: \n" + card.toString() + "\n" +
+                card.getColor());
     }
 
     public static void getPlayerAction(Player player, String str){
@@ -150,6 +146,10 @@ public class GUIController2 {
 
     public static String[] getPlayers() {
         return playerNames;
+    }
+
+    public static void showCenterMessage(String str){
+        gui.displayChanceCard(str);
     }
 
     private static Color convertColor(String color) {
