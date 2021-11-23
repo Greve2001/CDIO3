@@ -47,14 +47,15 @@ package Logic {
         -extraTurn : boolean
         -gameOver : boolean
 
-        +setupGame() : void
-        +startGame() : void
+
         -setupPlayers(int numPlayers) : void
         -takeTurn() : void
         -loseCheck() : void
         -findWinner() : void
         -changeTurn() : void
         +giveExtraTurn() : void
+        +setupGame() : void
+        +startGame() : void
 
       'debug: Debug'
       'actionHandler: ActionHandler'
@@ -97,11 +98,15 @@ package Logic {
 
 }
 
+package MonopolyJunior{
+   class Game
+   class Player
+   class Deck
+   class Die
+
+}
 
 
-class Deck
-class ChanceCard
-class Player
 class "<<singleton>>\nLanguage" as Language
 
 Game -up- Die
