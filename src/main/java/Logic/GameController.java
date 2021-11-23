@@ -49,8 +49,6 @@ public class GameController {
 
     private void takeTurn(){
         // GUI operations
-        GUIController2.clearChanceCard();
-
         for (Player p : players){
             GUIController2.setPlayerBalance(p, p.getBalance());
         }

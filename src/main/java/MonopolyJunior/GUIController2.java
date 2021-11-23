@@ -107,10 +107,6 @@ public class GUIController2 {
                 card.getColor());
     }
 
-    public static void clearChanceCard() {
-        gui.setChanceCard("");
-    }
-
     public static void getPlayerAction(Player player, String str){
         gui.showMessage(player.getName() + str);
     }
