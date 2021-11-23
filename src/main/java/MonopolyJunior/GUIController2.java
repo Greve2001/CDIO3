@@ -10,6 +10,7 @@ import java.awt.*;
 public class GUIController2 {
     private static GUI gui;
     private static String[] playerNames;
+    private static Color[] playerColors = {Color.RED, Color.YELLOW, Color.WHITE, Color.BLACK};
     private static GUI_Player[] guiPlayers;
     private static int[] playerPositions;
     private static Square[] allSquares;
@@ -78,8 +79,10 @@ public class GUIController2 {
 
         for (int i = 0; i < numberOfPlayers; i++) {
             playerNames[i] = gui.getUserString(Language.getText("enterName"));
+            GUI_Car playerCar = new GUI_Car(playerColors[i], playerColors[i],
+                    GUI_Car.Type.RACECAR, GUI_Car.Pattern.FILL);
 
-            guiPlayers[i] = new GUI_Player(playerNames[i], startBalance);
+            guiPlayers[i] = new GUI_Player(playerNames[i], startBalance, playerCar);
             gui.addPlayer(guiPlayers[i]);
 
             GUI_Field field = gui.getFields()[0];
