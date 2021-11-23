@@ -56,7 +56,10 @@ public class ActionHandler {
                 else{ // There is a booth
                     Debug.println(amusement.getBoothOwner().getName() + ", has a booth on this square" );
                     // Pay to the one who owns the booth
-                    if (board.hasMonopoly(position)){ // Has monopoly, x2
+                    if (amusement.getBoothOwner() == currentPlayer){
+                        // Dont pay yourself
+                    }
+                    else if (board.hasMonopoly(position)){ // Has monopoly, x2
                         Debug.println("That player has monopoly you will pay x2.");
                         bank.payToPlayer(currentPlayer, amusement.getBoothOwner(), amusement.getPrice()*2);
                     }
@@ -95,6 +98,7 @@ public class ActionHandler {
             case "PennyBag":
                 // Get all the money saved up
                 currentPlayer.updateBalance(pennyBag.withDraw());
+                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
                 break;
 
             case "PayToSee":
