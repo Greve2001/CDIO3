@@ -73,6 +73,7 @@ public class GameController {
 
         // Get new position
         int currentPosition = currentPlayer.getPosition();
+        GUIController2.movePlayer(currentPlayer, currentPosition);
 
         // Do action on that field
         actionHandler.doFieldAction(currentPlayer, currentPosition);

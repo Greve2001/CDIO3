@@ -87,13 +87,15 @@ public class GUIController2 {
 
     public static void movePlayer(Player player, int position) {
         GUI_Player playerToMove = new GUI_Player("");
-        GUI_Field to = gui.getFields()[position];
+        GUI_Field to = gui.getFields()[position - 1];
 
         for (int i = 0; i < playerNames.length ; i++) {
             if(playerNames[i].equals(player.getName())) {
                 playerToMove = guiPlayers[i];
 
                 GUI_Field from = gui.getFields()[playerPositions[i]];
+
+                playerPositions[i] = position - 1;
                 from.setCar(playerToMove, false);
             }
         }
