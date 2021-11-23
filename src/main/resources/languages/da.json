@@ -1,18 +1,18 @@
 {
-  "en": {
-    "chanceGreenlineRailroad": "Take a ride on the GREEN LINE RAILROAD and roll again",
-    "chanceBluelineRailroad": "Take a ride on the BLUE LINE RAILROAD and roll again",
-    "chanceRedlineRailroad": "Take a ride on the RED LINE RAILROAD and roll again",
-    "chanceGoToWaterShow": "GO to the WATER SHOW and pay 2 dollars",
-    "chanceGoToFireworks" : "GO to the FIREWORKS and pay 2 dollars",
-    "chanceGoToMerryGoRound" : "GO to the MERRY-GO-ROUND",
-    "chanceGoToWaterSlide" : "GO to the WATER SLIDE",
-    "chanceGoToBumperCars" : "GO to the BUMPER CARS",
-    "chanceGoToLoopTheLoop" : "GO to the LOOP THE LOOP",
-    "chanceGoToArcadeVideo" : "GO to the ARCADE VIDEO",
-    "chanceGoToTheRestrooms" : "Pay 3 dollars to take the tramway to the restrooms",
-    "chanceGoToGo" : "GO to GO. Collect 2 dollars allowance as you pass",
-    "chanceFreeTicketBooth" : "Free ticket booth"
+  "da": {
+    "chanceGreenlineRailroad": "Kør med den grønne jernbanelinje og slå igen",
+    "chanceBluelineRailroad": "Kør med den blå jernbanelinje og slå igen",
+    "chanceRedlineRailroad": "Kør med den røde jernbanelinje og slå igen",
+    "chanceGoToWaterShow": "Gå til SPRINGVANDET og betal 2 dollars",
+    "chanceGoToFireworks" : "Gå til FYRVÆRKERISHOWET og betal 2 dollars",
+    "chanceGoToMerryGoRound" : "Gå til KARRUSELLEN",
+    "chanceGoToWaterSlide" : "Gå til VANDRUTSJEBANEN",
+    "chanceGoToBumperCars" : "Gå til RADIOBILERNE",
+    "chanceGoToLoopTheLoop" : "Gå til FLYV I LOOP",
+    "chanceGoToArcadeVideo" : "Gå til SPILLEHALLEN",
+    "chanceGoToTheRestrooms" : "Betal 3 dollars for at tage sporvognen hen til toiletterne",
+    "chanceGoToGo" : "Gå til Start. Du får 2 dollars i lommepenge når du passerer",
+    "chanceFreeTicketBooth" : "Gratis billetbod"
 
   }
 }
