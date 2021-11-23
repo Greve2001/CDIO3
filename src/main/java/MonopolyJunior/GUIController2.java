@@ -1,4 +1,4 @@
-package MonopolyJunior;
+/*package MonopolyJunior;
 
 import Board.*;
 import gui_fields.*;
@@ -157,3 +157,4 @@ public class GUIController2 {
         return playerNames;
     }
 }
+*/
