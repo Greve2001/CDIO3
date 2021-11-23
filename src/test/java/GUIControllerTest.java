@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions;
 public class GUIControllerTest {
     Square[] squares = new Board().getAllSquares();
     GUIController controller= new GUIController(squares);
-
     Player player = new Player("Goli");
 
     @Test
@@ -22,12 +21,7 @@ public class GUIControllerTest {
         player = controller.setPlayer(1, 100);
         Assertions.assertEquals( playerName, player.getName().toLowerCase());
 
-        controller.selectNumbersOfPlayers();
-
-        boolean moved = controller.moveCar(player, 0,10);
-        Assertions.assertEquals(moved, true);
-
-        controller.selectNumbersOfPlayers();
+       // controller.selectNumbersOfPlayers();
     }
 
     @Test
