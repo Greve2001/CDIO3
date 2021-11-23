@@ -3,7 +3,6 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
-import org.assertj.core.util.VisibleForTesting;
 
 public class ActionHandler {
 
@@ -181,13 +180,6 @@ public class ActionHandler {
                     }
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square2.getPosition()); // Deafult, remove with extended features
-
-                } else if (square1.getBoothOwner() == null) { // Square1 is free
-                    currentPlayer.useOneBooth();
-                    board.addBooth(currentPlayer, square1.getPosition());
-                } else if (square2.getBoothOwner() == null) { // Square 2
-                    currentPlayer.useOneBooth();
-                    board.addBooth(currentPlayer, square2.getPosition());
                 } else { // Both are taken with different colored booths
                     // TODO use utility class to get a choice from players
                     // Quick solution:
