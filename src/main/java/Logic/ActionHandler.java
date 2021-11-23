@@ -115,8 +115,7 @@ public class ActionHandler {
         }
     }
 
-    @VisibleForTesting
-    public void doChanceCard(ChanceCard card, Player currentPlayer) {
+    private void doChanceCard(ChanceCard card, Player currentPlayer) {
         //String cardText = card.getChanceCardText();//unused for now
 
         debug.println("You pulled a chance card");
