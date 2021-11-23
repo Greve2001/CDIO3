@@ -95,7 +95,7 @@ public class ActionHandler {
             case "PennyBag":
                 // Get all the money saved up
                 currentPlayer.updateBalance(pennyBag.withDraw());
-                GUIController2.setPennyBagValue(pennyBag.getAmountOfMoneyPlaced(), );
+                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
                 break;
 
             case "PayToSee":
