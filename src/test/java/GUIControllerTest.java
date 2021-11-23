@@ -1,19 +1,13 @@
-import MonopolyJunior.GUIController;
-import gui_codebehind.GUI_FieldFactory;
-import gui_fields.*;
-import gui_main.GUI;
+import Board.*;
+import MonopolyJunior.*;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 
-import java.awt.*;
-
-import static org.junit.Assert.*;
-
 public class GUIControllerTest {
-    GUI_Field[] fields = GUI_FieldFactory.makeFields();
-    GUIController controller= new GUIController(fields);
+    Square[] squares = new Board().getAllSquares();
+    GUIController controller= new GUIController(squares);
 
-    GUI_Player[] players = {new GUI_Player("Goli", 100, new GUI_Car())};
+    Player player = new Player("Goli");
 
     @Test
     public void selectNumbersOfPlayers(){
@@ -23,49 +17,66 @@ public class GUIControllerTest {
 
     @Test
     public void setPlayer() {
-        boolean added= controller.setPlayer(1, 100);
-        Assertions.assertEquals(added , true);
+        player.setBalance(100);
+        String playerName= player.getName().toLowerCase();
+        player = controller.setPlayer(1, 100);
+        Assertions.assertEquals( playerName, player.getName().toLowerCase());
+
+        controller.selectNumbersOfPlayers();
+
+        boolean moved = controller.moveCar(player, 0,10);
+        Assertions.assertEquals(moved, true);
+
+        controller.selectNumbersOfPlayers();
     }
 
     @Test
     public void showRoll() {
+        Die die=new Die();
+        int x= die.getFaceValue();
+
+        int value=controller.showRoll(die);
+        Assertions.assertEquals(x,value);
+
+        //controller.selectNumbersOfPlayers();
     }
 
     @Test
     public void moveCar() {
-        boolean moved = controller.moveCar(players[0], 0,10);
+        boolean moved = controller.moveCar(player, 0,10);
         Assertions.assertEquals(moved, true);
     }
 
     @Test
     public void showChance() {
-        boolean displayed= controller.showChance("welcome");
+        ChanceCard card = new ChanceCard("hello",5);
+        boolean displayed= controller.showChance(card);
         Assertions.assertEquals(true, displayed);
     }
 
     @Test
     public void setOwner() {
-        boolean owned=controller.setOwner( (GUI_Ownable) fields[1] ,"red");
-        Assertions.assertEquals(true,owned);
+        Amusement amusement=new Amusement("Cotton Candy",4, "Purple", 1);
+        Boolean owned=controller.setOwner(amusement,"red");
+
+        Assertions.assertEquals(true, owned);
+
+        //controller.selectNumbersOfPlayers();
     }
 
     @Test
-    public void addToPennyBag() {
-        fields[5].setSubText("5");
-        boolean isAdded=controller.addToPennyBag(players[0].getName(),5,100);
-        Assertions.assertEquals(true,isAdded);
-    }
+    public void updatePennybag(){
+        PennyBag pennyBag = new PennyBag("lene",17);
+        pennyBag.addMoney(50);
+        Boolean updated=controller.updatePennybag(player,pennyBag);
+        Assertions.assertEquals(true,updated);
 
-    @Test
-    public void withdrawPennyBag() {
-        fields[5].setSubText("5");
-        boolean isWithrawed=controller.withdrawPennyBag(players[0].getName(),5,100);
-        Assertions.assertEquals(true,isWithrawed);
+        //controller.selectNumbersOfPlayers();
     }
 
     @Test
     public void showWinner() {
-        String input =controller.ShowWinner(players[0]);
-       Assertions.assertEquals("winner: "+ players[0].getName() + " with balance: "+ players[0].getBalance(), input);
+        String input =controller.ShowWinner(player);
+        Assertions.assertEquals("winner: "+ player.getName() + " with balance: "+ player.getBalance(), input);
     }
 }

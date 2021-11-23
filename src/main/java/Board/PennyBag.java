@@ -3,7 +3,7 @@ package Board;
 public class PennyBag extends Square{
     int AmountOfMoneyPlaced = 0;
 
-    PennyBag(String name, int position) {
+    public PennyBag(String name, int position) {
         super(name, position);
     }
 
