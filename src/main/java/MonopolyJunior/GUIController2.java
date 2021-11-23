@@ -9,8 +9,8 @@ public class GUIController2 {
     private static String[] playerNames;
     private static GUI_Player[] guiPlayers;
     private static int[] playerPositions;
-    static Square[] allSquares;
-    static GUI_Field[] squares;
+    private static Square[] allSquares;
+    private static GUI_Field[] squares;
 
     public static void main(String[] args) {
         gui = new GUI(createBoard());
@@ -30,6 +30,7 @@ public class GUIController2 {
                 case "Go" :
                     squares[i] = new GUI_Start();
                     squares[i].setTitle(allSquares[i].getName());
+                    squares[i].setSubText("Get: " + ((Go) allSquares[i]).getAmount());
                     break;
                 case "Amusement" :
                     squares[i] = new GUI_Street();
@@ -119,23 +120,35 @@ public class GUIController2 {
         gui.setChanceCard("");
     }
 
-    public static void askPlayerToThrowDie(Player player){
-        gui.showMessage(player.getName() + ", throw dice:");
+    public static void getPlayerAction(Player player, String str){
+        gui.showMessage(player.getName() + str);
     }
 
     public static void showDie(int value){
         gui.setDie(value);
     }
 
-    public static void showTicketBooth(int position, boolean show){
-        for (int square = 0; square < allSquares.length; square++) {
-            if (allSquares[square].getPosition() == position-1){
-                GUI_Street street = (GUI_Street) squares[square];
-                if (show)
-                    street.setHouses(1);
-                else
-                    street.setHouses(0);
+    public static void showTicketBooth(String ownerName, int position, boolean show){
+        GUI_Street amusement = ((GUI_Street) squares[position - 1]);
 
+        if(show) {
+            amusement.setHouses(1);
+            amusement.setOwnerName(ownerName);
+        } else {
+            amusement.setHouses(0);
+            amusement.setOwnerName(null);
+        }
+
+    }
+
+    public static void setPennyBagValue(int position, int value) {
+        squares[position - 1].setSubText("Value: " + value);
+    }
+
+    public static void setPlayerBalance(Player player, int value){
+        for (int i = 0; i < playerNames.length; i++) {
+            if (player.getName().equals(playerNames[i])){
+                guiPlayers[i].setBalance(value);
             }
         }
     }
