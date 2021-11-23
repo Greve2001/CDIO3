@@ -48,11 +48,20 @@ public class GameController {
     }
 
     private void takeTurn(){
+        // GUI operations
+        GUIController2.clearChanceCard();
+
+        for (Player p : players){
+            GUIController2.setPlayerBalance(p, p.getBalance());
+        }
+
 
         // Print players turn and stats
         String name = currentPlayer.getName();
         int balance = currentPlayer.getBalance();
         int position = currentPlayer.getPosition();
+
+
 
         Debug.println("\n" + name + ":\t" + "Pos " + position + ", \t $" + balance + "\t" +
                 "booths " + currentPlayer.getBoothsOnHand());

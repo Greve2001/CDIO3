@@ -147,4 +147,8 @@ public class GUIController2 {
     public static String[] getPlayers() {
         return playerNames;
     }
+
+    public static void showCenterMessage(String str){
+        gui.displayChanceCard(str);
+    }
 }

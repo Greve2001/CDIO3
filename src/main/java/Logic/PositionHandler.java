@@ -1,5 +1,6 @@
 package Logic;
 
+import MonopolyJunior.GUIController2;
 import MonopolyJunior.Player;
 import Utilities.Debug;
 
@@ -33,6 +34,7 @@ public class PositionHandler {
                 newPos = endPos;
         }
         player.setPosition(newPos);
+        GUIController2.movePlayer(player, newPos);
 
     }
 
@@ -43,6 +45,7 @@ public class PositionHandler {
         if (getsStartBonus && endPos < prevPos) payBonus(player);
 
         player.setPosition(endPos);
+        GUIController2.movePlayer(player, endPos);
     }
 
     private void payBonus(Player player){
