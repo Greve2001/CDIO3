@@ -63,7 +63,7 @@ public class GUIController2 {
                     break;
             }
             squares[i].setTitle(allSquares[i].getName());
-            squares[i].setDescription("");
+            squares[i].setDescription(allSquares[i].getName());
         }
 
 
