@@ -30,47 +30,42 @@ public class GUIController2 {
             switch (allSquares[i].getClass().getSimpleName()) {
                 case "Go" :
                     squares[i] = new GUI_Start();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText(Language.getText("getMoneyFromSquare") + ((Go) allSquares[i]).getAmount() + "$");
                     break;
                 case "Amusement" :
                     squares[i] = new GUI_Street();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText(((Amusement)allSquares[i]).getPrice() + "$");
                     ((GUI_Ownable) squares[i]).setRent(((Amusement)allSquares[i]).getPrice() + "$");
                     break;
                 case "Chance" :
                     squares[i] = new GUI_Chance();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText("");
                     break;
                 case "Railroad" :
                     squares[i] = new GUI_Street();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText(Language.getText("rollAgain"));
                     break;
                 case "PayToSee" :
                     squares[i] = new GUI_Street();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText(Language.getText("payToLandOn") + ((PayToSee) allSquares[i]).getAmount() + "$");
                     break;
                 case "GoToRestrooms" :
                     squares[i] = new GUI_Street();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText("");
                     break;
                 case "PennyBag" :
                     squares[i] = new GUI_Refuge();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText(Language.getText("valueOfSquare") + ((PennyBag) allSquares[i]).getAmountOfMoneyPlaced() + "$");
                     break;
                 case "Restrooms" :
                     squares[i] = new GUI_Jail();
-                    squares[i].setTitle(allSquares[i].getName());
                     squares[i].setSubText(allSquares[i].getName());
                     break;
             }
+            squares[i].setTitle(allSquares[i].getName());
+            squares[i].setDescription("");
         }
+
 
         return squares;
     }
