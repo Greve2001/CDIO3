@@ -33,7 +33,7 @@ board : pennyBagPosition
 
 
 game          "1   "      -r-   "1   "          Deck: Is played with >
-board         "32"       -d-   "1"                Square: Is played with >
+board         "1"       -d-   "32"                Square: Is played with >
 game          "1"        -d-   "1"                 board: Is played on >
 game          "1   "      -l   "2..4 "            Player : Plays <
 game           "1"        -u-   "1 "                Die: Is played with >
