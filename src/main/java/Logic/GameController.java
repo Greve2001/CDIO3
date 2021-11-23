@@ -8,6 +8,8 @@ import java.util.Scanner;
 
 public class GameController {
 
+    GUIController2 guiController2;
+
     Scanner s = new Scanner(System.in);
 
     ActionHandler actionHandler;
@@ -21,12 +23,22 @@ public class GameController {
     boolean gameOver = false;
     boolean extraTurn = false;
 
+    final int START_MONEY = 31;
+    final int MAX_BOOTHS = 12;
+    final int MIN_BOOTHS = 10;
+
     int BOARD_SIZE = board.getAllSquares().length;
 
     public void setupGame(int amountOfPlayers){
-        setupPlayers(amountOfPlayers);
+        new GUIController2(board.getAllSquares());
+
+        GUIController2.createPlayers(START_MONEY);
+        String[] playerNames = GUIController2.getPlayers();
+        setupPlayers(playerNames);
+
         positionHandler = new PositionHandler(players, BOARD_SIZE);
         actionHandler = new ActionHandler(this, board, positionHandler);
+
     }
 
     public void playGame(){
@@ -47,12 +59,14 @@ public class GameController {
 
         // Get action from player
         Debug.print("Please press ENTER to roll");
-        s.nextLine();
+        GUIController2.getPlayerAction(currentPlayer, ", Please roll the dice");
+        //s.nextLine(); //TODO SLET!
 
         // Roll die, get value.
         die.roll();
         int spacesToMove = die.getFaceValue();
         Debug.println("You rolled: " + spacesToMove);
+        GUIController2.showDie(spacesToMove);
 
         // Move player position
         positionHandler.movePlayer(currentPlayer, spacesToMove);
@@ -113,17 +127,13 @@ public class GameController {
 
 
     // *** Player Handling *** //
-    private void setupPlayers(int numPlayers){
-        final int START_MONEY = 31;
-        final int MAX_BOOTHS = 12;
-        final int MIN_BOOTHS = 10;
+    private void setupPlayers(String[] playerNames){
+        players = new Player[playerNames.length];
 
-        players = new Player[numPlayers];
-
-        for (int player = 0; player < numPlayers; player++) {
-            players[player] = new Player("Player " + (player + 1));
+        for (int player = 0; player < playerNames.length; player++) {
+            players[player] = new Player(playerNames[player]);
             players[player].setupStartBalance(START_MONEY);
-            players[player].setBooths( (numPlayers > 2) ? MIN_BOOTHS : MAX_BOOTHS );
+            players[player].setBooths( (playerNames.length > 2) ? MIN_BOOTHS : MAX_BOOTHS );
         }
 
         currentPlayer = players[0]; // Default change later

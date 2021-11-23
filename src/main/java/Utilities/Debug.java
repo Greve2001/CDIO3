@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Debug {
 
-    static boolean enableDebugging = true;
+    static boolean enableDebugging = false;
     static Scanner input;
     
     private static Debug instance;

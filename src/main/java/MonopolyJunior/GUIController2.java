@@ -13,17 +13,13 @@ public class GUIController2 {
     private static Square[] allSquares;
     private static GUI_Field[] squares;
 
-    public static void main(String[] args) {
-        gui = new GUI(createBoard());
-        createPlayers(31); // add balance from gamecontroller
-        movePlayer(new Player("Mikael"), 4);
-        displayChanceCard("VIS MIG!");
-        clearChanceCard();
+    public GUIController2(Square[] allSquares){
+        GUI_Field[] guiBoard = createBoard(allSquares);
+        gui = new GUI(guiBoard);
     }
 
-    public static GUI_Field[] createBoard() {
-        Board board = new Board();
-        allSquares =  board.getAllSquares();
+    public static GUI_Field[] createBoard(Square[] as) {
+        allSquares = as;
         squares = new GUI_Field[allSquares.length];
 
         for (int i = 0; i < squares.length; i++) {
@@ -65,8 +61,6 @@ public class GUIController2 {
             squares[i].setTitle(allSquares[i].getName());
             squares[i].setDescription(allSquares[i].getName());
         }
-
-
         return squares;
     }
 
@@ -103,8 +97,6 @@ public class GUIController2 {
                 from.setCar(playerToMove, false);
             }
         }
-
-
         to.setCar(playerToMove, true);
     }
 
