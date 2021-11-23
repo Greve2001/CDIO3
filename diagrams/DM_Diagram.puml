@@ -26,18 +26,28 @@ chance : color
 chance : amounttopay
 chance : destination
 
+game : Min_Nr_Of_Players
+game : Max_Nr_Of_Players
+game : Moving_Past_Start
+game : StartMoney
+game : RestRoom_Position
+game : Board_Size
+game : Penny_Bag_Position
+
+
+
 board : pennyBagPosition
 
 
 
 
 
-game          "1   "      -r-   "1   "          Deck: Is played with >
-board         "1"       -d-   "32"                Square: Is played with >
-game          "1"        -d-   "1"                 board: Is played on >
-game          "1   "      -l   "2..4 "            Player : Plays <
-game           "1"        -u-   "1 "                Die: Is played with >
-chance         "24  "     -l-   " 1  "            Deck: Holds <
+game           "1   "    -r-   "1   "            Deck: Is played with >
+board          "1"       -d-   "32"              Square: Is played with >
+game           "1"       -d-   "1"               board: Is played on >
+game           "1   "    -l-   "2..4 "           Player : Plays <
+game           "1"       -u-   "1 "              Die: Is played with >
+chance         "24  "    -l-   " 1  "            Deck: Holds <
 
 
 
