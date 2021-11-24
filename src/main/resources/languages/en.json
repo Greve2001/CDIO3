@@ -19,6 +19,11 @@
     "valueOfSquare" : "Value: ",
     "getMoneyFromSquare" : "Get: ",
     "rollAgain" : "Roll Again",
-    "payToLandOn" : "Pay: "
+    "payToLandOn" : "Pay: ",
+
+    "paid" : "paid",
+    "toTheBank" : "to the bank",
+
+    "to" : "to"
   }
 }

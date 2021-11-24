@@ -12,7 +12,7 @@ class CSVReaderTest {
 
     @BeforeEach
     void setUp() {
-        reader = new CSVReader("board.csv", ",");
+        reader = new CSVReader("en_board.csv", ",");
     }
 
     @Test

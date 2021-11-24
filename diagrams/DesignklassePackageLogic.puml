@@ -1,0 +1,59 @@
+@startuml
+package Logic {
+    class Bank{
+         debug: Debug
+        -ableToPay(Player player,int amount): void
+        +payToBank(Player fromPlayer,int amount): void
+        +payToPlayer(Player fromPlayer,Player toPlayer,int amount): void
+
+
+    }
+    class GameController{
+        -currentPlayer : Player
+        -players : Player[]
+        -extraTurn : boolean
+        -gameOver : boolean
+
+
+        -setupPlayers(int numPlayers) : void
+        -takeTurn() : void
+        -loseCheck() : void
+        -findWinner() : void
+        -changeTurn() : void
+        +giveExtraTurn() : void
+        +setupGame() : void
+        +startGame() : void
+
+    }
+    class PositionHandler{
+       debug: Debug
+       players: Player[]
+       boardSize: int
+       startBonus: int
+
+       -payBonus(Player player):void
+       +movePlayer(Player player, int spacesToMove): void
+
+    }
+     class ActionHandler{
+        -BOARD: board
+        -currentPlayer: Player
+        -GAMECONTROLLER: GameController
+        -POSITIONHANDLER: PositionHandler
+
+        +doFieldAction(Player currentPlayer, int position): void
+        +doChanceCard(Chancecard card, Player currentPlayer):void
+
+     }
+}
+
+class "<<singleton>>\nLanguage" as Language
+
+Bank -u- ActionHandler
+ActionHandler -r- PositionHandler
+PositionHandler -- GameController
+ActionHandler -- GameController
+
+
+
+@enduml
