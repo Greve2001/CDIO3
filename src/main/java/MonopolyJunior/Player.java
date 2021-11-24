@@ -1,7 +1,5 @@
 package MonopolyJunior;// A class for the player which contains the score and name of the player
 
-import java.awt.*;
-
 public class Player {
     private String name;
     private int position = 1, balance, boothsOnHand;
@@ -22,10 +20,7 @@ public class Player {
 
     public boolean hasBooth() {
         //Checks if the player has booths on hand.
-        if (boothsOnHand > 0)
-            return true;
-        else
-            return false;
+        return boothsOnHand > 0;
     }
 
     public void updateBalance(int update) {
