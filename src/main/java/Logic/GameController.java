@@ -3,6 +3,7 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
+import Utilities.Language;
 
 import java.util.Scanner;
 
@@ -66,7 +67,7 @@ public class GameController {
 
         // Get action from player
         Debug.print("Please press ENTER to roll");
-        GUIController2.getPlayerAction(currentPlayer, ", Please roll the dice");
+        GUIController2.getPlayerAction(currentPlayer, ", " + Language.getText("pleaseRoll"));
         //s.nextLine(); //TODO SLET!
 
         // Roll die, get value.

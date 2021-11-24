@@ -18,8 +18,10 @@
     "enterName" : "Enter your name: ",
     "valueOfSquare" : "Value: ",
     "getMoneyFromSquare" : "Get: ",
+    "pleaseRoll" : "Please roll the dice",
     "rollAgain" : "Roll Again",
     "payToLandOn" : "Pay: ",
+    "chanceCard" : "Chance Card",
 
     "paid" : "paid",
     "toTheBank" : "to the bank",
