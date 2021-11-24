@@ -3,19 +3,14 @@ package Logic;
 import Board.*;
 import MonopolyJunior.*;
 import Utilities.Debug;
-
-import java.util.Scanner;
+import Utilities.Language;
 
 public class GameController {
 
-    GUIController2 guiController2;
-
-    Scanner s = new Scanner(System.in);
-
-    ActionHandler actionHandler;
+    private ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
-    Die die = new Die();
+    private final Die die = new Die();
 
     private Player[] players;
     private Player currentPlayer;
@@ -23,22 +18,24 @@ public class GameController {
     boolean gameOver = false;
     boolean extraTurn = false;
 
-    final int START_MONEY = 31;
-    final int MAX_BOOTHS = 12;
-    final int MIN_BOOTHS = 10;
+    private final int START_MONEY = 31;
 
     int BOARD_SIZE = board.getAllSquares().length;
 
-    public void setupGame(int amountOfPlayers){
+    public void setupGame(){
         new GUIController2(board.getAllSquares());
 
         GUIController2.createPlayers(START_MONEY);
         String[] playerNames = GUIController2.getPlayers();
         setupPlayers(playerNames);
 
-        positionHandler = new PositionHandler(players, BOARD_SIZE);
+        positionHandler = new PositionHandler(BOARD_SIZE, ((Go) board.getSquare(1)).getAmount());
         actionHandler = new ActionHandler(this, board, positionHandler);
 
+        // Intialises gui with balances
+        for (Player p : players){
+            GUIController2.setPlayerBalance(p, p.getBalance());
+        }
     }
 
     public void playGame(){
@@ -48,12 +45,6 @@ public class GameController {
     }
 
     private void takeTurn(){
-        // GUI operations
-        for (Player p : players){
-            GUIController2.setPlayerBalance(p, p.getBalance());
-        }
-
-
         // Print players turn and stats
         String name = currentPlayer.getName();
         int balance = currentPlayer.getBalance();
@@ -66,8 +57,7 @@ public class GameController {
 
         // Get action from player
         Debug.print("Please press ENTER to roll");
-        GUIController2.getPlayerAction(currentPlayer, ", Please roll the dice");
-        //s.nextLine(); //TODO SLET!
+        GUIController2.getPlayerAction(currentPlayer, ", " + Language.getText("pleaseRoll"));
 
         // Roll die, get value.
         die.roll();
@@ -84,6 +74,11 @@ public class GameController {
 
         // Do action on that field
         actionHandler.doFieldAction(currentPlayer, currentPosition);
+
+        // GUI operations
+        for (Player p : players){
+            GUIController2.setPlayerBalance(p, p.getBalance());
+        }
 
         // Lose check - Only for currentPlayer, since it's not possible for others to be a zero now.
         loseCheck();
@@ -136,18 +131,26 @@ public class GameController {
 
 
     // *** Player Handling *** //
-    private void setupPlayers(String[] playerNames){
-        players = new Player[playerNames.length];
+    public void setupPlayers(String[] playerNames){
+        final int MAX_BOOTHS = 12;
+        final int MIN_BOOTHS = 10;
+        if (playerNames.length >= 2 && playerNames.length <= 4){
+            players = new Player[playerNames.length];
 
-        for (int player = 0; player < playerNames.length; player++) {
-            players[player] = new Player(playerNames[player]);
-            players[player].setupStartBalance(START_MONEY);
-            players[player].setBooths( (playerNames.length > 2) ? MIN_BOOTHS : MAX_BOOTHS );
+            for (int player = 0; player < playerNames.length; player++) {
+                players[player] = new Player(playerNames[player]);
+                players[player].setupStartBalance(START_MONEY);
+                players[player].setBooths( (playerNames.length > 2) ? MIN_BOOTHS : MAX_BOOTHS );
+            }
+
+            currentPlayer = players[0]; // Default change later
+
+            Debug.println("~Players Initialized~");
+        } else{
+            players = new Player[]{};
+            Debug.println("Incorrect amount of player, should be between 2-4");
         }
 
-        currentPlayer = players[0]; // Default change later
-
-        Debug.println("~Players Initialized~");
     }
     
     private void changeTurn(){
@@ -166,5 +169,9 @@ public class GameController {
 
     public void giveExtraTurn(){
         extraTurn = true;
+    }
+
+    public Player[] getPlayers(){ // For testing.
+        return players;
     }
 }

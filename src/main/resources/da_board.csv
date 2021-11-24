@@ -28,6 +28,6 @@ Position,Type,Name,AmountGiven,Price,Color,AmountToPay,Dest
 27,GoTo,Gå til toiletterne,,,,3,11
 28,Amusement,Radiobilerne,,4,Green,,
 29,Amusement,Pariserhjulet,,4,Green,,
-30,Railroad,Den røde jernbanelinje,,,,,
+30,Railroad,Den røde jernbanelinje,,,Red,,
 31,Amusement,Flyv i loop,,5,Blue,,
 32,Amusement,Rutsjebane,,5,Blue,,

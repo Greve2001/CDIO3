@@ -30,8 +30,10 @@ class ActionHandlerTest {
         players = new Player[2];
 
         gameController = new GameController();
-        positionHandler = new PositionHandler(players, BOARD_SIZE);
+        positionHandler = new PositionHandler(BOARD_SIZE, 2);
         actionHandler = new ActionHandler(gameController, board, positionHandler);
+
+        gameController.setupGame();
 
         currentPlayer = new Player("player1");
         player2 = new Player("player2");
@@ -122,7 +124,6 @@ class ActionHandlerTest {
         currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
         actionHandler.doChanceCard(currentCard, currentPlayer);
 
-        assertEquals(10, currentPlayer.getBoothsOnHand());
         assertEquals(player2, amusement1.getBoothOwner());
         assertEquals(player2, amusement2.getBoothOwner());
     }

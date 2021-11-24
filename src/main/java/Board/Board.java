@@ -10,8 +10,14 @@ public class Board {
     private int pennyBagPosition;
 
     public Board() {
-        // Loads the information from the board.csv in ressources.
-        CSVReader reader = new CSVReader("board.csv", ",");
+        // Loads the information from the en_board.csv in ressources.
+        CSVReader reader;
+        try {
+            reader = new CSVReader(System.getProperty("user.language") + "_board.csv", ",");
+        } catch (Exception e) {
+            reader = new CSVReader("en_board.csv", ",");
+        }
+
         OverloadList listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
 
         allSquares = new Square[listOfAllSquareAndProps.size()];
@@ -140,5 +146,14 @@ public class Board {
 
     public Square getSquare(int position) {
         return allSquares[position - OFFSET];
+    }
+
+    public String toString() {
+        String result = "";
+        for (Square s : allSquares) {
+            result = result +  s.getPosition() + " " + s.getName() + "\n";
+        }
+
+        return result;
     }
 }

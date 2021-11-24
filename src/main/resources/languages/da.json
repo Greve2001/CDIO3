@@ -12,7 +12,20 @@
     "chanceGoToArcadeVideo" : "Gå til SPILLEHALLEN",
     "chanceGoToTheRestrooms" : "Betal 3 dollars for at tage sporvognen hen til toiletterne",
     "chanceGoToGo" : "Gå til Start. Du får 2 dollars i lommepenge når du passerer",
-    "chanceFreeTicketBooth" : "Gratis billetbod"
+    "chanceFreeTicketBooth" : "Gratis billetbod",
 
+    "selectNumOfPlayers" : "Vælg antallet af spillere: ",
+    "enterName" : "Indtast dit navn: ",
+    "valueOfSquare" : "Værdi: ",
+    "getMoneyFromSquare" : "Få: ",
+    "pleaseRoll" : "Slå venligst med terningen",
+    "rollAgain" : "Slå igen",
+    "payToLandOn" : "Betal: ",
+    "chanceCard" : "Chance Kort",
+
+    "paid" : "betalte",
+    "toTheBank" : "til banken",
+
+    "to" : "til"
   }
 }
