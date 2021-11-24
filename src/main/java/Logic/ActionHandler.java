@@ -56,16 +56,13 @@ public class ActionHandler {
                 else{ // There is a booth
                     Debug.println(amusement.getBoothOwner().getName() + ", has a booth on this square" );
                     // Pay to the one who owns the booth
-                    if (amusement.getBoothOwner() == currentPlayer){
-                        // Dont pay yourself
-                    }
-                    else if (board.hasMonopoly(position)){ // Has monopoly, x2
+                    if (board.hasMonopoly(position) && amusement.getBoothOwner() != currentPlayer){
                         Debug.println("That player has monopoly you will pay x2.");
                         bank.payToPlayer(currentPlayer, amusement.getBoothOwner(), amusement.getPrice()*2);
                     }
-                    else{ // Has not, normal price
+                    else if (amusement.getBoothOwner() != currentPlayer)// If owned by anyone else then the player
                         bank.payToPlayer(currentPlayer, amusement.getBoothOwner(), amusement.getPrice());
-                    }
+
                 }
                 break;
 
