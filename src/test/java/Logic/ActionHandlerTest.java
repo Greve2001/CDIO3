@@ -124,7 +124,6 @@ class ActionHandlerTest {
         currentPlayer.setBooths(10); //to ensure that the player have booths to place on the board
         actionHandler.doChanceCard(currentCard, currentPlayer);
 
-        assertEquals(10, currentPlayer.getBoothsOnHand());
         assertEquals(player2, amusement1.getBoothOwner());
         assertEquals(player2, amusement2.getBoothOwner());
     }
