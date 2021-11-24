@@ -23,6 +23,18 @@ class BoardTest {
     }
 
     @Test
+    void ensureDifferentTypesOfSquares(){
+        String prevSquareType = board.getSquare(1).getClass().getSimpleName();
+
+        for (Square square : board.getAllSquares()){
+            String newSquareType = square.getClass().getSimpleName();
+            if (prevSquareType != newSquareType){
+                assertTrue(true);
+            }
+        }
+    }
+
+    @Test
     void allArrayFieldInit() {
         Square[] arr = board.getAllSquares();
 
