@@ -5,13 +5,7 @@ import MonopolyJunior.*;
 import Utilities.Debug;
 import Utilities.Language;
 
-import java.util.Scanner;
-
 public class GameController {
-
-    GUIController2 guiController2;
-
-    Scanner s = new Scanner(System.in);
 
     ActionHandler actionHandler;
     PositionHandler positionHandler;
@@ -40,7 +34,7 @@ public class GameController {
         positionHandler = new PositionHandler(players, BOARD_SIZE);
         actionHandler = new ActionHandler(this, board, positionHandler);
 
-        // Intialises gui with balances 
+        // Intialises gui with balances
         for (Player p : players){
             GUIController2.setPlayerBalance(p, p.getBalance());
         }
