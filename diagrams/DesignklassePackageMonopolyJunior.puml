@@ -1,0 +1,73 @@
+@startuml
+package MonopolyJunior{
+   class "Monopoly Junior" as Game{
+       -players: Player[]
+       -currentPlayer: Player
+       -board: Board[]
+       -deck: Deck
+       -die: Die
+       -hasWinner: boolean
+       -MIN_NR_OF_PLAYERS: int
+       -MAX_NR_OF_PLAYERS: int
+       -START_MONEY: int
+       -RESTOROOM_POSITION: int
+       -MOVING_PAST_START: int
+       -BOARD_SIZE: int
+       -PENNYBAG_POSITION: int
+
+       -handleField(int position): void
+       -handleChance(): void
+       +setupGame(): void
+       +playGame(): void
+       +initializePlayers(int numOfPlayers): void
+       +takeTurn(): void
+       +chancePlayer(): void
+       +updatePosition(int moveSpaces): void
+       +hasPassStart(int prevPos, int endPos, boolean goingToRestrooms) : void
+       +pay(int amount): void
+       +pay(Player to, int amount): void
+       +paymentPossible(Player player, int amount): boolean
+       +decideAndAnnounceWinner(): void
+
+   }
+   class Die{
+      -faceValue: int
+      -nrOfSides: int
+
+      +roll(): void
+
+   }
+   class Player{
+       -color: Color:
+       -name: String
+       -position: int
+       -balance: int
+       -boothsOnHand: int
+       -goingToRestroom: boolean
+
+       +hasBooth(): boolean
+       +updateBalance(int update): void
+       +useOneBooth(): void
+       +setupStartBalance(int startMoney): void
+   }
+   class Deck{
+      -chanceCardDeck: ChanceCard[]
+      -drawCardCount: int
+
+      +pullCard(): ChanceCard
+      +shuffleDeck(): void
+   }
+   class ChanceCard{
+      -chanceCardText: String
+      -color: String
+      -amountToPay: int
+      -destination: int
+   }
+}
+
+Player -r- Game
+Game -u- Die
+Game -r- Deck
+Deck *- ChanceCard
+
+@enduml
