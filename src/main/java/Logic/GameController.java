@@ -40,6 +40,11 @@ public class GameController {
         positionHandler = new PositionHandler(players, BOARD_SIZE);
         actionHandler = new ActionHandler(this, board, positionHandler);
 
+        // Intialises gui with balances 
+        for (Player p : players){
+            GUIController2.setPlayerBalance(p, p.getBalance());
+        }
+
     }
 
     public void playGame(){
@@ -49,12 +54,6 @@ public class GameController {
     }
 
     private void takeTurn(){
-        // GUI operations
-        for (Player p : players){
-            GUIController2.setPlayerBalance(p, p.getBalance());
-        }
-
-
         // Print players turn and stats
         String name = currentPlayer.getName();
         int balance = currentPlayer.getBalance();
@@ -85,6 +84,11 @@ public class GameController {
 
         // Do action on that field
         actionHandler.doFieldAction(currentPlayer, currentPosition);
+
+        // GUI operations
+        for (Player p : players){
+            GUIController2.setPlayerBalance(p, p.getBalance());
+        }
 
         // Lose check - Only for currentPlayer, since it's not possible for others to be a zero now.
         loseCheck();
