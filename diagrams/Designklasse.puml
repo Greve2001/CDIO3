@@ -162,11 +162,12 @@ package MonopolyJunior{
 
 class "<<singleton>>\nLanguage" as Language
 
-
-    Bank -- Player
-    GameController -- Game
-    PositionHandler -- Game
-    ActionHandler -- Game
+    PositionHandler -- GameController
+    Bank -down- ActionHandler
+    ActionHandler -left- PositionHandler
+    GameController -- Player
+    PositionHandler -- Player
+    ActionHandler -- Player
     Game -up- Die
     Game -right- Deck
     Deck *-right- ChanceCard
