@@ -2,33 +2,27 @@
 'https://plantuml.com/sequence-diagram
 
 autonumber
+hide footbox
 
-actor Spiller #lightyellow
-activate Spiller #lightgreen
+actor Player #lightyellow
+participant ":System" as System
+activate Player #lightgreen
 
-Spiller -[#red]>  System++ #lightgreen: Start Spil
-System  ->  System: Tildel billetboder
-System  ->  System: Tildel penge
-Spiller <[#blue]--  System--:  Vis tekst om at vægle farve
+Player <-- System: Enter the number of players
+Player -> System: Input the number of players
 
-Spiller -[#red]>  System++ #lightgreen: Vægle farve
-System  ->  System: Sætte spillerens position til 1
-Spiller <[#blue]-- System--: Vis bil på start felt
-
-Spiller -[#red]>  System++ #lightgreen: Slå med terning
-System  ->  System: Højste antal øjne starter
-
-loop pengeBeholdning > 0
-    Spiller -[#red]>  System++ #green: Slå med terning
-    System  ->  System: Få faceValue
-    System  ->  System: Ærndre spillerens position
-    System  ->  System: Udføres en handling for hvilket felt spilleren lander på
-    Spiller <[#blue]-- System--: Vis hvor bilen er landet på
-
-    System  ->  System++ #green: Opdate pengeBeholdning
-    Spiller <[#blue]-- System--: Vis opdate pengeBeholdning
+loop all players
+    Player <-- System : Enter the player's name
+    Player -> System : Input player's name
 end
 
-Spiller <[#blue]-- System--: Vis "vinderen" som har højdeste pengeBeholdning
+loop until a player has lost
+    Player <-- System: Asking to throw die
+    Player -> System: Player throw's die
+    Player <-- System: Updated game board
+
+end
+
+Player <-- System: End game
 
 @enduml
