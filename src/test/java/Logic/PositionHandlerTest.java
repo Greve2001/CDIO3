@@ -17,7 +17,7 @@ class PositionHandlerTest {
 
         Player[] arr = new Player[1];
         arr[0] = player;
-        posHandler = new PositionHandler(arr, 32);
+        posHandler = new PositionHandler(arr, 32, 2);
     }
 
 

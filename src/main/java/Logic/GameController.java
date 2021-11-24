@@ -7,10 +7,10 @@ import Utilities.Language;
 
 public class GameController {
 
-    ActionHandler actionHandler;
+    private ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
-    Die die = new Die();
+    private Die die = new Die();
 
     private Player[] players;
     private Player currentPlayer;
@@ -31,7 +31,7 @@ public class GameController {
         String[] playerNames = GUIController2.getPlayers();
         setupPlayers(playerNames);
 
-        positionHandler = new PositionHandler(players, BOARD_SIZE);
+        positionHandler = new PositionHandler(players, BOARD_SIZE, ((Go) board.getSquare(1)).getAmount());
         actionHandler = new ActionHandler(this, board, positionHandler);
 
         // Intialises gui with balances

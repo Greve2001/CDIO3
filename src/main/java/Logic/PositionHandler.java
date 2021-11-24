@@ -6,13 +6,14 @@ import Utilities.Debug;
 
 public class PositionHandler {
 
-    Player[] players;
+    private Player[] players;
 
-    int boardSize;
-    int startBonus = 2; // should get this from controller
+    private int boardSize;
+    private int startBonus;
 
-    public PositionHandler(Player[] players, int boardLength) {
+    public PositionHandler(Player[] players, int boardLength, int startBonus) {
         this.players = players;
+        this.startBonus = startBonus;
         boardSize = boardLength;
     }
 

@@ -30,7 +30,7 @@ class ActionHandlerTest {
         players = new Player[2];
 
         gameController = new GameController();
-        positionHandler = new PositionHandler(players, BOARD_SIZE);
+        positionHandler = new PositionHandler(players, BOARD_SIZE, 2);
         actionHandler = new ActionHandler(gameController, board, positionHandler);
 
         gameController.setupGame(2);
