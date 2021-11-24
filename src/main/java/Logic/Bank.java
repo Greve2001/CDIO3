@@ -3,14 +3,17 @@ package Logic;
 import MonopolyJunior.GUIController2;
 import MonopolyJunior.Player;
 import Utilities.Debug;
+import Utilities.Language;
 
 public class Bank {
 
     public void payToBank(Player fromPlayer, int amount){
         int pay = ableToPay(fromPlayer, amount);
         fromPlayer.updateBalance(-pay);
-        Debug.println(fromPlayer.getName() + ", paid $" + pay + " to the bank");
-        GUIController2.showCenterMessage(fromPlayer.getName() + ", paid $" + pay + " to the bank");
+        Debug.println(fromPlayer.getName() +
+                ", " + Language.getText("paid") + " $" + pay + " " + Language.getText("toTheBank"));
+        GUIController2.showCenterMessage(fromPlayer.getName() +
+                ", " + Language.getText("paid") + " $" + pay + " " + Language.getText("toTheBank"));
     }
 
     public void payToPlayer(Player fromPlayer, Player toPlayer, int amount){
@@ -18,7 +21,8 @@ public class Bank {
         fromPlayer.updateBalance(-pay);
         toPlayer.updateBalance(pay);
         Debug.println(fromPlayer.getName() + ", paid $" + pay + " to " + toPlayer.getName());
-        GUIController2.showCenterMessage(fromPlayer.getName() + ", paid $" + pay + " to " + toPlayer.getName());
+        GUIController2.showCenterMessage(fromPlayer.getName() + ", " +
+                Language.getText("paid") + " $" + pay + " " + Language.getText("to") + " " + toPlayer.getName());
     }
 
     private int ableToPay(Player player, int amount){
