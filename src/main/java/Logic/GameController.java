@@ -31,7 +31,7 @@ public class GameController {
         String[] playerNames = GUIController2.getPlayers();
         setupPlayers(playerNames);
 
-        positionHandler = new PositionHandler(players, BOARD_SIZE, ((Go) board.getSquare(1)).getAmount());
+        positionHandler = new PositionHandler(BOARD_SIZE, ((Go) board.getSquare(1)).getAmount());
         actionHandler = new ActionHandler(this, board, positionHandler);
 
         // Intialises gui with balances

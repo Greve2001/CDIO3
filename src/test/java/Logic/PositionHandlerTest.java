@@ -13,11 +13,7 @@ class PositionHandlerTest {
 
     @BeforeEach
     void setup(){
-        player = new Player("Player");
-
-        Player[] arr = new Player[1];
-        arr[0] = player;
-        posHandler = new PositionHandler(arr, 32, 2);
+        posHandler = new PositionHandler(32, 2);
     }
 
 

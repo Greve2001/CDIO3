@@ -6,13 +6,10 @@ import Utilities.Debug;
 
 public class PositionHandler {
 
-    private Player[] players;
-
     private int boardSize;
     private int startBonus;
 
-    public PositionHandler(Player[] players, int boardLength, int startBonus) {
-        this.players = players;
+    public PositionHandler(int boardLength, int startBonus) {
         this.startBonus = startBonus;
         boardSize = boardLength;
     }
