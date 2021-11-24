@@ -147,4 +147,13 @@ public class Board {
     public Square getSquare(int position) {
         return allSquares[position - OFFSET];
     }
+
+    public String toString() {
+        String result = "";
+        for (Square s : allSquares) {
+            result = result +  s.getPosition() + " " + s.getName() + "\n";
+        }
+
+        return result;
+    }
 }
