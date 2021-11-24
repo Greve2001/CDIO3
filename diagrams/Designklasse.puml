@@ -163,7 +163,7 @@ package MonopolyJunior{
 class "<<singleton>>\nLanguage" as Language
 
     PositionHandler -- GameController
-    Bank -down- ActionHandler
+    Bank -up- ActionHandler
     ActionHandler -left- PositionHandler
     GameController -- Player
     PositionHandler -- Player
