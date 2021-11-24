@@ -3,8 +3,11 @@ package Logic;
 import MonopolyJunior.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+
 
 class GameControllerTest {
 
@@ -23,13 +26,23 @@ class GameControllerTest {
     }
 
     @Test
-    void setupGameTest(){
+    void testAllowedNumberOfPlayers() throws NoSuchFieldException, IllegalAccessException {
 
-        int amountOfPlayer = 4;
+        int[] numOfPlayers = {0, 1, 2, 3, 4, 5, 6};
+        int[] expectednumPlayers = {0, 0, 2, 3, 4, 0, 0};
 
-        gameController.setupGame(amountOfPlayer);
+        for (int i = 0; i < numOfPlayers.length; i++) {
 
+            String[] playerNames = new String[numOfPlayers[i]]; // Just to use function
+            for (int j = 0; j < numOfPlayers[i]; j++) {
+                playerNames[j] = Integer.toString(j);
+
+            }
+            gameController.setupPlayers(playerNames);
+
+            int acutalNumOfPlayers = gameController.getPlayers().length;
+
+            assertEquals(expectednumPlayers[i], acutalNumOfPlayers);
+        }
     }
-
-
 }

@@ -136,18 +136,24 @@ public class GameController {
 
 
     // *** Player Handling *** //
-    private void setupPlayers(String[] playerNames){
-        players = new Player[playerNames.length];
+    public void setupPlayers(String[] playerNames){
+        if (playerNames.length >= 2 && playerNames.length <= 4){
+            players = new Player[playerNames.length];
 
-        for (int player = 0; player < playerNames.length; player++) {
-            players[player] = new Player(playerNames[player]);
-            players[player].setupStartBalance(START_MONEY);
-            players[player].setBooths( (playerNames.length > 2) ? MIN_BOOTHS : MAX_BOOTHS );
+            for (int player = 0; player < playerNames.length; player++) {
+                players[player] = new Player(playerNames[player]);
+                players[player].setupStartBalance(START_MONEY);
+                players[player].setBooths( (playerNames.length > 2) ? MIN_BOOTHS : MAX_BOOTHS );
+            }
+
+            currentPlayer = players[0]; // Default change later
+
+            Debug.println("~Players Initialized~");
+        } else{
+            players = new Player[]{};
+            Debug.println("Incorrect amount of player, should be between 2-4");
         }
 
-        currentPlayer = players[0]; // Default change later
-
-        Debug.println("~Players Initialized~");
     }
     
     private void changeTurn(){
@@ -166,5 +172,9 @@ public class GameController {
 
     public void giveExtraTurn(){
         extraTurn = true;
+    }
+
+    public Player[] getPlayers(){ // For testing.
+        return players;
     }
 }
