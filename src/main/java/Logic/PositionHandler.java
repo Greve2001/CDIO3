@@ -6,12 +6,12 @@ import Utilities.Debug;
 
 public class PositionHandler {
 
-    private int boardSize;
-    private int startBonus;
+    private final int BOARDSIZE;
+    private final int STARTBONUS;
 
-    public PositionHandler(int boardLength, int startBonus) {
-        this.startBonus = startBonus;
-        boardSize = boardLength;
+    public PositionHandler(int boardLength, int STARTBONUS) {
+        this.STARTBONUS = STARTBONUS;
+        this.BOARDSIZE = boardLength;
     }
 
     public void movePlayer(Player player, int spacesToMove){
@@ -19,15 +19,15 @@ public class PositionHandler {
         int newPos;
         if (spacesToMove == Math.abs(spacesToMove)) {
             // Make sure player loops on board
-            if (endPos > boardSize) {
-                newPos = endPos - boardSize;
+            if (endPos > BOARDSIZE) {
+                newPos = endPos - BOARDSIZE;
                 payBonus(player);
             } else {
                 newPos = endPos;
             }
         }else{
             if (endPos < 0)
-                newPos = endPos + boardSize;
+                newPos = endPos + BOARDSIZE;
             else
                 newPos = endPos;
         }
@@ -36,19 +36,19 @@ public class PositionHandler {
 
     }
 
-    public void setPlayerPosition(Player player, int endPos, boolean getsStartBonus){
+    public void setPlayerPosition(Player player, int endPos, boolean getsSTARTBONUS){
         int prevPos = player.getPosition();
 
         // Make sure start is passed, and that the player is allowed a bonus.
-        if (getsStartBonus && endPos < prevPos) payBonus(player);
+        if (getsSTARTBONUS && endPos < prevPos) payBonus(player);
 
         player.setPosition(endPos);
         GUIController2.movePlayer(player, endPos);
     }
 
     private void payBonus(Player player){
-        player.updateBalance(startBonus);
-        Debug.println(player.getName() + ", just got a bonus of " + startBonus);
+        player.updateBalance(STARTBONUS);
+        Debug.println(player.getName() + ", just got a bonus of " + STARTBONUS);
     }
 }
 
