@@ -15,6 +15,7 @@ public class Language {
 
     private Language() {
         language = System.getProperty("user.language");
+        language = "da";
 
         // Tries to set language to system language. If language not found in ressources it will be set to en.json
         try {
