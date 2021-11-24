@@ -17,7 +17,7 @@ class GameControllerTest {
     void setUp() throws NoSuchMethodException {
 
         gameController = new GameController();
-        gameController.setupGame(4);
+        gameController.setupGame();
 
         Method doChanceCardMethod = ActionHandler.class.getDeclaredMethod("doChanceCard", ChanceCard.class, Player.class);
         doChanceCardMethod.setAccessible(true);

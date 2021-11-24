@@ -10,7 +10,7 @@ public class GameController {
     private ActionHandler actionHandler;
     PositionHandler positionHandler;
     Board board = new Board();
-    private Die die = new Die();
+    private final Die die = new Die();
 
     private Player[] players;
     private Player currentPlayer;
@@ -18,13 +18,11 @@ public class GameController {
     boolean gameOver = false;
     boolean extraTurn = false;
 
-    final int START_MONEY = 31;
-    final int MAX_BOOTHS = 12;
-    final int MIN_BOOTHS = 10;
+    private final int START_MONEY = 31;
 
     int BOARD_SIZE = board.getAllSquares().length;
 
-    public void setupGame(int amountOfPlayers){
+    public void setupGame(){
         new GUIController2(board.getAllSquares());
 
         GUIController2.createPlayers(START_MONEY);
@@ -38,7 +36,6 @@ public class GameController {
         for (Player p : players){
             GUIController2.setPlayerBalance(p, p.getBalance());
         }
-
     }
 
     public void playGame(){
@@ -61,7 +58,6 @@ public class GameController {
         // Get action from player
         Debug.print("Please press ENTER to roll");
         GUIController2.getPlayerAction(currentPlayer, ", " + Language.getText("pleaseRoll"));
-        //s.nextLine(); //TODO SLET!
 
         // Roll die, get value.
         die.roll();
@@ -136,6 +132,8 @@ public class GameController {
 
     // *** Player Handling *** //
     public void setupPlayers(String[] playerNames){
+        final int MAX_BOOTHS = 12;
+        final int MIN_BOOTHS = 10;
         if (playerNames.length >= 2 && playerNames.length <= 4){
             players = new Player[playerNames.length];
 
