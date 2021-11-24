@@ -111,8 +111,13 @@ public class GUIController2 {
     }
 
     public static void displayChanceCard(ChanceCard card) {
-        gui.displayChanceCard("CHANCE CARD: \n" + card.toString() + "\n" +
-                card.getColor());
+        if (card.getColor() != null){
+            gui.displayChanceCard( Language.getText("chanceCard") + "\n" + card.toString() + "\n" +
+                    card.getColor());
+        }else{
+            gui.displayChanceCard(Language.getText("chanceCard") + "\n" + card.toString());
+        }
+
     }
 
     public static void getPlayerAction(Player player, String str){
