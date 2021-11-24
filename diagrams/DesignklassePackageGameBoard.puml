@@ -1,0 +1,57 @@
+@startuml
+hide empty members
+skinparam groupInheritance 2
+package "Game Board" {
+    class Board{
+    -squares: Square[]
+        -pennyBagPosition: int
+
+        +getSquare(): Square
+        +addBooth(Player, position:int) : void
+        +removeBooth(position): void
+        +hasMonopoly(): boolean
+
+        -readCSV(): void
+    }
+
+    class "<<abstract>>\nSquare" as Square{
+        -name: String
+        -position: int
+        -Effect?!
+    }
+        class Amusement{
+          -boothOwner: Player
+          -COLOR: String
+          -PRICE: int
+        }
+        class Restrooms
+        class Go{
+          -AMOUNT: int
+        }
+        'before was start
+        class Railroad{
+           -COLOR: String
+        }
+        class Chance
+        class PennyBag{
+           amountOfMoneyPlaced: int
+
+           +addMoney(int amount): void
+           +withDraw(): int
+
+        }
+        class PayForSee{
+           -AMOUNT: int
+        }
+}
+
+    Board *-down- Square
+    Square <|-- Restrooms
+    Square <|-- Amusement
+    Square <|-- Railroad
+    Square <|-- PayForSee
+    Square <|-- PennyBag
+    Square <|-- Go
+    Square <|-- Chance
+
+@enduml
