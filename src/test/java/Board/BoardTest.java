@@ -28,7 +28,7 @@ class BoardTest {
 
         for (Square square : board.getAllSquares()){
             String newSquareType = square.getClass().getSimpleName();
-            if (prevSquareType != newSquareType){
+            if (!prevSquareType.equals(newSquareType)){
                 assertTrue(true);
             }
         }
