@@ -34,11 +34,13 @@ class PositionHandlerTest {
     // *** SetPlayer method *** //
     @Test
     void aroundToStartBonusBorderCaseSetPlayer(){
-        posHandler.setPlayerPosition(player, 0, true);
+        player.setPosition(31);
+
+        posHandler.setPlayerPosition(player, 1, true);
 
         // Position
         int actualPos = player.getPosition();
-        int expectedPos = 0;
+        int expectedPos = 1;
         assertEquals(expectedPos, actualPos);
 
         // Start bonus applied
@@ -49,11 +51,11 @@ class PositionHandlerTest {
 
     @Test
     void aroundToStartNoBonusBorderCaseSetPlayer(){
-        posHandler.setPlayerPosition(player, 0, false);
+        posHandler.setPlayerPosition(player, 1, false);
 
         // Position
         int actualPos = player.getPosition();
-        int expectedPos = 0;
+        int expectedPos = 1;
         assertEquals(expectedPos, actualPos);
 
         // Start bonus applied
