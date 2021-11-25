@@ -8,12 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PositionHandlerTest {
 
-    Player player;
-    PositionHandler posHandler;
-    GameController g = new GameController();
+    private Player player;
+    private PositionHandler posHandler;
+    private GameController g = new GameController();
 
     @BeforeEach
-    void setup(){
+    void setup() {
         g.setupGame();
         player = new Player("test");
         posHandler = new PositionHandler(32, 2);
@@ -21,7 +21,7 @@ class PositionHandlerTest {
 
 
     @Test
-    void normalCaseSetPlayer(){
+    void normalCaseSetPlayer() {
         posHandler.setPlayerPosition(player, 7, true);
 
         int actual = player.getPosition();
@@ -33,7 +33,7 @@ class PositionHandlerTest {
 
     // *** SetPlayer method *** //
     @Test
-    void aroundToStartBonusBorderCaseSetPlayer(){
+    void aroundToStartBonusBorderCaseSetPlayer() {
         player.setPosition(31);
 
         posHandler.setPlayerPosition(player, 1, true);
@@ -50,7 +50,7 @@ class PositionHandlerTest {
     }
 
     @Test
-    void aroundToStartNoBonusBorderCaseSetPlayer(){
+    void aroundToStartNoBonusBorderCaseSetPlayer() {
         posHandler.setPlayerPosition(player, 1, false);
 
         // Position
@@ -65,7 +65,7 @@ class PositionHandlerTest {
     }
 
     @Test
-    void aroundToEndBonusBorderCaseSetPlayer(){
+    void aroundToEndBonusBorderCaseSetPlayer() {
         posHandler.setPlayerPosition(player, 32, true);
 
         // Position
@@ -80,7 +80,7 @@ class PositionHandlerTest {
     }
 
     @Test
-    void aroundToEndNoBonusBorderCaseSetPlayer(){
+    void aroundToEndNoBonusBorderCaseSetPlayer() {
         posHandler.setPlayerPosition(player, 32, false);
 
         // Position
@@ -95,10 +95,9 @@ class PositionHandlerTest {
     }
 
 
-
     // *** MovePlayer method *** //
     @Test
-    void normalCaseMovePlayer(){
+    void normalCaseMovePlayer() {
         posHandler.movePlayer(player, 5);
 
         // Position
@@ -108,7 +107,7 @@ class PositionHandlerTest {
     }
 
     @Test
-    void sequentialCasePlayerMoves(){
+    void sequentialCasePlayerMoves() {
         posHandler.movePlayer(player, 5);
         int actualPos = player.getPosition();
         int expectedPos = 6; // 1+5
@@ -126,7 +125,7 @@ class PositionHandlerTest {
     }
 
     @Test
-    void moveAcrossStartCase(){
+    void moveAcrossStartCase() {
         posHandler.setPlayerPosition(player, 30, false);
 
         posHandler.movePlayer(player, 5);
@@ -142,8 +141,9 @@ class PositionHandlerTest {
         assertEquals(expectedBalance, actualBalance);
     }
 
-    @Test // Hvad forventer vi, kan man bevæge sig bagud????
-    void moveNegativeSpacesCase(){
+    @Test
+        // Hvad forventer vi, kan man bevæge sig bagud????
+    void moveNegativeSpacesCase() {
         posHandler.movePlayer(player, -5);
 
         // Position

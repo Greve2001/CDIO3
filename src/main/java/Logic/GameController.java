@@ -8,25 +8,25 @@ import Utilities.Language;
 public class GameController {
 
     private ActionHandler actionHandler;
-    PositionHandler positionHandler;
-    Board board = new Board();
+    private PositionHandler positionHandler;
+    private Board board = new Board();
     private final Die die = new Die();
 
     private Player[] players;
     private Player currentPlayer;
 
-    boolean gameOver = false;
-    boolean extraTurn = false;
+    private boolean gameOver = false;
+    private boolean extraTurn = false;
 
     private final int START_MONEY = 31;
 
     int BOARD_SIZE = board.getAllSquares().length;
 
     public void setupGame(){
-        new GUIController2(board.getAllSquares());
+        new GUIController(board.getAllSquares());
 
-        GUIController2.createPlayers(START_MONEY);
-        String[] playerNames = GUIController2.getPlayers();
+        GUIController.createPlayers(START_MONEY);
+        String[] playerNames = GUIController.getPlayers();
         setupPlayers(playerNames);
 
         positionHandler = new PositionHandler(BOARD_SIZE, ((Go) board.getSquare(1)).getAmount());
@@ -34,7 +34,7 @@ public class GameController {
 
         // Intialises gui with balances
         for (Player p : players){
-            GUIController2.setPlayerBalance(p, p.getBalance());
+            GUIController.setPlayerBalance(p, p.getBalance());
         }
     }
 
@@ -57,27 +57,27 @@ public class GameController {
 
         // Get action from player
         Debug.print("Please press ENTER to roll");
-        GUIController2.getPlayerAction(currentPlayer, ", " + Language.getText("pleaseRoll"));
+        GUIController.getPlayerAction(currentPlayer, ", " + Language.getText("pleaseRoll"));
 
         // Roll die, get value.
         die.roll();
         int spacesToMove = die.getFaceValue();
         Debug.println("You rolled: " + spacesToMove);
-        GUIController2.showDie(spacesToMove);
+        GUIController.showDie(spacesToMove);
 
         // Move player position
         positionHandler.movePlayer(currentPlayer, spacesToMove);
 
         // Get new position
         int currentPosition = currentPlayer.getPosition();
-        GUIController2.movePlayer(currentPlayer, currentPosition);
+        GUIController.movePlayer(currentPlayer, currentPosition);
 
         // Do action on that field
         actionHandler.doFieldAction(currentPlayer, currentPosition);
 
         // GUI operations
         for (Player p : players){
-            GUIController2.setPlayerBalance(p, p.getBalance());
+            GUIController.setPlayerBalance(p, p.getBalance());
         }
 
         // Lose check - Only for currentPlayer, since it's not possible for others to be a zero now.
@@ -126,7 +126,7 @@ public class GameController {
         }
         //announce the winner
         Debug.println(announce.toString());
-        GUIController2.showCenterMessage(announce.toString());
+        GUIController.showCenterMessage(announce.toString());
     }
 
 

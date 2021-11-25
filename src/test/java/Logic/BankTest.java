@@ -1,6 +1,5 @@
 package Logic;
 
-import MonopolyJunior.GUIController2;
 import MonopolyJunior.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,14 +1,14 @@
 package Board;
 
-public class PayToSee extends Square{
-    private final int amount;
+public class PayToSee extends Square {
+    private final int AMOUNT;
 
-    public PayToSee(String name, int position, int amount) {
+    public PayToSee(String name, int position, int AMOUNT) {
         super(name, position);
-        this.amount = amount;
+        this.AMOUNT = AMOUNT;
     }
 
     public int getAmount() {
-        return amount;
+        return AMOUNT;
     }
 }

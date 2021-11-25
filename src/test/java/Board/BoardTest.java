@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
-    Board board;
+    private Board board;
 
     @BeforeEach
     void setUp() {
@@ -23,12 +23,12 @@ class BoardTest {
     }
 
     @Test
-    void ensureDifferentTypesOfSquares(){
+    void ensureDifferentTypesOfSquares() {
         String prevSquareType = board.getSquare(1).getClass().getSimpleName();
 
-        for (Square square : board.getAllSquares()){
+        for (Square square : board.getAllSquares()) {
             String newSquareType = square.getClass().getSimpleName();
-            if (!prevSquareType.equals(newSquareType)){
+            if (!prevSquareType.equals(newSquareType)) {
                 assertTrue(true);
             }
         }
@@ -40,7 +40,7 @@ class BoardTest {
 
         int index = 1;
         for (Square square : arr) {
-            if(square == null)
+            if (square == null)
                 System.out.println("Index: " + index + " " + square);
             index++;
 

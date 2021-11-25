@@ -1,14 +1,14 @@
 package Board;
 
 public class Railroad extends Square {
-    private final String color;
+    private final String COLOR;
 
-    public Railroad(String name, int position, String color) {
+    public Railroad(String name, int position, String COLOR) {
         super(name, position);
-        this.color = color;
+        this.COLOR = COLOR;
     }
 
     public String getColor() {
-        return color;
+        return COLOR;
     }
 }

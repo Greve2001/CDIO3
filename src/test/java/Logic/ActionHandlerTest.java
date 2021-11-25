@@ -39,7 +39,7 @@ class ActionHandlerTest {
         player2 = new Player("player2");
         player3 = new Player("player3");
 
-        }
+    }
 
     //test regarding free ticket booth chance cards.
     //in this test, the amusement with the color magenta is used, witch have position 12 & 13 on the board.
@@ -59,7 +59,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard2(){ //if the first are owned and the second isn't
+    void drawAFreeTicketBoothCard2() { //if the first are owned and the second isn't
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -76,7 +76,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard3(){ //if the second are owned and the first isn't
+    void drawAFreeTicketBoothCard3() { //if the second are owned and the first isn't
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -93,7 +93,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard4(){ //if both are owned, but there isn't monopoly
+    void drawAFreeTicketBoothCard4() { //if both are owned, but there isn't monopoly
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -111,8 +111,8 @@ class ActionHandlerTest {
     }
 
     @Test
-    //this test will result in drawing a new chanceCard, so the result may vary
-    void drawAFreeTicketBoothCard5(){ //if monopoly eksists
+        //this test will result in drawing a new chanceCard, so the result may vary
+    void drawAFreeTicketBoothCard5() { //if monopoly eksists
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -129,7 +129,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard6(){ //if it's possible to place a booth, when player doesn't have one
+    void drawAFreeTicketBoothCard6() { //if it's possible to place a booth, when player doesn't have one
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -144,7 +144,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard7(){ //if you own amusement1, and 2 is owned by another player
+    void drawAFreeTicketBoothCard7() { //if you own amusement1, and 2 is owned by another player
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -164,7 +164,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAFreeTicketBoothCard8(){ //if it's possible to play a booth, but player doesn't have one
+    void drawAFreeTicketBoothCard8() { //if it's possible to play a booth, but player doesn't have one
         currentCard = new ChanceCard("Free ticket booth", "magenta"); //the chanceCard we are testing
 
         Amusement amusement1 = (Amusement) board.getSquare(12); //Amusement that match the color
@@ -185,7 +185,7 @@ class ActionHandlerTest {
 
     //test regarding chanceCard that make the player move.
     @Test
-    void drawAMoveChanceCard(){ //moving to WATER SHOW
+    void drawAMoveChanceCard() { //moving to WATER SHOW
         currentCard = new ChanceCard("GO to the FIREWORKS and pay 2 dollars", 9);
 
         currentPlayer.setPosition(2);
@@ -206,7 +206,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawAMoveChanceCard2(){ //moving to WATER SHOW and pass start
+    void drawAMoveChanceCard2() { //moving to WATER SHOW and pass start
         currentCard = new ChanceCard("GO to the FIREWORKS and pay 2 dollars", 9);
 
         currentPlayer.setPosition(12);
@@ -226,7 +226,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawMoveToRestroom(){ //moving to Restroom and pass start
+    void drawMoveToRestroom() { //moving to Restroom and pass start
         currentCard = new ChanceCard("Pay 3 dollars to take the tramway to the restrooms", 11, 3);
 
         currentPlayer.setPosition(2);
@@ -246,7 +246,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawMoveToRestroomAndPastStart(){ //moving to Restroom and pass start
+    void drawMoveToRestroomAndPastStart() { //moving to Restroom and pass start
         currentCard = new ChanceCard("Pay 3 dollars to take the tramway to the restrooms", 11, 3);
 
         currentPlayer.setPosition(18);
@@ -267,7 +267,7 @@ class ActionHandlerTest {
 
     //using ChanceCard to move to amusements
     @Test
-    void drawCardMoveToWaterSlideWhileNotOwned(){
+    void drawCardMoveToWaterSlideWhileNotOwned() {
         currentCard = new ChanceCard("GO to the WATER SLIDE", 15);
 
         currentPlayer.setPosition(2);
@@ -298,7 +298,7 @@ class ActionHandlerTest {
     }
 
     @Test
-    void drawCardMoveToWaterSlideWhileNotOwnedAndPassingStart(){
+    void drawCardMoveToWaterSlideWhileNotOwnedAndPassingStart() {
         currentCard = new ChanceCard("GO to the WATER SLIDE", 15);
 
         currentPlayer.setPosition(21);
@@ -330,13 +330,13 @@ class ActionHandlerTest {
 
     //testing of the doFieldAction method
     @Test
-    void landingOnUnownedAmusement(){
+    void landingOnUnownedAmusement() {
         int position = 28;
         currentPlayer.setPosition(position); //using bumpercards for test
         currentPlayer.setBalance(10);
         currentPlayer.setBooths(10);
 
-        actionHandler.doFieldAction(currentPlayer , position);
+        actionHandler.doFieldAction(currentPlayer, position);
 
         //balance check
         int expected = 6;
@@ -355,13 +355,13 @@ class ActionHandlerTest {
     }
 
     @Test
-    void landingOnUnownedAmusementAndHaveNoBooths(){
+    void landingOnUnownedAmusementAndHaveNoBooths() {
         int position = 28;
         currentPlayer.setPosition(position); //using bumpercards for test
         currentPlayer.setBalance(10);
         currentPlayer.setBooths(0);
 
-        actionHandler.doFieldAction(currentPlayer , position);
+        actionHandler.doFieldAction(currentPlayer, position);
 
         //balance check
         int expected = 6;

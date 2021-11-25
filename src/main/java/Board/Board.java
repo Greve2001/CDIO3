@@ -6,7 +6,7 @@ import Utilities.OverloadList;
 
 public class Board {
     private final int OFFSET = 1;
-    private final Square[] allSquares;
+    private final Square[] ALL_SQUARES;
     private int pennyBagPosition;
 
     public Board() {
@@ -20,7 +20,7 @@ public class Board {
 
         OverloadList listOfAllSquareAndProps = reader.getFILE_AS_LIST_OF_ARR();
 
-        allSquares = new Square[listOfAllSquareAndProps.size()];
+        ALL_SQUARES = new Square[listOfAllSquareAndProps.size()];
 
         // initialises the objects in an array based on the hashmap
         for (int i = 0; i < listOfAllSquareAndProps.size(); i++) {
@@ -28,52 +28,52 @@ public class Board {
 
             // Column names is expected to be in the following order in the columnNames:
             int position = 0, type = 1, name = 2, amountGiven = 3, price = 4, color = 5, amountToPay = 6, dest = 7;
-            
+
             switch (currentSquare[type]) {
                 case "GO!":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new Go(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]),
                                     Integer.parseInt(currentSquare[amountGiven]));
                     break;
                 case "Amusement":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new Amusement(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]),
                                     currentSquare[color],
                                     Integer.parseInt(currentSquare[price]));
                     break;
                 case "Chance":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new Chance(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]));
                     break;
                 case "Railroad":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new Railroad(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]),
                                     currentSquare[color]);
                     break;
                 case "PayToSee":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new PayToSee(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]),
                                     Integer.parseInt(currentSquare[amountToPay]));
                     break;
                 case "GoTo":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new GoToRestrooms(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]),
                                     Integer.parseInt(currentSquare[dest]));
                     break;
                 case "GetMoney":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new PennyBag(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]));
                     pennyBagPosition = Integer.parseInt(currentSquare[position]);
                     break;
                 case "Restrooms":
-                    allSquares[Integer.parseInt(currentSquare[position]) - OFFSET] =
+                    ALL_SQUARES[Integer.parseInt(currentSquare[position]) - OFFSET] =
                             new Restrooms(currentSquare[name],
                                     Integer.parseInt(currentSquare[position]));
                     break;
@@ -103,13 +103,13 @@ public class Board {
         Amusement amusement = (Amusement) getSquare(position);
         boolean result = true;
 
-        for (int i = 0; i < allSquares.length; i++) {
-            if (allSquares[i].getClass().getSimpleName().equals("Amusement")) {
-                if (i + OFFSET != position && ((Amusement) allSquares[i]).getColor().equalsIgnoreCase(amusement.getColor())) {
+        for (int i = 0; i < ALL_SQUARES.length; i++) {
+            if (ALL_SQUARES[i].getClass().getSimpleName().equals("Amusement")) {
+                if (i + OFFSET != position && ((Amusement) ALL_SQUARES[i]).getColor().equalsIgnoreCase(amusement.getColor())) {
                     if (amusement.getBoothOwner() == null ||
-                            ((Amusement) allSquares[i]).getBoothOwner() == null) {
+                            ((Amusement) ALL_SQUARES[i]).getBoothOwner() == null) {
                         result = false;
-                    } else if (!(((Amusement) allSquares[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
+                    } else if (!(((Amusement) ALL_SQUARES[i]).getBoothOwner().equals(amusement.getBoothOwner()))) {
 
                         result = false;
                     }
@@ -125,8 +125,8 @@ public class Board {
         OverloadList listOfPositions = new OverloadList("int");
 
         // Checks the entire array in case there is implemented more than two Amusements of the same color
-        for (Square square : allSquares) {
-            if(square instanceof Amusement) {
+        for (Square square : ALL_SQUARES) {
+            if (square instanceof Amusement) {
                 if (((Amusement) square).getColor().equalsIgnoreCase(color)) {
                     listOfPositions.add((square.getPosition()));
                 }
@@ -141,19 +141,18 @@ public class Board {
     }
 
     public Square[] getAllSquares() {
-        return allSquares;
+        return ALL_SQUARES;
     }
 
     public Square getSquare(int position) {
-        return allSquares[position - OFFSET];
+        return ALL_SQUARES[position - OFFSET];
     }
 
     public String toString() {
         String result = "";
-        for (Square s : allSquares) {
-            result = result +  s.getPosition() + " " + s.getName() + "\n";
+        for (Square s : ALL_SQUARES) {
+            result = result + s.getPosition() + " " + s.getName() + "\n";
         }
-
         return result;
     }
 }

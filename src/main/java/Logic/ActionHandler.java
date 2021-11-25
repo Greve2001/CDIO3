@@ -6,8 +6,8 @@ import Utilities.Debug;
 
 public class ActionHandler {
 
-    Deck deck = new Deck();
-    Bank bank = new Bank();
+    private Deck deck = new Deck();
+    private Bank bank = new Bank();
 
     private int PENNYBAG_POSITION;
 
@@ -46,7 +46,7 @@ public class ActionHandler {
                     if (currentPlayer.hasBooth()) {
                         // add booth to board
                         board.addBooth(currentPlayer, position);
-                        GUIController2.showTicketBooth(currentPlayer.getName(), position, true);
+                        GUIController.showTicketBooth(currentPlayer.getName(), position, true);
                         // Remove one booth
                         currentPlayer.useOneBooth();
                     }
@@ -84,7 +84,7 @@ public class ActionHandler {
                 // Pay 3$ and adds them to pennybag
                 bank.payToBank(currentPlayer, 3);
                 pennyBag.addMoney(3);
-                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
+                GUIController.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
 
                 // Change position
                 positionHandler.setPlayerPosition(currentPlayer, goToRestrooms.getDestination(), false);
@@ -97,7 +97,7 @@ public class ActionHandler {
             case "PennyBag":
                 // Get all the money saved up
                 currentPlayer.updateBalance(pennyBag.withDraw());
-                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
+                GUIController.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
                 break;
 
             case "PayToSee":
@@ -105,7 +105,7 @@ public class ActionHandler {
                 // Add money to pennybag
                 bank.payToBank(currentPlayer, payToSee.getAmount());
                 pennyBag.addMoney(payToSee.getAmount());
-                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
+                GUIController.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
 
                 break;
 
@@ -123,7 +123,7 @@ public class ActionHandler {
 
         Debug.println("You pulled a chance card");
 
-        GUIController2.displayChanceCard(card);
+        GUIController.displayChanceCard(card);
 
 
         // Determine if free ticketbooth card or move-somewhere card.
@@ -143,7 +143,7 @@ public class ActionHandler {
             if (dest == 11){
                 PennyBag pennyBag = (PennyBag)board.getSquare(PENNYBAG_POSITION);
                 pennyBag.addMoney(amount);
-                GUIController2.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
+                GUIController.setPennyBagValue(pennyBag.getPosition(), pennyBag.getAmountOfMoneyPlaced());
 
                 positionHandler.setPlayerPosition(currentPlayer, dest, false);
                 return;
@@ -169,7 +169,7 @@ public class ActionHandler {
                     // TODO use utility class to get a choice from players
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition()); // Default, remove with extended features
-                    GUIController2.showTicketBooth(currentPlayer.getName(), square1.getPosition(), true);
+                    GUIController.showTicketBooth(currentPlayer.getName(), square1.getPosition(), true);
                 }
                 // If either the first one is free, or you own the second, buy the first
                 else if (square1.getBoothOwner() == null || square2.getBoothOwner() == currentPlayer) {
@@ -177,13 +177,13 @@ public class ActionHandler {
                     if (square1.getBoothOwner() != null){
                         square1.getBoothOwner().getOneBooth();
                         board.removeBooth(square1.getPosition());
-                        GUIController2.showTicketBooth(null, square1.getPosition(), false);
+                        GUIController.showTicketBooth(null, square1.getPosition(), false);
 
                     }
 
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition());
-                    GUIController2.showTicketBooth(currentPlayer.getName(), square1.getPosition(), true);
+                    GUIController.showTicketBooth(currentPlayer.getName(), square1.getPosition(), true);
 
                 }
                 // If either the secoind one is free, or you own the first, buy the second
@@ -192,19 +192,19 @@ public class ActionHandler {
                     if (square2.getBoothOwner() != null){
                         square2.getBoothOwner().getOneBooth();
                         board.removeBooth(square2.getPosition());
-                        GUIController2.showTicketBooth(null, square1.getPosition(), false);
+                        GUIController.showTicketBooth(null, square1.getPosition(), false);
 
                     }
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square2.getPosition()); // Deafult, remove with extended features
-                    GUIController2.showTicketBooth(currentPlayer.getName(), square2.getPosition(), true);
+                    GUIController.showTicketBooth(currentPlayer.getName(), square2.getPosition(), true);
 
                 } else { // Both are taken with different colored booths
                     // TODO use utility class to get a choice from players
                     // Quick solution:
                     currentPlayer.useOneBooth();
                     board.addBooth(currentPlayer, square1.getPosition()); // Default, remove with extended features
-                    GUIController2.showTicketBooth(currentPlayer.getName(), square2.getPosition(), true);
+                    GUIController.showTicketBooth(currentPlayer.getName(), square2.getPosition(), true);
 
                 }
             } else if (monopoly) { // There is monopoly, draw new card

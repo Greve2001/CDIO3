@@ -2,21 +2,20 @@ package Board;
 
 import MonopolyJunior.Player;
 
-public class Amusement extends Square{
+public class Amusement extends Square {
     private final String color;
-    private final int price;
+    private final int PRICE;
     private Player boothOwner = null;
 
-    public Amusement(String name, int position, String color, int price) {
+    public Amusement(String name, int position, String color, int PRICE) {
         super(name, position);
         this.color = color;
-        this.price = price;
+        this.PRICE = PRICE;
     }
 
     public int getPrice() {
-        return price;
+        return PRICE;
     }
-
 
     public String getColor() {
         return color;

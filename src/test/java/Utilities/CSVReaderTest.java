@@ -8,7 +8,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CSVReaderTest {
-    CSVReader reader;
+    private CSVReader reader;
 
     @BeforeEach
     void setUp() {
@@ -18,8 +18,8 @@ class CSVReaderTest {
     @Test
     void getColumnNames() {
         String[] expected = {"Position", "Type",
-                "Name","AmountGiven","Price","Color",
-                "AmountToPay","Dest"};
+                "Name", "AmountGiven", "Price", "Color",
+                "AmountToPay", "Dest"};
 
         String[] actual = reader.getColumnNames();
 

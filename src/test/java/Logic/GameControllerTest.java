@@ -1,12 +1,8 @@
 package Logic;
 
-import MonopolyJunior.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 
 class GameControllerTest {
@@ -14,22 +10,16 @@ class GameControllerTest {
     GameController gameController;
 
     @BeforeEach
-    void setUp() throws NoSuchMethodException {
-
+    void setUp() {
         gameController = new GameController();
         gameController.setupGame();
-
-        Method doChanceCardMethod = ActionHandler.class.getDeclaredMethod("doChanceCard", ChanceCard.class, Player.class);
-        doChanceCardMethod.setAccessible(true);
-        ActionHandler actionHandler = new ActionHandler(gameController, gameController.board, gameController.positionHandler);
-        
     }
 
     @Test
-    void testAllowedNumberOfPlayers() throws NoSuchFieldException, IllegalAccessException {
+    void testAllowedNumberOfPlayers() {
 
         int[] numOfPlayers = {0, 1, 2, 3, 4, 5, 6};
-        int[] expectednumPlayers = {0, 0, 2, 3, 4, 0, 0};
+        int[] expectedNumPlayers = {0, 0, 2, 3, 4, 0, 0};
 
         for (int i = 0; i < numOfPlayers.length; i++) {
 
@@ -40,9 +30,9 @@ class GameControllerTest {
             }
             gameController.setupPlayers(playerNames);
 
-            int acutalNumOfPlayers = gameController.getPlayers().length;
+            int actualNumOfPlayers = gameController.getPlayers().length;
 
-            assertEquals(expectednumPlayers[i], acutalNumOfPlayers);
+            assertEquals(expectedNumPlayers[i], actualNumOfPlayers);
         }
     }
 }

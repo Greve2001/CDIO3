@@ -1,6 +1,6 @@
 package Logic;
 
-import MonopolyJunior.GUIController2;
+import MonopolyJunior.GUIController;
 import MonopolyJunior.Player;
 import Utilities.Debug;
 
@@ -14,7 +14,7 @@ public class PositionHandler {
         this.BOARDSIZE = boardLength;
     }
 
-    public void movePlayer(Player player, int spacesToMove){
+    public void movePlayer(Player player, int spacesToMove) {
         int endPos = player.getPosition() + spacesToMove;
         int newPos;
         if (spacesToMove == Math.abs(spacesToMove)) {
@@ -25,28 +25,28 @@ public class PositionHandler {
             } else {
                 newPos = endPos;
             }
-        }else{
+        } else {
             if (endPos < 0)
                 newPos = endPos + BOARDSIZE;
             else
                 newPos = endPos;
         }
         player.setPosition(newPos);
-        GUIController2.movePlayer(player, newPos);
+        GUIController.movePlayer(player, newPos);
 
     }
 
-    public void setPlayerPosition(Player player, int endPos, boolean getsSTARTBONUS){
+    public void setPlayerPosition(Player player, int endPos, boolean getsSTARTBONUS) {
         int prevPos = player.getPosition();
 
         // Make sure start is passed, and that the player is allowed a bonus.
         if (getsSTARTBONUS && endPos < prevPos) payBonus(player);
 
         player.setPosition(endPos);
-        GUIController2.movePlayer(player, endPos);
+        GUIController.movePlayer(player, endPos);
     }
 
-    private void payBonus(Player player){
+    private void payBonus(Player player) {
         player.updateBalance(STARTBONUS);
         Debug.println(player.getName() + ", just got a bonus of " + STARTBONUS);
     }

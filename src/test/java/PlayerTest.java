@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
-        Player player = new Player("Name");
+    Player player = new Player("Name");
 
     @Test
     void HasBoothEqualsANegativeValueOrZero() {
@@ -15,10 +15,11 @@ class PlayerTest {
         boolean expected = false;
         Assertions.assertEquals(expected, actual);
         player.setBalance(0);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
 
 
     }
+
     @Test
     void PlusOrMinusValuesToUpdateBalance() {
         player.setBalance(200);
@@ -26,14 +27,14 @@ class PlayerTest {
         player.updateBalance(-15);
         int actual = 185;
 
-        assertEquals(player.getBalance(),actual);
+        assertEquals(player.getBalance(), actual);
 
         player.setBalance(200);
         //When input is a Positiv value
         player.updateBalance(+15);
         actual = 215;
 
-        assertEquals(player.getBalance(),actual);
+        assertEquals(player.getBalance(), actual);
     }
 
 }

@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DeckTest {
 
     @Test
-    public void pullCardShouldReturnChanceCard(){
+    public void pullCardShouldReturnChanceCard() {
 
         Deck testDeck = new Deck(new ChanceCard[]{new ChanceCard("", 0)});
 
@@ -18,9 +18,9 @@ public class DeckTest {
     }
 
     @Test
-    public void pullCardShouldReturnAChanceCardFromTheDeck(){
+    public void pullCardShouldReturnAChanceCardFromTheDeck() {
 
-        ChanceCard testCard = new ChanceCard("" , 0);
+        ChanceCard testCard = new ChanceCard("", 0);
 
         Deck testDeck = new Deck(new ChanceCard[]{testCard});
 
@@ -31,7 +31,7 @@ public class DeckTest {
     }
 
     @Test
-    public void pullCardShouldReturnChanceCardWithIndexCorrespondingToDrawCardCount(){
+    public void pullCardShouldReturnChanceCardWithIndexCorrespondingToDrawCardCount() {
         ChanceCard testCard1 = new ChanceCard("", 0);
         ChanceCard testCard2 = new ChanceCard("", 0);
         ChanceCard testCard3 = new ChanceCard("", 0);
@@ -47,8 +47,9 @@ public class DeckTest {
         Assertions.assertEquals(result3, testCard3);
 
     }
+
     @Test
-    public void pullCardShouldReturnChanceCardIndex0WhenArrayIsOutOfBounds(){
+    public void pullCardShouldReturnChanceCardIndex0WhenArrayIsOutOfBounds() {
         ChanceCard testCard0 = new ChanceCard("", 0);
         ChanceCard testCard1 = new ChanceCard("", 0);
         ChanceCard testCard2 = new ChanceCard("", 0);
@@ -64,7 +65,7 @@ public class DeckTest {
     }
 
     @Test
-    public void shuffleDeckShouldReturnChanceCardsInNewOrder(){
+    public void shuffleDeckShouldReturnChanceCardsInNewOrder() {
 
         ChanceCard testCard1 = new ChanceCard("1", 0);
         ChanceCard testCard2 = new ChanceCard("2", 0);
@@ -93,7 +94,7 @@ public class DeckTest {
     }
 
     @Test
-    public void changesMadeTheArrayInDeckClassShouldNotApplyToOriginalArray(){
+    public void changesMadeTheArrayInDeckClassShouldNotApplyToOriginalArray() {
         ChanceCard testCard0 = new ChanceCard("0", 0);
         ChanceCard testCard1 = new ChanceCard("1", 0);
         ChanceCard testCard2 = new ChanceCard("2", 0);
@@ -107,7 +108,6 @@ public class DeckTest {
         originalArray[1] = temp;
 
         assertThat(testDeck.pullCard()).isEqualTo(testCard0);
-
 
 
     }

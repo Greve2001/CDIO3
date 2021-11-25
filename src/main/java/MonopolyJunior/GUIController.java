@@ -1,168 +1,196 @@
 package MonopolyJunior;
 
 import Board.*;
+import Utilities.Language;
 import gui_fields.*;
 import gui_main.GUI;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GUIController {
-    //------------------Fields---------------------
-    private final GUI gui;
-    private Map<Player, GUI_Player> playerMap;
-    private final Map<String, Color> colorMap;
+    private static GUI gui;
+    private static String[] playerNames;
+    private static Color[] playerColors = {Color.RED, Color.YELLOW, Color.WHITE, Color.BLACK};
+    private static GUI_Player[] guiPlayers;
+    private static int[] playerPositions;
+    private static Square[] allSquares;
+    private static GUI_Field[] squares;
 
-    //------------------Constructor---------------------
-    public GUIController(Square[] squares) {
-        playerMap = new HashMap<>();
-        colorMap = new HashMap<>();
-        colorMap.put("red", Color.RED);
-        colorMap.put("green", Color.GREEN);
-        colorMap.put("blue", new Color(45, 137, 239));
-        colorMap.put("yellow", Color.YELLOW);
-        colorMap.put("purple", new Color(255, 90, 255));
-        colorMap.put("turquoise",new Color(0,255,239));
-        colorMap.put("magenta",new Color(255,0,151));
-        colorMap.put("orange",new Color(235,97,35));
-
-
-        GUI_Field[] fields = new GUI_Field[squares.length];
-        for (int i = 0; i < squares.length; i++) {
-            fields[i] = convertTo(squares[i]);
-        }
-        gui = new GUI(fields);
+    public GUIController(Square[] allSquares){
+        GUI_Field[] guiBoard = createBoard(allSquares);
+        gui = new GUI(guiBoard);
     }
 
-    //------------------Methods---------------------
+    public static GUI_Field[] createBoard(Square[] as) {
+        allSquares = as;
+        squares = new GUI_Field[allSquares.length];
 
-
-    //this method is responsible to convert our square to library's GUI_Field
-    public GUI_Field convertTo(Square square) {
-        GUI_Field field;
-
-        if (square instanceof Amusement) {
-            //here we used the GUI_Street to create our amusement-fields on the GUI and get square's info and set it to the Field.
-            field = new GUI_Street();
-            field.setTitle(square.getName());
-            field.setSubText(String.valueOf(((Amusement) square).getPrice()));
-            field.setDescription(String.valueOf(((Amusement) square).getBoothOwner()));
-            Color color = colorMap.get(String.valueOf(((Amusement) square).getColor()).toLowerCase());
-            field.setBackGroundColor(color);
+        for (int i = 0; i < squares.length; i++) {
+            switch (allSquares[i].getClass().getSimpleName()) {
+                case "Go" :
+                    squares[i] = new GUI_Start();
+                    squares[i].setSubText(Language.getText("getMoneyFromSquare") + ((Go) allSquares[i]).getAmount() + "$");
+                    break;
+                case "Amusement" :
+                    squares[i] = new GUI_Street();
+                    squares[i].setSubText(((Amusement)allSquares[i]).getPrice() + "$");
+                    ((GUI_Ownable) squares[i]).setRent(((Amusement)allSquares[i]).getPrice() + "$");
+                    squares[i].setBackGroundColor(convertColor((((Amusement) allSquares[i])).getColor()));
+                    break;
+                case "Chance" :
+                    squares[i] = new GUI_Chance();
+                    squares[i].setSubText("");
+                    squares[i].setBackGroundColor(convertColor("orange"));
+                    break;
+                case "Railroad" :
+                    squares[i] = new GUI_Street();
+                    squares[i].setSubText(Language.getText("rollAgain"));
+                    squares[i].setBackGroundColor(convertColor((((Railroad) allSquares[i])).getColor()));
+                    break;
+                case "PayToSee" :
+                    squares[i] = new GUI_Street();
+                    squares[i].setSubText(Language.getText("payToLandOn") + ((PayToSee) allSquares[i]).getAmount() + "$");
+                    break;
+                case "GoToRestrooms" :
+                    squares[i] = new GUI_Street();
+                    squares[i].setSubText("");
+                    break;
+                case "PennyBag" :
+                    squares[i] = new GUI_Refuge();
+                    squares[i].setSubText(Language.getText("valueOfSquare") + ((PennyBag) allSquares[i]).getAmountOfMoneyPlaced() + "$");
+                    break;
+                case "Restrooms" :
+                    squares[i] = new GUI_Jail();
+                    squares[i].setSubText(allSquares[i].getName());
+                    break;
+            }
+            squares[i].setTitle(allSquares[i].getName());
+            squares[i].setDescription(allSquares[i].getName());
         }
-        else
-        {
-            //here we used the GUI_Start to create rest of the squares-fields on the GUI and get square's info and set it to the related-Field.
-            field = new GUI_Start();
-            field.setTitle("");
-            field.setSubText(square.getName());
-            if (square instanceof Go) {
-                field.setDescription(String.valueOf(((Go) square).getAmount()));
-            } else if (square instanceof PayToSee) {
-                field.setDescription(String.valueOf(((PayToSee) square).getAmount()));
-            } else if (square instanceof PennyBag) {
-                field.setDescription(String.valueOf(((PennyBag) square).getAmountOfMoneyPlaced()));
-            } else if (square instanceof GoToRestrooms) {
-                field.setDescription(String.valueOf(((GoToRestrooms) square).getDestination()));
-            } else if (square instanceof Railroad) {
-                field.setForeGroundColor(Color.getColor(((Railroad) square).getColor()));
+        return squares;
+    }
+
+    public static void createPlayers(int startBalance) {
+        int numberOfPlayers = Integer.parseInt(
+                gui.getUserSelection(Language.getText("selectNumOfPlayers"), "2", "3", "4"));
+
+        playerNames = new String[numberOfPlayers];
+        guiPlayers = new GUI_Player[numberOfPlayers];
+        playerPositions = new int[numberOfPlayers];
+
+        for (int i = 0; i < numberOfPlayers; i++) {
+            playerNames[i] = gui.getUserString(Language.getText("enterName"));
+            GUI_Car playerCar = new GUI_Car(playerColors[i], playerColors[i],
+                    GUI_Car.Type.RACECAR, GUI_Car.Pattern.FILL);
+
+            guiPlayers[i] = new GUI_Player(playerNames[i], startBalance, playerCar);
+            gui.addPlayer(guiPlayers[i]);
+
+            GUI_Field field = gui.getFields()[0];
+            field.setCar(guiPlayers[i], true);
+
+            playerPositions[i] = 0;
+        }
+    }
+
+    public static void movePlayer(Player player, int position) {
+        GUI_Player playerToMove = new GUI_Player("");
+        GUI_Field to = gui.getFields()[position - 1];
+
+        for (int i = 0; i < playerNames.length ; i++) {
+            if(playerNames[i].equals(player.getName())) {
+                playerToMove = guiPlayers[i];
+
+                GUI_Field from = gui.getFields()[playerPositions[i]];
+
+                playerPositions[i] = position - 1;
+                from.setCar(playerToMove, false);
             }
         }
-        return field;
+        to.setCar(playerToMove, true);
     }
 
+    public static void displayChanceCard(ChanceCard card) {
+        if (card.getColor() != null){
+            gui.displayChanceCard( Language.getText("chanceCard") + "\n" + card.toString() + "\n" +
+                    card.getColor());
+        }else{
+            gui.displayChanceCard(Language.getText("chanceCard") + "\n" + card.toString());
+        }
 
-    //this methode is responsible for get the number of players and return it.
-    public int selectNumbersOfPlayers() {
-        return Integer.valueOf(gui.getUserSelection("Select numbers of players?", "2", "3", "4"));
     }
 
-    //this methode take the input from GUI and create Player and GUI_Player and add them to playerMap.
-    //then return the Player object to the system.
-    public Player setPlayer(int turn, int balance) {
-        String playerName = gui.getUserString("Player " + turn + ": Enter your name please.");
-        String color = gui.getUserSelection("Select your color?", "green", "red", "yellow", "blue").toLowerCase();
-        Color primaryColor = colorMap.get(color);
-        GUI_Car car = new GUI_Car(primaryColor, primaryColor, GUI_Car.Type.CAR, GUI_Car.Pattern.FILL);
-        Player player = new Player(playerName);
-        player.setBalance(balance);
-        GUI_Player gui_player = new GUI_Player(player.getName(), player.getBalance(), car);
-        try {
-            gui.addPlayer(gui_player);
-            playerMap.put(player, gui_player);
-            return player;
-        } catch (Exception error) {
-            return null;
+    public static void getPlayerAction(Player player, String str){
+        gui.showMessage(player.getName() + str);
+    }
+
+    public static void showDie(int value){
+        gui.setDie(value);
+    }
+
+    public static void showTicketBooth(String ownerName, int position, boolean show){
+        GUI_Street amusement = ((GUI_Street) squares[position - 1]);
+
+        if(show) {
+            amusement.setHouses(1);
+            amusement.setOwnerName(ownerName);
+        } else {
+            amusement.setHouses(0);
+            amusement.setOwnerName(null);
+        }
+
+    }
+
+    public static void setPennyBagValue(int position, int value) {
+        squares[position - 1].setSubText(Language.getText("valueOfSquare") + value);
+    }
+
+    public static void setPlayerBalance(Player player, int value){
+        for (int i = 0; i < playerNames.length; i++) {
+            if (player.getName().equals(playerNames[i])){
+                guiPlayers[i].setBalance(value);
+            }
         }
     }
 
-    //here we get the die as input and show it's faceValue on the GUI.
-    public int  showRoll(Die die) {
-        int value= die.getFaceValue();
-        try{
-            gui.setDie(value);
-            return value;
-        }catch (Exception error){
-            error.printStackTrace();
-            return 0;
+    public static String[] getPlayers() {
+        return playerNames;
+    }
+
+    public static void showCenterMessage(String str){
+        gui.displayChanceCard(str);
+    }
+
+    private static Color convertColor(String color) {
+        Color result = Color.white;
+
+        switch (color.toLowerCase()) {
+            case "red" :
+                result = Color.red;
+                break;
+            case "green" :
+                result = Color.green;
+                break;
+            case "blue" :
+                result = new Color(45, 137, 239);
+                break;
+            case "yellow" :
+                result = Color.yellow;
+                break;
+            case "purple" :
+                result = new Color(255, 90, 255);
+                break;
+            case "turquoise" :
+                result = new Color(0,255,239);
+                break;
+            case "magenta" :
+                result = new Color(255,0,151);
+                break;
+            case "orange" :
+                result = new Color(235,97,35);
+                break;
         }
+
+        return result;
     }
-
-    //we get the Player object as input and find the related GUI_player in the playerMap and move the car.
-    public boolean moveCar(Player player, int from, int to) {
-        try {
-            GUI_Player gui_player = playerMap.get(player);
-            gui.getFields()[from].setCar(gui_player, false);
-            gui.getFields()[to].setCar(gui_player, true);
-            return true;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
-        }
-    }
-
-    //this method show the discription of chancecart on the GUI
-    public boolean showChance(ChanceCard card) {
-        try {
-            gui.displayChanceCard(card.toString());
-            return true;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
-        }
-    }
-
-    //this method requires amusement and color of owner as input.
-    //we cast the amusement to the Ownable class to set the border with new color.
-    public boolean setOwner(Amusement amusement, String color) {
-        try {
-            GUI_Ownable field = (GUI_Ownable) gui.getFields()[(amusement.getPosition() - 1)];
-            field.setBorder(colorMap.get(color));
-            return true;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
-        }
-    }
-
-
-    public boolean updatePennybag(Player player, PennyBag pennyBag) {
-        try {
-            gui.getFields()[pennyBag.getPosition() - 1].setSubText(String.valueOf(pennyBag.getAmountOfMoneyPlaced()));
-            return true;
-        } catch (Exception error) {
-            error.printStackTrace();
-            return false;
-        }
-    }
-
-
-    public String ShowWinner(Player player) {
-        String input;
-        input = gui.getUserButtonPressed("winner: " + player.getName() + " with balance: " + player.getBalance(), "ok");
-        return input;
-    }
-
 }
-

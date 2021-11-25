@@ -1,14 +1,14 @@
 package Board;
 
-public class PennyBag extends Square{
+public class PennyBag extends Square {
     private int AmountOfMoneyPlaced = 0;
 
     public PennyBag(String name, int position) {
         super(name, position);
     }
 
-    public void addMoney(int amount){
-        if(amount <= 0) {
+    public void addMoney(int amount) {
+        if (amount <= 0) {
             System.out.println("Error: value must be negative");
         } else {
             AmountOfMoneyPlaced += amount;

@@ -1,19 +1,19 @@
 package Board;
 
 public class Square {
-    private final String name;
-    private final int position;
+    private final String NAME;
+    private final int POSITION;
 
-    public Square(String name, int position) {
-        this.name = name;
-        this.position = position;
+    public Square(String NAME, int POSITION) {
+        this.NAME = NAME;
+        this.POSITION = POSITION;
     }
 
     public String getName() {
-        return name;
+        return NAME;
     }
 
     public int getPosition() {
-        return position;
-    }
-}
+        return POSITION;
+    }}
+
