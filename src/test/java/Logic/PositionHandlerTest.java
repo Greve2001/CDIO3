@@ -10,9 +10,12 @@ class PositionHandlerTest {
 
     Player player;
     PositionHandler posHandler;
+    GameController g = new GameController();
 
     @BeforeEach
     void setup(){
+        g.setupGame();
+        player = new Player("test");
         posHandler = new PositionHandler(32, 2);
     }
 

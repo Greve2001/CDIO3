@@ -1,5 +1,6 @@
 package Logic;
 
+import MonopolyJunior.GUIController2;
 import MonopolyJunior.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,12 +9,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BankTest {
 
+    GameController g = new GameController();
+
     Bank bank;
     Player player1;
     Player player2;
 
     @BeforeEach
     void setup() {
+        g.setupGame();
         bank = new Bank();
         player1 = new Player("Player 1");
         player2 = new Player("Player 2");
